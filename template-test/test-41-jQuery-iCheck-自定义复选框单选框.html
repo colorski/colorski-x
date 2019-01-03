@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-41-jQuery-iCheck-自定义复选框单选框</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+<link href="css/plugins/iCheck/red.css" rel="stylesheet">
+
+
+<link type="text/css" rel="stylesheet" href="http://www.colorski.com/plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushJScript.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushCss.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushXml.js"></script>
+
+<style></style>
+</head>
+
+<body>
+<h1>自定义复选框单选框</h1>
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p></div>
+
+<section class="code">
+<h5>据称兼容ie6+未测试</h5>
+
+<hr />
+
+<div class="box box1">
+    <label for="quux[1]"><input type="checkbox" name="quux[1]" id="quux[1]" checked /> Foo </label>
+    <label for="quux[2]"><input type="checkbox" name="quux[1]" id="quux[2]" /> Foo </label>
+    <label for="quux[3]"><input type="checkbox" name="quux[1]" id="quux[3]" /> Foo </label>
+    <label for="quux[4]"><input type="checkbox" name="quux[1]" id="quux[4]" /> Foo </label>
+    <label for="quux[5]"><input type="checkbox" name="quux[1]" id="quux[5]" /> Foo </label>
+</div>
+
+<hr />
+
+<div class="box box2">
+    <input type="radio" name="quux[2]" id="baz[1]" checked><label for="baz[1]"> Bar </label>
+    <input type="radio" name="quux[2]" id="baz[2]"><label for="baz[2]"> Bar </label>
+    <input type="radio" name="quux[2]" id="baz[3]"><label for="baz[3]"> Bar </label>
+    <input type="radio" name="quux[2]" id="baz[4]"><label for="baz[4]"> Bar </label>
+    <input type="radio" name="quux[2]" id="baz[5]"><label for="baz[5]"> Bar </label>
+</div>
+
+<hr />
+</section>
+
+<!--colorBorder-->
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+<script src="js/plugins/icheck.min.js"></script>
+<script>
+$(function(){
+    $('input').iCheck({
+        checkboxClass: 'icheckbox_flat-red',
+        radioClass: 'iradio_flat-red'
+    });
+
+    $('input').on('ifChecked', function(event){
+      console.log($(this).attr('id'));
+    });
+
+    //$('input').iCheck('check'); //— 将输入框的状态设置为checked
+    //$('input').iCheck('uncheck'); //— 移除 checked 状态
+    //$('input').iCheck('toggle'); //— toggle checked state
+    //$('input').iCheck('disable'); //— 将输入框的状态设置为 disabled
+    //$('input').iCheck('enable'); //— 移除 disabled 状态
+    //$('input').iCheck('update'); //— apply input changes, which were done outside the plugin
+    //$('input').iCheck('destroy'); //— 移除iCheck样式
+});
+</script>
+</body>
+</html>

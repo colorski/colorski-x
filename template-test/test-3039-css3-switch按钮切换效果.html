@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>switch按钮切换</title>
+	<link href="css/reset.css" rel="stylesheet" type="text/css">
+	<link href="css/plugins/mui-switch.css" rel="stylesheet" type="text/css">
+
+	<link href="css/plugins/prettify.css" rel="stylesheet" type="text/css">
+	<script src="js/plugins/prettify.js"></script>
+<style>
+        h3 {
+            margin: 10px 0 10px 0;
+            font-size: 20px;
+        }
+
+        body {
+            padding: 10px;
+            font-size: 12px;
+        }
+
+        .example-con {
+            margin-top: 30px;
+        }
+
+        .mui-switch-con {
+            margin-top: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body onload="prettyPrint();">
+<p>1.按钮样式和切换效果只要mui-switch.css即可；</p>
+<p>2.页面中显示代码的样式需要引入prettify.css和prettify.js；</p>
+<p>3.简洁的经过修改的switch样式见test-3040-css3-switch按钮简洁版；</p>
+<div class="example-con">
+    <h3>默认</h3>
+
+    <div class="mui-tab-con clearfix">
+        <form class="mui-form" name="" method="post" action="#" id="">
+            <fieldset>
+                <legend>表单标题</legend>
+                <div class="mui-switch-con">
+                    <label><input class="mui-switch" type="checkbox"> 默认未选中</label>
+                </div>
+                <div class="mui-switch-con">
+                    <label><input class="mui-switch" type="checkbox" checked> 默认选中</label>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+<pre class="prettyprint lang-html linenums:1">
+&lt;label&gt;&lt;input class=&quot;mui-switch&quot; type=&quot;checkbox&quot;&gt; &#40664;&#35748;&#26410;&#36873;&#20013;&lt;/label&gt;
+&lt;label&gt;&lt;input class=&quot;mui-switch&quot; type=&quot;checkbox&quot; checked&gt; &#40664;&#35748;&#36873;&#20013;&lt;/label&gt;
+</pre>
+</div>
+<div class="example-con">
+    <h3>简单的背景过渡效果 switch</h3>
+       <p>加 mui-switch-animbg 类即可</p>
+    <div class="mui-tab-con clearfix">
+        <form class="mui-form" name="" method="post" action="#" id="">
+            <fieldset>
+                <legend>表单标题</legend>
+                <div class="mui-switch-con">
+                    <label><input class="mui-switch mui-switch-animbg" type="checkbox"> 默认未选中</label>
+                </div>
+                <div class="mui-switch-con">
+                    <label><input class="mui-switch mui-switch-animbg" type="checkbox" checked> 默认选中</label>
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+<pre class="prettyprint lang-html linenums:1">
+&lt;label&gt;&lt;input class=&quot;mui-switch mui-switch-animbg&quot; type=&quot;checkbox&quot;&gt; &#40664;&#35748;&#26410;&#36873;&#20013;&lt;/label&gt;
+&lt;label&gt;&lt;input class=&quot;mui-switch mui-switch-animbg&quot; type=&quot;checkbox&quot; checked&gt; &#40664;&#35748;&#36873;&#20013;&lt;/label&gt;
+</pre>
+</div>
+<div class="example-con">
+    <h3>过渡效果的switch</h3>
+       <p>加 mui-switch-anim 类即可</p>
+    <div class="mui-tab-con clearfix">
+        <form class="mui-form" name="" method="post" action="#" id="">
+            <fieldset>
+                <legend>表单标题</legend>
+                <div class="mui-switch-con">
+                    <label><input class="mui-switch mui-switch-anim" type="checkbox"> 默认未选中</label>
+                </div>
+                <div class="mui-switch-con">
+                    <label><input class="mui-switch mui-switch-anim" type="checkbox" checked> 默认选中</label>
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+<pre class="prettyprint lang-html linenums:1">
+&lt;label&gt;&lt;input class=&quot;mui-switch mui-switch-anim&quot; type=&quot;checkbox&quot;&gt; &#40664;&#35748;&#26410;&#36873;&#20013;&lt;/label&gt;
+&lt;label&gt;&lt;input class=&quot;mui-switch mui-switch-anim&quot; type=&quot;checkbox&quot; checked&gt; &#40664;&#35748;&#36873;&#20013;&lt;/label&gt;
+</pre>
+</div>
+<!-- todo 和 表单 结合 -->
+<!-- todo 和 列表 结合 -->
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+<title>test-3509-mobile-链接鼠标移入效果</title>
+<meta name="keywords" content="" />
+<meta name="description" content="WW:\00-前端相关\已整理特效收藏\html5+css3\css3_link-hover   这里有全部效果" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<style>
+/*********边框 01*********/
+.nav1 li {
+	display:inline-block;}
+.nav1 li a{
+    display: block;
+    position: relative;
+}
+.nav1 li a:hover{
+    color: #ff9d2c;
+}
+.nav1 li span{
+    height: 45px;
+    line-height: 45px;
+    padding: 15px;
+}
+.nav1 li a::after,
+.nav1 li a::before{
+    content: "";
+    width: 0;
+    height: 2px;
+    background-color: #ff9d2c;
+    position: absolute;
+    transition: .35s;
+}
+.nav1 li span::after,
+.nav1 li span::before{
+    content: "";
+    width: 2px;
+    height: 0;
+    background-color: #ff9d2c;
+    position: absolute;
+    transition: .35s;
+}
+.nav1 li a::before{ left: 0; top: 0; }
+.nav1 li span:after{ right: 0; top: 0; }
+.nav1 li a::after{ bottom: 0; right: 0; }
+.nav1 li span:before{ left: 0; bottom: 0; }
+
+.nav1 li a:hover::after,
+.nav1 li a:hover::before{
+    width: 100%;
+    opacity: 1;
+}
+.nav1 li a:hover span::after,
+.nav1 li a:hover span::before{
+    height: 100%;
+    opacity: 1;
+}
+/*********经典 02************/
+.nav2 li {
+	display:inline-block;}
+.nav2 li a{
+    display: block;
+    position: relative;
+    /* margin: 0 10px; */
+}
+.nav2 li a:hover{
+    color: #ff9d2c;
+}
+.nav2 li span{
+    height: 45px;
+    line-height: 45px;
+    padding: 15px;
+}
+.nav2 li a::after,
+.nav2 li a::before,
+.nav2 li a span::after,
+.nav2 li a span::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    position: absolute;
+    opacity: 0;
+    transition: .2s;
+}
+.nav2 li a::after {
+    right: 0;
+    top: 0;
+    border-top: solid 2px #ff9d2c;
+    border-right: solid 2px #ff9d2c;
+}
+.nav2 li a::before {
+    left: 0;
+    top: 0;
+    border-left: solid 2px #ff9d2c;
+    border-top: solid 2px #ff9d2c;
+}
+.nav2 li a span::after {
+    right: 0;
+    bottom: 0;
+    border-bottom: solid 2px #ff9d2c;
+    border-right: solid 2px #ff9d2c;
+}
+.nav2 li a span::before {
+    left: 0;
+    bottom: 0;
+    border-left: solid 2px #ff9d2c;
+    border-bottom: solid 2px #ff9d2c;
+}
+.nav2 li a:hover::after {
+    right: 6px;
+    top: 6px;
+}
+.nav2 li a:hover::before {
+    left: 6px;
+    top: 6px;
+}
+.nav2 li a:hover span::after {
+    right: 6px;
+    bottom: 6px;
+}
+.nav2 li a:hover span::before {
+    left: 6px;
+    bottom: 6px;
+}
+
+.nav2 li a:hover::after,
+.nav2 li a:hover::before,
+.nav2 li a:hover span::after,
+.nav2 li a:hover span::before {
+    opacity: 1;
+}
+/********中心边线 03**********/
+.nav3 li {
+	display:inline-block;
+	margin:0 10px;}
+.nav3 li a{
+    display: block;
+    position: relative;
+    height: 45px;
+    line-height: 45px;
+}
+.nav3 li a::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background-color: #ff9d2c;
+    opacity: 0;
+    -webkit-transition: 0.35s all cubic-bezier(0.77, 0, 0.175, 1);
+    -moz-transition: 0.35s all cubic-bezier(0.77, 0, 0.175, 1);
+    transition: 0.35s all cubic-bezier(0.77, 0, 0.175, 1);
+}
+.nav3 li a:hover{
+    color: #ff9d2c;
+}
+.nav3 li a:hover::after{
+    left: 0;
+    opacity: 1;
+    width: 100%;
+}
+
+</style>
+</head>
+
+<body>
+<ul class="nav nav1">
+    <li><a href="#"><span>首页</span></a></li>
+    <li><a href="#"><span>页面导航</span></a></li>
+    <li><a href="#"><span>学习列表</span></a></li>
+    <li><a href="#"><span>文字很多也可以</span></a></li>
+</ul>
+<ul class="nav nav2">
+    <li><a href="#"><span>首页</span></a></li>
+    <li><a href="#"><span>页面导航</span></a></li>
+    <li><a href="#"><span>学习列表</span></a></li>
+    <li><a href="#"><span>文字很多也可以</span></a></li>
+</ul>
+<ul class="nav nav3">
+    <li><a href="#"><span>首页</span></a></li>
+    <li><a href="#"><span>页面导航</span></a></li>
+    <li><a href="#"><span>学习列表</span></a></li>
+    <li><a href="#"><span>文字很多也可以</span></a></li>
+</ul>
+
+</body>
+</html>

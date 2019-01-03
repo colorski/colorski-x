@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-1005-js-彩票随机</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<link type="text/css" rel="stylesheet" href="http://www.colorski.com/plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushJScript.js"></script>
+
+<style>
+	#redBall, #redBall-dlt { padding-right: 10px; color: red;}
+	#blueBall, #blueBall-dlt { color: blue; }
+</style>
+</head>
+
+<body>
+<h1>随机彩票</h1>
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p></div>
+
+<section class="code">
+
+    <h5>双色球随机</h5>
+    <p><input type="button" id="cpBtn" value="随机一注" /><span id="redBall"></span><b id="blueBall"></b></p>
+
+    <h5>大乐透随机</h5>
+    <p><input type="button" id="cpBtn-dlt" value="随机一注" /><span id="redBall-dlt"></span><b id="blueBall-dlt"></b></p>
+
+</section>
+
+<!--colorBorder-->
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+
+<script>
+//双色球随机
+(function(){
+	//n-m之间的随机数（默认0-10，包括n不包括m）
+	var rdm = function(n,m){
+		n = n || 0;
+		m = m || 10;
+		return parseInt(Math.random()*(m-n))+n;
+	}
+	//补零函数
+	var toDbl = function(n){
+		return n<10?'0'+n:''+n;
+	}
+	//某个
+	var findArr = function(arr,x){
+		for(var i=0, l=arr.length; i<l; i++){
+			if(arr[i]==x)return true;
+		}
+		return false;
+	}
+
+	var findMin = function(arr,start){
+		var iMin=arr[start];
+		var iMinIndex=start;
+		for(var i=start+1, l=arr.length; i<l; i++){
+			if(arr[i]<iMin){
+				iMin=arr[i];
+				iMinIndex=i;	
+			}
+		}
+		return iMinIndex; //出现的位置
+	}
+
+	var oRed=document.getElementById('redBall');
+	var oBlue=document.getElementById('blueBall');
+	var oBtn=document.getElementById('cpBtn');
+	var timer=null;
+
+	function fnCp(){
+		clearInterval(timer);
+		timer=setInterval(function(){
+			var arr=[];
+			while(arr.length<6){
+				var n=rdm(1,34);
+				if(!findArr(arr,n)){
+					arr.push(toDbl(n));
+				}
+			}
+			for(var i=0; i<arr.length; i++){
+				var n=findMin(arr,i);
+				var car;
+				car=arr[n];
+				arr[n]=arr[i];
+				arr[i]=car;
+			}
+			
+			oRed.innerHTML=arr.join(' ');
+			oBlue.innerHTML=toDbl(rdm(1,17));  //不包括m
+		},30);	
+		setTimeout(function(){
+			clearInterval(timer);
+		},300);	
+	}
+	fnCp();
+	oBtn.onclick=fnCp;
+})();
+
+//大乐透随机
+(function(){
+	//n-m之间的随机数（默认0-10，包括n不包括m）
+	var rdm = function(n,m){
+		n = n || 0;
+		m = m || 10;
+		return parseInt(Math.random()*(m-n))+n;
+	}
+	//补零函数
+	var toDbl = function(n){
+		return n<10?'0'+n:''+n;
+	}
+
+	var findArr = function(arr,n){
+		for(var i=0; i<arr.length; i++){
+			if(arr[i]==n)return true;
+		}
+		return false;
+	}
+
+	var findMin = function(arr,start){
+		var iMin=arr[start];
+		var iMinIndex=start;
+		for(var i=start+1; i<arr.length; i++){
+			if(arr[i]<iMin){
+				iMin=arr[i];
+				iMinIndex=i;	
+			}
+		}
+		return iMinIndex; //出现的位置
+	}
+
+	var oRed=document.getElementById('redBall-dlt');
+	var oBlue=document.getElementById('blueBall-dlt');
+	var oBtn=document.getElementById('cpBtn-dlt');
+	var timer=null;
+
+	function fnCp(){
+		clearInterval(timer);
+		timer=setInterval(function(){
+			var arr=[];
+			while(arr.length<5){
+				var n=rdm(1,36);
+				if(!findArr(arr,n)){
+					arr.push(toDbl(n));
+				}
+			}
+			for(var i=0; i<arr.length; i++){
+				var n=findMin(arr,i);
+				var car;
+				car=arr[n];
+				arr[n]=arr[i];
+				arr[i]=car;
+			}
+
+			var arr1=[];//记得优化
+			while(arr1.length<2){
+				var n=rdm(1,13);
+				if(!findArr(arr1,n)){
+					arr1.push(toDbl(n));
+				}
+			}
+			for(var i=0; i<arr1.length; i++){
+				var n=findMin(arr1,i);
+				var car;
+				car=arr1[n];
+				arr1[n]=arr1[i];
+				arr1[i]=car;
+			}
+			
+			oRed.innerHTML=arr.join(' ');
+			oBlue.innerHTML=arr1.join(' ');
+		},30);	
+		setTimeout(function(){
+			clearInterval(timer);
+		},300);	
+	}
+	fnCp();
+	oBtn.onclick=fnCp;
+})();
+
+</script>
+</body>
+</html>

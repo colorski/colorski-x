@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-2103-plugins-百度地图生成器-需要申请密匙</title>
+<meta name="keywords" content="" />
+<meta name="description" content="http://api.map.baidu.com/mapCard/" />
+
+<link rel="stylesheet" href="css/reset.css" />
+<!--引用百度地图API-->
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=Nn5ke9CccsBG460dGGWgeapCSFGqG0xR"></script>
+
+</head>
+
+<body>
+<h2>百度地图生成器-需要申请密匙</h2>
+<p>说明与步骤：<a href="http://api.map.baidu.com/lbsapi/createmap/index.html">http://api.map.baidu.com/lbsapi/createmap/index.html</a></p>
+<p>需要：登录百度 -- 创建应用 -- 选择浏览器端 -- 添加Refer白名单 -- 提交</p>
+<p>实例：帐号：QQ -- 目前白名单是：*colorski.com*,*10.1.16.53* (注意后边这个ip可以改为本地服务端的ip地址)</p>
+<p>本地服务器环境地址类似：http://10.1.16.53/template-test/test-2103-plugins-.html</p>
+<p>根据以上申请的密匙是：Nn5ke9CccsBG460dGGWgeapCSFGqG0xR     --  放到引用百度地图API的链接地址里，然后给一个容器就可以引用了。如下：</p>
+<!--百度地图容器-->
+<div style="width:700px;height:550px;border:#ccc solid 1px;font-size:12px" id="map"></div>
+
+
+<p>项目中最好进行开发者认证：分 企业开发者和个人开发者 </p>
+<p>说明：企业开发者需要提供企业营业执照等信息; 个人开发者只需要提供个人身份信息。企业开发者与个人开发者的服务配额帐号的服务配额有所差异，请按照实际情况进行选择。</p>
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+<script>
+	alert("注意：需要在服务器环境或线上环境测试");
+</script>
+<script type="text/javascript">
+//创建和初始化地图函数：
+function initMap(){
+  createMap();//创建地图
+  setMapEvent();//设置地图事件
+  addMapOverlay();//向地图添加覆盖物
+}
+function createMap(){ 
+  map = new BMap.Map("map"); 
+  map.centerAndZoom(new BMap.Point(116.131214,39.727186),15);
+}
+function setMapEvent(){
+  map.enableScrollWheelZoom();
+  map.enableKeyboard();
+  map.enableDragging();
+  map.enableDoubleClickZoom()
+}
+function addClickHandler(target,window){
+  target.addEventListener("click",function(){
+    target.openInfoWindow(window);
+  });
+}
+function addMapOverlay(){
+  var markers = [
+    {content:"www.zxxk.com",title:"学科网",imageOffset: {width:0,height:3},position:{lat:39.728178,lng:116.121369}}
+  ];
+  for(var index = 0; index < markers.length; index++ ){
+    var point = new BMap.Point(markers[index].position.lng,markers[index].position.lat);
+    var marker = new BMap.Marker(point,{icon:new BMap.Icon("http://api.map.baidu.com/lbsapi/createmap/images/icon.png",new BMap.Size(20,25),{
+      imageOffset: new BMap.Size(markers[index].imageOffset.width,markers[index].imageOffset.height)
+    })});
+    var label = new BMap.Label(markers[index].title,{offset: new BMap.Size(25,5)});
+    var opts = {
+      width: 200,
+      title: markers[index].title,
+      enableMessage: false
+    };
+    var infoWindow = new BMap.InfoWindow(markers[index].content,opts);
+    marker.setLabel(label);
+    addClickHandler(marker,infoWindow);
+    map.addOverlay(marker);
+  };
+  var labels = [
+  ];
+  for(var index = 0; index < labels.length; index++){
+    var opt = { position: new BMap.Point(labels[index].position.lng,labels[index].position.lat )};
+    var label = new BMap.Label(labels[index].content,opt);
+    map.addOverlay(label);
+  };
+  var plOpts = [
+    {strokeColor:"#f00",strokeWeight:"4",strokeOpacity:"0.6"}
+  ];
+  var plPath = [
+    [
+      new BMap.Point(116.121728,39.728684),
+      new BMap.Point(116.131861,39.72885),
+      new BMap.Point(116.131789,39.72885),
+      new BMap.Point(116.131789,39.72885)
+    ],
+  ];
+  for(var index = 0; index < plOpts.length; index++){
+    var polyline = new BMap.Polyline(plPath[index],plOpts[index]);
+    map.addOverlay(polyline);
+  }
+}
+//向地图添加控件
+function addMapControl(){
+  var scaleControl = new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT});
+  scaleControl.setUnit(BMAP_UNIT_IMPERIAL);
+  map.addControl(scaleControl);
+  var navControl = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
+  map.addControl(navControl);
+}
+var map;
+initMap();
+</script>
+</body>
+</html>

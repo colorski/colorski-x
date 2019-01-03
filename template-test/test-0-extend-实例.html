@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-0-extend-实例</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<style>
+/******common*****/
+.list { padding: .8em; border-bottom: 1px solid #eee;}
+.list h6 { padding-bottom:.8em; font-size: 1.15rem; color: #f00; }
+.list em { display: inline-block; padding: 0.2em 0.4em; margin: 0 1em; background-color: #50bfff; color: #fff; font-style: normal; cursor: pointer;}
+
+/*弹出提示框s秒*/
+.alerts {
+    display: none;
+    max-width: 250px;
+    padding: 12px 40px;
+    line-height: 24px;
+    background-color: #13ce66;
+    border-radius: 5px;
+    font-family: "SimSun";
+    font-size: 1.15rem;
+    color: #fff;
+
+    position: fixed;
+    top: 50%;
+    margin-top: -100px;
+    left: 50%;
+    margin-left: -150px;
+    z-index: 8000;
+}
+.warning {
+    background-color: #f7ba2a;
+}
+.danger {
+    background-color: #ff4949;
+}
+.info {
+    background-color: #50bfff;
+}
+
+/*确定提示框*/
+.alertTip_bg {
+    width: 100%;
+    height: 100%;
+    background: url(images/bg_alpha.png) left center repeat;
+    background: rgba(0,0,0,.5);
+    position: fixed;
+    top: 0;
+    left:0;
+    z-index: 5100;
+}
+.alertTip {
+    width: 300px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-left: -150px;
+    margin-top: -200px;
+    z-index: 5101;
+}
+
+.alertTip h6 {
+    height: 40px;
+    line-height: 40px;
+    padding-left: 10px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    background-color: #f8f8f8;
+}
+.alertTip h6:hover {
+    cursor: move;
+}
+.alertTip p {
+    padding: 0 10px;
+    line-height: 24px;
+    font-size: 14px;
+    text-indent: 2em;
+}
+.alertTip > button {
+    display: block;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    margin-top: 20px;
+    border: none;
+    background-color: #fff;
+    border-top: 1px solid #eee;
+    cursor: pointer;
+    transition: .3s background-color;
+}
+.alertTip > button:hover {
+    background-color: #f8f8f8;
+}
+
+.alertTip > .cancle {
+    float:left;
+    width: 150px;
+}
+.alertTip > .sure {
+    float: right;
+    width: 150px;
+    border-left: 1px solid #eee;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="list">
+    <h6>2秒提示框 -- $.alerts(txt, class)</h6>
+    <pre  class="brush:javascript;">
+        用法：$.alerts( txt, class );
+              txt -- 必填 -- 提示内容；
+              class -- 选填 -- 提示背景色 -- 默认成功的绿色； 可选参数 'info', 'danger', 'warning'.
+    </pre>
+    示例：<em id="btn-1-1">点我成功</em>
+    <pre  class="brush:javascript;">
+        $.alerts("删除成功！");
+    </pre>
+    示例：<em id="btn-1-2">点我失败</em><br />
+    <pre  class="brush:javascript;">
+        $.alerts("失败了！","danger");
+    </pre>
+    示例：<em id="btn-1-3">点我警告</em><br />
+    <pre  class="brush:javascript;">
+        $.alerts("这个操作比较危险！","warning");
+    </pre>
+    示例：<em id="btn-1-4">点我提示</em><br />
+    <pre  class="brush:javascript;">
+        $.alerts("正常的提示！","info");
+    </pre>
+</div>
+
+
+<div class="list">
+    <h6>确定提示框 -- $.alert(txt)</h6>
+    <em id="btn-2-1">点我弹出确定提示</em>
+    <pre  class="brush:javascript;">
+        $.alert('你真敢点我！0^0');
+    </pre>
+</div>
+
+
+<div class="list">
+    <h6>确认提示框 -- $.confirm(txt)</h6>
+    <div class="box_3">
+        <div class="moni_box"><em id="btn-3-1" data-id="12345">点我删除12345</em></div>
+        <div class="moni_box"><em id="btn-3-2" data-id="56789">点我删除56789</em></div>
+    </div>
+    <pre  class="brush:javascript;">
+        //确认提示框
+        var aimId;
+
+        $(".box_3 em").click(function(){
+            aimId = $(this).attr('data-id');
+            $.confirm("确定要删除"+aimId+"吗？");
+            $('#alertTip_bg').addClass('some_works_bg');
+            //赋给一个新类名的目的是在提交的时候，只提交当前功能需要的内容，防止与别的功能冲突，其它功能赋给其它类，在确定的时候用到
+        });
+        //点确定掉用回调函数
+        $('body').delegate('.some_works_bg .sure', 'click', function() {
+            //ajax({...在success里成功后执行下边代码});
+            
+            $.alert("aimId为"+aimId+"的em标签删除成功了！");
+            $('#alertTip_bg').remove().unbind();
+        });
+    </pre>
+</div>
+
+
+<div class="list">
+    <h6>n-m之间的随机数 -- $.rdm(n, m)</h6>
+    <input type="text" name="ipt_4_n" placeholder="n" ><input type="text" name="ipt_4_m" placeholder="m" ><em id="btn-4-1">点我测试</em>
+    <pre  class="brush:javascript;">
+        //n-m之间的随机数（默认0-10，包括n和m）
+        rdm:function(n,m){
+            n = n || 0;
+            m = m || 10;
+            return parseInt(Math.random()*((m-n)+1))+n;
+        }
+
+        //实例代码：
+        $('#btn-4-1').click(function(){
+            var _valn = $('input[name="ipt_4_n"]').val();
+            var _valm = $('input[name="ipt_4_m"]').val();
+            var _res;
+
+            if(_valn==''){
+                $.alert('n值为空！');
+            }else if(!$.isInt(_valn)){
+                $.alert('n值不是整数！');
+            }else{
+                if(_valm==''){
+                    $.alert('m值为空！');
+                }else if(!$.isInt(_valm)){
+                    $.alert('m值不是整数！');
+                }else{
+                    _valn = Number(_valn);
+                    _valm = Number(_valm);
+                    _res = $.rdm(_valn, _valm);
+
+                    $.alert(_valn+'-'+_valm+'之间的当前随机数是'+_res);
+                }
+            }
+        });
+    </pre>
+</div>
+
+
+<div class="list">
+    <h6>补零函数 -- $.toDbl(n)</h6>
+    <input type="text" name="ipt_5" placeholder="1-9之间的数字" ><em id="btn-5-1">点我</em>
+    <pre  class="brush:javascript;">
+        //补零函数--返回的是String
+        toDbl:function(n){
+            return n<10?'0'+n:''+n;
+        }
+
+        //实例代码：
+        $("#btn-5-1").click(function(){
+            var _val = $('input[name="ipt_5"]').val();
+            var _reg = /^[1-9][1]*$/.test(_val);
+            if(_val == ''){
+                $.alert('请输入！');
+            }else if(!_reg){
+                $.alert('超出范围！');
+            }else{
+                var _res = $.toDbl(_val);
+
+                $.alert(_res);
+            }
+        });
+    </pre>
+</div>
+
+
+<div class="list">
+    <h6>获取len长度的随机数字 -- $.getRnd(len) -- 默认5位</h6>
+    <pre  class="brush:javascript;">
+        //获取len长度的随机数字 --注意会出现1.0的情况
+        getRnd: function (len) {
+            if ($.isNullOrEmpty(len)) { len = 5; }
+            return parseFloat(Math.random()).toFixed(len).toString().replace("0.", "");
+        }
+    </pre>
+</div>
+
+
+<div class="list">
+    <h6>是否整数：0,正整数，负整数 -- $.isInt(str)</h6>
+    <pre  class="brush:javascript;">
+        isInt: function (str) {
+            return (str % 1 == 0 ? true : false); //return /^\-?\d+$/.test(num);
+        }
+    </pre>
+</div>
+
+
+<div class="list">
+    <h6>是否是正整数 -- $.isPositiveInt(str, symbol)</h6>
+    <pre  class="brush:javascript;">
+        //是否是正整数
+        //symbol不指定时表示不按正号前导符匹配，?表示模糊正号前导符匹配，+表示一定要有正号前导符
+        isPositiveInt: function (str, symbol) {
+            if ($.isNullOrEmpty(str)) { return false; }
+            switch (symbol) {
+                case "+": return /^\+[1-9][0-9]*$/.test(str); break;
+                case "?": return /^\+?[1-9][0-9]*$/.test(str); break;
+                default: return /^[1-9][0-9]*$/.test(str); break;
+            }
+        }
+    </pre>
+</div>
+
+
+<div class="list">
+    <h6>非负整数(正整数和零) -- $.isPositiveIntOrZero(str, symbol)</h6>
+    <pre  class="brush:javascript;">
+        //非负整数(正整数和零)
+        isPositiveIntOrZero: function (str, symbol) {
+            switch (symbol) {
+                case "+": return (/^\+[1-9][0-9]*$/.test(str) || str == 0); break;
+                case "?": return (/^\+?[1-9][0-9]*$/.test(str) || str == 0); break;
+                default: return (/^[1-9][0-9]*$/.test(str) || str == "0"); break;
+            }
+        }
+    </pre>
+</div>
+
+
+<div class="list">
+    <h6>是否是金额 -- $.isMoney(str)</h6>
+    <pre  class="brush:javascript;">
+        //是否是金额
+        isMoney: function (str) {
+            return /^(0|[1-9][0-9]*){1}(\.\d{1,2})?$/.test(str);
+        }
+    </pre>
+</div>
+
+
+<div class="list">
+    <h6>小数四舍五入 -- $.decRound(Decimal, i)</h6>
+    <pre  class="brush:javascript;">
+        //小数四舍五入
+        decRound: function (Decimal, i) {
+            return Math.round(Decimal * Math.pow(10, i)) / Math.pow(10, i);
+        }
+    </pre>
+</div>
+
+
+<div class="list">
+    <h6>过滤数组中重复的项 -- $.arrFilter(arr)</h6>
+    <pre  class="brush:javascript;">
+        //过滤数组中重复的项
+        arrFilter: function (arr) {
+            if (arr.length < 2) { return [arr[0]] || []; }
+            var array = [];
+            for (var i = 0; i < arr.length; i++) {
+                array.push(arr.splice(i--, 1));
+                for (var j = 0; j < arr.length; j++) {
+                    if (arr[j] == array[array.length - 1]) {
+                        arr.splice(j--, 1);
+                    }
+                }
+            }
+            return array;
+        }
+    </pre>
+</div>
+
+
+<div class="list">
+    <h6>返回下标从l到h的项组成的数组 -- $.arrRange(arr, l, h)</h6>
+    <pre  class="brush:javascript;">
+        //返回下标从l到h的项组成的数组
+        arrRange: function (arr, l, h) {
+            var _a = arr; var ret = [];
+            l = l < 0 ? 0 : l;
+            h = h > _a.length ? _a.length : h;
+            for (var i = 0; i < _a.length; i++) {
+                if (i >= l && i <= h) { ret[ret.length] = _a[i]; }
+                if (i > h) { break; }
+            };
+            return ret;
+        }
+    </pre>
+</div>
+
+
+<div class="list">
+    <h6>获取项在数组中第一次出现的下标 -- $.arrIndexOf(arr, item)</h6>
+    <pre  class="brush:javascript;">
+        //获取项在数组中第一次出现的下标
+        arrIndexOf: function (arr, item) {
+            var len = arr.length;
+            for (var i = 0; i < len; i++) {
+                if (item == arr[i]) { return i; }
+            }
+            return -1;
+        }
+    </pre>
+</div>
+
+
+<div class="list">
+    <h6>根据项的下标从数组中删除 -- $.arrDelete(arr, removeItemIndex)</h6>
+    <pre  class="brush:javascript;">
+        //根据项的下标从数组中删除
+        arrDelete: function (arr, removeItemIndex) {
+            if (isNaN(removeItemIndex) || removeItemIndex > arr.length) { return arr; }
+            arr.splice(removeItemIndex, 1);
+            return arr;
+        }
+    </pre>
+</div>
+
+
+<div class="list">
+    <h6>根据项的值从数组中删除（如果有重复项也一起删除） -- $.arryRemove(arr, removeItemValue)</h6>
+    <pre  class="brush:javascript;">
+        //根据项的值从数组中删除（如果有重复项也一起删除）
+        arryRemove: function (arr, removeItemValue) {
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i] == removeItemValue) {
+                    arr.splice(i, 1);
+                }
+            }
+            return arr;
+        }
+    </pre>
+</div>
+
+
+<div class="list">
+    <h6>元素是否在数组中存在 -- $.arrIsExit(arr, ele)</h6>
+    <pre  class="brush:javascript;">
+        // 元素是否在数组中存在
+        arrIsExit: function (arr, ele) {
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i] === ele) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    </pre>
+</div>
+
+
+<div class="list">
+    <h6>获取url中的参数值 -- $.getUrlParam(name)</h6>
+    <pre  class="brush:javascript;">
+        //获取url中的参数值
+        getUrlParam: function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+    </pre>
+</div>
+
+
+<div class="list">
+    <h6>将json格式的字符串转为json对象{} -- $.json(jsonStr)</h6>
+    <pre  class="brush:javascript;">
+        //将json格式的字符串转为json对象{}
+        json: function (jsonStr) {
+            return eval("(" + jsonStr + ")");
+        }
+    </pre>
+</div>
+
+
+<div class="list">
+    <h6>字符串替换，正则匹配替换 -- $.replace(text, oldStr, newStr)</h6>
+    <pre  class="brush:javascript;">
+        //字符串替换，正则匹配替换
+        replace: function (text, oldStr, newStr) {
+            var reg = new RegExp(oldStr, "g");
+            return text.replace(reg, newStr);
+        }
+    </pre>
+</div>
+
+
+<div class="list">
+    <h6>精确的四则运算 -- $.accAdd(arg1, arg2)</h6>
+    <pre  class="brush:javascript;">
+        //精确的四则运算
+        //精确加法，可类字符串数值/纯数字值
+        //javascript的加法结果会有误差，在两个大浮点数相加的时候会比较明显。这个函数返回较为精确的加法结果。
+        accAdd: function (arg1, arg2) {
+            var r1, r2, m;
+            try { r1 = arg1.toString().split(".")[1].length; } catch (e) { r1 = 0; }
+            try { r2 = arg2.toString().split(".")[1].length; } catch (e) { r2 = 0; }
+            m = Math.pow(10, Math.max(r1, r2));
+            return (arg1 * m + arg2 * m) / m;
+        },
+        //精确减法
+        accSub: function (arg1, arg2) {
+            var r1, r2, m, n;
+            try { r1 = arg1.toString().split(".")[1].length; } catch (e) { r1 = 0; }
+            try { r2 = arg2.toString().split(".")[1].length; } catch (e) { r2 = 0; }
+            m = Math.pow(10, Math.max(r1, r2));
+            //last modify by deeka
+            //动态控制精度长度
+            n = (r1 >= r2) ? r1 : r2;
+            return ((arg1 * m - arg2 * m) / m).toFixed(n);
+        },
+        //精确乘法
+        accMul: function (arg1, arg2) {
+            var m = 0, s1 = arg1.toString(), s2 = arg2.toString();
+            try { m += s1.split(".")[1].length; } catch (e) { };
+            try { m += s2.split(".")[1].length; } catch (e) { };
+            return Number(s1.replace(".", "")) * Number(s2.replace(".", "")) / Math.pow(10, m);
+        },
+        //精确除法
+        //javascript的除法结果会有误差，在两个浮点数相除的时候会比较明显。这个函数返回较为精确的除法结果。
+        accDiv: function (arg1, arg2) {
+            var t1 = 0, t2 = 0, r1, r2;
+            try { t1 = arg1.toString().split(".")[1].length; } catch (e) { };
+            try { t2 = arg2.toString().split(".")[1].length; } catch (e) { };
+            with (Math) {
+                r1 = Number(arg1.toString().replace(".", ""));
+                r2 = Number(arg2.toString().replace(".", ""));
+                return (r1 / r2) * pow(10, t2 - t1);
+            }
+        }
+    </pre>
+</div>
+
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+<script src="js/common-1.js"></script>
+
+<script>
+//弹出提示框s秒
+$("#btn-1-1").click(function(){
+    $.alerts('删除成功删除成功删除成功删除成功删除成功！');
+});
+$("#btn-1-2").click(function(){
+    $.alerts('失败了！','danger');
+});
+$("#btn-1-3").click(function(){
+    $.alerts('这个操作比较危险！','warning');
+});
+$("#btn-1-4").click(function(){
+    $.alerts('正常的提示！','info');
+});
+
+//确定提示框
+$("#btn-2-1").click(function(){
+    $.alert('你真敢点我！0^0');
+});
+
+//确认提示框
+var aimId;
+
+$(".box_3 em").click(function(){
+    aimId = $(this).attr('data-id');
+    $.confirm("确定要删除"+aimId+"吗？");
+    $('#alertTip_bg').addClass('some_works_bg');
+    //赋给一个新类名的目的是在提交的时候，只提交当前功能需要的内容，防止与别的功能冲突，其它功能赋给其它类，在确定的时候用到
+});
+//点确定掉用回调函数
+$('body').delegate('.some_works_bg .sure', 'click', function() {
+    //ajax({...在success里成功后执行下边代码});
+    
+    $.alert("aimId为"+aimId+"的em标签删除成功了！");
+    $('#alertTip_bg').remove().unbind();
+});
+
+
+//n-m之间的随机数
+$('#btn-4-1').click(function(){
+    var _valn = $('input[name="ipt_4_n"]').val();
+    var _valm = $('input[name="ipt_4_m"]').val();
+    var _res;
+
+    if(_valn==''){
+        $.alert('n值为空！');
+    }else if(!$.isInt(_valn)){
+        $.alert('n值不是整数！');
+    }else{
+        if(_valm==''){
+            $.alert('m值为空！');
+        }else if(!$.isInt(_valm)){
+            $.alert('m值不是整数！');
+        }else{
+            _valn = Number(_valn);
+            _valm = Number(_valm);
+            _res = $.rdm(_valn, _valm);
+
+            $.alert(_valn+'-'+_valm+'之间的当前随机数是'+_res);
+        }
+    }
+});
+
+
+//补零函数--返回的是String
+$("#btn-5-1").click(function(){
+    var _val = $('input[name="ipt_5"]').val();
+    var _reg = /^[1-9][1]*$/.test(_val);
+    if(_val == ''){
+        $.alert('请输入！');
+    }else if(!_reg){
+        $.alert('超出范围！');
+    }else{
+        var _res = $.toDbl(_val);
+
+        $.alert(_res);
+    }
+});
+
+console.log($.getRnd());
+
+</script>
+
+<link type="text/css" rel="stylesheet" href="../plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="../plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="../plugins/codeView/shBrushJScript.js"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+1. layer.js
+   弹出层插件
+   API说明：http://layer.layui.com/api.html
+
+2. laydate.js
+   日期插件
+   API说明：http://laydate.layui.com/api.html
+
+3. jquery.raty.js
+   星星评分插件
+   API说明：http://bookshadow.com/weblog/2014/08/16/jquery-raty-star-plugin/
+
+4. jquery.SuperSlide.2.1.1.js
+   外层文件夹里有源文件和具体使用实例-已经买了扩展的实例和源文件-otherDemo文件内为所有扩展效果示例
+   API说明：http://www.SuperSlide2.com/
+
+5. jquery.tablescroll.js
+   带滚动条的表格插件-可固定宽高使用滚动条
+   test-22-tableScroll-表格.html
+
+6. jquery.easyaudioeffects.1.0.0.min.js
+   开启声音插件-鼠标移入或点击某个元素可开启声音
+
+7. prefixfree.min.js
+   css3兼容各现代浏览器的自动补齐插件-直接引用即可
+   test-109-css3-loading.html
+
+8. jquery.jqpagination.min.js
+   jqpagination.css
+   修改过的兼容bootStrap的分页插件
+   具体用法看js里library_chennan.js里
+   已做整理在48.html
+
+9. icheck.min.js
+   自定义单选框复选框按钮插件
+   可引入皮肤图片也可修改皮肤图片为自己定义的图片
+   在00-前端相关\已整理特效收藏\已整理可用于项目 中有完整的实例和皮肤及api说明
+
+10.jquery.slideunlock.js
+   滑动解锁
+   兼容ie7及以上
+   
+11.jquery.form.js
+   表单异步提交插件
+   特别功能在于可以做上传的进度条显示；
+   整理在49.thml
+
+12.particles.min.js
+   线性背景canvas
+   整理在213.html
+
+
+

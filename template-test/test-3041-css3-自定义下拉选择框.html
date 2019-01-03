@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>图片自定义下拉框</title>
+	<link href="css/reset.css" rel="stylesheet" type="text/css">
+<style>
+/*用图片替换下拉框的下拉按钮*/
+.box select {
+	float:left;
+	padding-left:5px;
+	width:80px;
+	height:30px;
+	font:14px/20px "Microsoft Yahei";
+	border:1px solid #e6e6e6;
+	-webkit-appearance:none;
+	-moz-appearance:none;
+	appearance:none;
+	background:url(images/pic_test_icon_cmn.png) no-repeat 62px -22px;
+}
+.box select::-ms-expand { 
+	display: none;
+}
+</style>
+</head>
+
+<body>
+<div class="box">
+	<select name="stage" id="stage">
+		<option value="1">小学</option>
+		<option value="2">初中</option>
+		<option value="3">高中</option>
+	</select>
+</div>
+</body>
+</html>

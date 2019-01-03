@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-6-txtLimit</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+<style>
+.area_con {
+	width: 300px;
+	height: 100px;
+}
+.red {
+	color: #f00;
+}
+</style>
+</head>
+
+<body>
+<textarea name="areaContent" class="area_con"></textarea>
+<p class="fr txt_limit"><span class="txt_count">0</span><span>/</span><span class="max_count">300</span></p>
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+<script src="js/common-1.js"></script>
+<script>
+$(function(){
+	ski.cmn.txtLimit('.area_con','.txt_count','.max_count');//输入框字数限制
+});
+</script>
+</body>
+</html>

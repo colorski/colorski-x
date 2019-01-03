@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-1001-js-fn-常用函数封装</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<link type="text/css" rel="stylesheet" href="http://www.colorski.com/plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushJScript.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushCss.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushXml.js"></script>
+
+<style></style>
+</head>
+
+<body>
+<h1>常用函数封装</h1>
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p></div>
+
+<section class="code">
+
+    <h5>1.补零函数</h5>
+    <p>顺便脑补一下if else的简便写法</p>
+    <pre class="brush:javascript;">
+        function dbl(n){
+            if(n<10){
+                return "0"+n;   
+            }else{
+                return ''+n;
+            }
+        };
+    </pre>
+    <pre class="brush:javascript;">
+        function dbl(n){
+            n<10?return '0'+n:return ''+n;
+        };
+    </pre>
+    <pre class="brush:javascript;">
+        function dbl(n){
+            return n<10?'0'+n:''+n;
+        };
+    </pre>
+
+<hr />
+
+    <h5>2.toTextEnd</h5>
+    <p>让焦点自动聚焦到文本框内容的后面</p>
+    <pre class="brush:javascript;">
+        function toTextEnd(obj){
+            if(obj.setSelectionRange){
+                obj.setSelectionRange(obj.value.length,obj.value.length);
+                obj.focus();    
+            }else{
+                var range=obj.createTextRange();
+                range.collapse(false); 
+                range.select();
+                obj.focus();
+            }
+        };
+    </pre>
+
+<hr />
+
+    <h5>3.去除前后空格</h5>
+    <p>以原型方式调用，即obj.trim();</p>
+    <pre class="brush:javascript;">
+        String.prototype.trim = function(){
+            return this.replace(/(^\s*)|(\s+$)/g,"");  //去除左侧空格即 /^\s+/g; 右侧即 /\s+$/g
+        };
+        使用方法：
+        document.getElementById('txt').value.trim();
+    </pre>
+    <p>已传参方式，即trim(obj);</p>
+    <pre class="brush:javascript;">
+        function trim(str){
+            return str.replace(/(^\s+)|(\s+$)/g,"");  //去除左侧空格即 /^\s+/g; 右侧即 /\s+$/g
+        };
+        使用方法：
+        trim(document.getElementById('txt').value);
+    </pre>
+
+<hr />
+
+    <h5>4.字节长度查询</h5>
+    <p>汉字是2个字节</p>
+    <pre class="brush:javascript;">
+        function GetBytes(obj) {
+            var byteLegth = 0;
+            if (null != obj) {
+                for (var i = 0, len = obj.length; i < len; i++) {
+                    if (obj.charCodeAt(i) >= 0 && obj.charCodeAt(i) <= 255) {
+                        byteLegth++;
+                    }
+                    else {
+                        byteLegth = byteLegth + 2;
+                    }
+                }
+            }
+            return byteLegth;
+        };
+    </pre>
+    测试：<span id="test4" class="red">文字123ab</span><input type="button" value="按钮" id="btn4">
+
+<hr />
+
+    <h5>5.字节长度截取</h5>
+    <p>需要配合 4.字节长度查询 函数</p>
+    <pre class="brush:javascript;">
+        function CutBytes(obj,len) {
+            var tit = $(obj).text();
+            var len = len || 60;   // 截取长度默认60
+            if (GetBytes(tit) > len) {
+                // 字符截取操作
+                for (var i = 0; i < len; i++) {
+                    if (!(tit.charCodeAt(i) >= 0 && tit.charCodeAt(i) <= 255)) {
+                        // 汉字
+                        len--;
+                    }
+                }
+                //$(obj).text(tit.substring(0, len));
+                return tit.substring(0, len);
+            }
+        };
+    </pre>
+    测试：<span id="test5" class="red">文字123ab</span><input type="button" value="按钮" id="btn5">
+
+<hr />
+
+    <h5>6.取数组中的任意一个</h5>
+    <pre class="brush:javascript;">
+        var arr = ["太阳光大","父母恩大","君子量大","小人气大","原谅别人就是善待自己","手心向下是助人","手心向上是求人"];
+        var len = arr.length;
+        var idx = Math.floor((Math.random()*len)); 
+        //console.log(arr[idx]);
+    </pre>
+    测试：<input type="button" value="点我" id="btn6"><span id="test6"></span>
+
+<hr />
+
+    <h5>7.取数组中的任意n个</h5>
+    <pre class="brush:javascript;">
+        function getRandom(arr,len) {
+            var old_arry = arr,
+                len = len || 1; //默认1个
+            //防止超过数组的长度
+            len = len > old_arry.length?old_arry.length:len;
+            var newArray = [].concat(old_arry), //拷贝原数组进行操作就不会破坏原数组
+                valArray = [];
+            for (var n = 0; n < len; n++) {
+                var r = Math.floor(Math.random() * (newArray.length));
+                valArray.push(newArray[r]);
+                //在原数组删掉，然后在下轮循环中就可以避免重复获取
+                newArray.splice(r, 1);
+            }
+            return valArray;
+        }
+        //要进行处理的数组
+        var myArr = [1,6,8,0,3];
+        var new_val = getRandom(myArr,3);
+        console.log(new_val);
+    </pre>
+    测试：<input type="button" value="点我" id="btn7"><span id="test7"></span>
+    <p>此方法可替代6.方法（即不传len参数）,这样：getRandom(myArr)[0];</p>
+    <p>被注释起来的是从json中获取，其实是走弯路了，直接先从json中取出来arry即可</p>
+
+<hr />
+
+    <h5>8.获取文件后缀名（文档扩展名）</h5>
+    <pre class="brush:javascript;">
+        var fileAddr="www.colorski.com/data/xyz.docX";
+        var fileStyle = fileAddr.toLowerCase().substring(fileAddr.lastIndexOf(".")+1);//是否需要toLowerCase根据情况
+    </pre>
+    测试：<input type="button" value="点我" id="btn8">
+
+<hr />
+
+    <h5>9.保留小数点后两位，并第三位四舍五入</h5>
+    <pre class="brush:javascript;">
+        var num=22.125456;
+        alert(num.toFixed(2));
+        //注意：.toFixed(2)输出的是字符串，记得要转为数字。即：
+        var newNum = Number(num.toFixed(2));
+    </pre>
+
+<hr />
+
+    <h5>10.求和函数</h5>
+    <pre class="brush:javascript;">
+        function sum(arr){
+            var res=0;
+            for(var i=0; i<\arr.length; i++){ //注意去掉反斜线
+                res+=arr[i];
+            }
+            return res;
+        }
+        var arrVal = [1,2,3,4,5]; //注意是数值数组
+        console.log(sum(arrVal));
+    </pre>
+
+<hr />
+
+    <h5>11.两个数字或字符串调换位置</h5>
+    <pre class="brush:javascript;">
+        var a=5;
+        var b=12;
+
+        var car;
+        car=a;
+        a=b;
+        b=car;
+
+        console.log('a='+a+';'+ 'b='+b); //a=12;b=5
+    </pre>
+
+<hr />
+
+    <h5>12.求数组中的最小值</h5>
+    <pre class="brush:javascript;">
+        var arr=[12,3,65,4,89,5,32];
+        var iMin=arr[0];
+
+        for(var i=0; i<\arr.length; i++){
+            if(iMin>arr[i]){
+                iMin=arr[i];
+            }
+        }
+        console.log(iMin); //3
+
+        //找最小值所在的位置  即索引
+        /*var arr=[12,3,65,4,89,5,32];
+        var iMin=arr[0];
+        var iMinIndex=0;
+
+        for(var i=0; i<\arr.length; i++){
+            if(iMin>arr[i]){
+                iMin=arr[i];
+                iMinIndex=i;
+            }
+        }
+        console.log(iMinIndex);*/
+    </pre>
+
+<hr />
+
+    <h5>12.合并数组并去重</h5>
+    <pre class="brush:javascript;">
+        var arr1 = ["a","b"];
+        var arr2 = ["b","c"];
+
+        //一般合并数组用 concat() 即：
+        var arr3 = arr1.concat(arr2);
+        //结果arr3为：["a","b","b","c"];
+
+        //以上结果，要把重复的项b去掉一个，即想要的结果是 ["a","b","c"];
+
+        Array.prototype.unique = function(){
+            var a = this.concat();
+            for(var i=0; i<\a.length; i++){
+                for(var j=i+1; j<\a.length; j++){
+                    if(a[i] === a[j]){
+                        a.splice(j,1);
+                    }
+                }
+            }
+            return a;
+        };
+        //demo
+        var arr1 = ["a","b"];
+        var arr2 = ["b","c"];
+        var arr3 = arr1.concat(arr2).unique();
+        console.log('13-合并去重后值为：'+arr3);
+    </pre>
+
+
+</section>
+
+<!--colorBorder-->
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+
+<script>
+
+/***********4**********/
+
+function GetBytes(obj) {
+    var byteLegth = 0;
+    if (null != obj) {
+        for (var i = 0, len = obj.length; i < len; i++) {
+            if (obj.charCodeAt(i) >= 0 && obj.charCodeAt(i) <= 255) {
+                byteLegth++;
+            }
+            else {
+                byteLegth = byteLegth + 2;
+            }
+        }
+    }
+    return byteLegth;
+};
+
+(function(){
+    var txt = $('#test4').text();
+
+    $('#btn4').click(function(){
+        alert("红色文字有："+GetBytes(txt)+"个字节");
+    });
+})();
+
+/***********5**********/
+
+function CutBytes(obj,len) {
+    var tit = $(obj).text();
+    var len = len || 60;   // 截取长度默认60
+    if (GetBytes(tit) > len) {
+        // 字符截取操作
+        for (var i = 0; i < len; i++) {
+            if (!(tit.charCodeAt(i) >= 0 && tit.charCodeAt(i) <= 255)) {
+                // 汉字
+                len--;
+            }
+        }
+        //$(obj).text(tit.substring(0, len));
+        return tit.substring(0, len);
+    }
+};
+
+(function(){
+    $('#btn5').click(function(){
+        alert("截取前6个字符："+CutBytes('#test5',6));
+    });
+})();
+
+/***********6**********/
+(function(){
+    var arr = ["太阳光大","父母恩大","君子量大","小人气大","原谅别人就是善待自己","手心向下是助人","手心向上是求人"];
+    var len = arr.length;
+
+    function rdmArr(){
+        var idx = Math.floor((Math.random()*len));
+        return arr[idx];
+    };
+
+    $("#btn6").click(function(){
+        $("#test6").empty().text( rdmArr() );
+    });
+})();
+
+/***********7**********/
+(function(){
+    function getRandom(arr,len) {
+        var old_arry = arr,
+            len = len || 1; //默认1个
+        //防止超过数组的长度
+        len = len > old_arry.length?old_arry.length:len;
+        var newArray = [].concat(old_arry), //拷贝原数组进行操作就不会破坏原数组
+            valArray = [];
+        for (var n = 0; n < len; n++) {
+            var r = Math.floor(Math.random() * (newArray.length));
+            valArray.push(newArray[r]);
+            //在原数组删掉，然后在下轮循环中就可以避免重复获取
+            newArray.splice(r, 1);
+        }
+        return valArray;
+    }
+    //要进行处理的数组
+    var myArr = [1,6,8,0,3];
+    var new_val = getRandom(myArr,3);
+    //console.log(new_val);
+
+    $("#btn7").click(function(){
+        $("#test7").empty().text( getRandom(myArr,3) );
+    });
+})();
+/*
+//以下是以json的形式 参数opt即是一个json
+(function(){
+    function getRandom(opt,len) {
+        var old_arry = opt.arry,
+            len = len || 1; //默认1个
+        //防止超过数组的长度
+        len = len > old_arry.length?old_arry.length:len;
+        var newArray = [].concat(old_arry), //拷贝原数组进行操作就不会破坏原数组
+            valArray = [];
+        for (var n = 0; n < len; n++) {
+            var r = Math.floor(Math.random() * (newArray.length));
+            valArray.push(newArray[r]);
+            //在原数组删掉，然后在下轮循环中就可以避免重复获取
+            newArray.splice(r, 1);
+        }
+        return valArray;
+    }
+    var json = {'arry':[1,6,8,0,3]};
+    var new_val = getRandom(json,3);
+    console.log(new_val);
+})();
+*/
+
+/***********8**********/
+(function(){
+    var fileAddr="www.colorski.com/data/xyz.docX";
+    var fileStyle = fileAddr.toLowerCase().substring(fileAddr.lastIndexOf(".")+1);//是否需要toLowerCase根据情况
+    
+    $('#btn8').click(function(){ alert(fileStyle) });
+})();
+
+
+/***********10 求和函数**********/
+function sum(arr){
+    var res=0;
+    for(var i=0; i<arr.length; i++){
+        res+=arr[i];
+    }
+    return res;
+}
+var arrVal = [1,2,3,4,5]; //注意是数值数组
+console.log('10-- '+sum(arrVal));
+/*
+//以下是直接传参的形式 取的是参数个数值
+function sum(){
+    var res=0;
+    for(var i=0; i<\arguments.length; i++){ //注意去掉反斜线
+        res+=arguments[i];
+    }
+    return res;
+}
+//console.log(sum(1,2,3,4,5)); //15 
+*/
+
+
+/***********11 两个数字或字符串调换位置**********/
+var a=5;
+var b=12;
+
+var car;
+car=a;
+a=b;
+b=car;
+
+console.log('11--'+'a='+a+';'+ 'b='+b); //a=12;b=5
+
+
+/***********12 求最小值**********/
+//找一个变量让它等于数组里面的任意一项（比如arr[0]，即12），让这一项去跟数组里的其他项比较，有比它小的，此项就成了比它小的那个。
+var arr=[12,3,65,4,89,5,32];
+var iMin=arr[0];
+
+for(var i=0; i<arr.length; i++){
+    if(iMin>arr[i]){
+        iMin=arr[i];
+    }
+}
+console.log('12--最小值为：'+iMin);
+
+//找最小值所在的位置    就是找索引
+/*var arr=[12,3,65,4,89,5,32];
+var iMin=arr[0];
+var iMinIndex=0;
+
+for(var i=0; i<arr.length; i++){
+    if(iMin>arr[i]){
+        iMin=arr[i];
+        iMinIndex=i;
+    }
+}
+alert(iMinIndex);*/
+
+
+/***********13 合并数组并去重**********/
+
+Array.prototype.unique = function(){
+    var a = this.concat();
+    for(var i=0; i<a.length; i++){
+        for(var j=i+1; j<a.length; j++){
+            if(a[i] === a[j]){
+                a.splice(j,1);
+            }
+        }
+    }
+    return a;
+};
+//demo
+var arr1 = ["a","b"];
+var arr2 = ["b","c"];
+var arr3 = arr1.concat(arr2).unique();
+console.log('13-合并去重后值为：'+arr3);
+
+</script>
+</body>
+</html>

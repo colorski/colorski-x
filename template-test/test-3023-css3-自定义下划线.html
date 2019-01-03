@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-3023-css3-自定义复选框单选框</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<link type="text/css" rel="stylesheet" href="http://www.colorski.com/plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushJScript.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushCss.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushXml.js"></script>
+
+<style>
+p { font-size: 14px;}
+.p1 { text-decoration:underline; }
+.p2 {
+    display: inline-block;
+    border-bottom: 1px dashed #f00;
+}
+.p3 { 
+	display: inline-block;
+	background: linear-gradient(#f00,#ccc) no-repeat;
+	background-size: 100% 1px;
+	background-position: 0 18px;
+	text-shadow: .05em 0 #fff, -.05em 0 #fff;
+ }
+.p4 {
+    display: inline-block;
+    background: linear-gradient(90deg, #f00 66%, transparent 0) repeat-x;
+    background-size: 14px 1px;
+    background-position: 0 18px;
+    text-shadow: .05em 0 #fff, -.05em 0 #fff;
+ }
+.p5 {
+    background: linear-gradient(0deg, #ccc 66%, transparent 0) repeat;
+    background-size: 100% 2px;
+    background-position: 0 17px;
+    text-shadow: .05em 0 #fff, -.05em 0 #fff;
+ }
+</style>
+</head>
+
+<body>
+<h1>自定义下划线</h1>
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p></div>
+
+<section class="code">
+
+    <h5>1.css2标准：如果有折行还是老老实实用这个吧！</h5>
+    <pre  class="brush:css;">
+    .p1 { text-decoration:underline; }
+    </pre>
+    <p class="p1">这是一个有下划线的段落文字。This is an underlined passage.这是一个有下划线的段落文字。This is an underlined passage.</p>
+
+<hr />
+
+    <h5>2.使用border模拟。注意折行会有问题。</h5>
+    <pre  class="brush:css;">
+    .p2 {
+        display: inline-block;
+        border-bottom: 1px dashed #ccc;
+    }
+    </pre>
+    <p class="p2">这是一个有下划线的段落文字。This is an underlined passage.这是一个有下划线的段落文字。This is an underlined passage.这是一个有下划线的段落文字。This is an underlined passage.这是一个有下划线的段落文字。This is an underlined passage.这是一个有下划线的段落文字。This is an underlined passage.这是一个有下划线的段落文字。This is an underlined passage.</p>
+
+<hr />
+
+    <h5>3.使用背景。其实对于下划线的自定义应该是针对有<a href="https://www.zhihu.com/question/22183501/answer/20566238?utm_campaign=rss&utm_medium=rss&utm_source=rss&utm_content=title"> 基线 </a>的外文字体。下边方法以及虚线下划线如果折行会有问题，而且不兼容低版本浏览器，谨慎使用！</h5>
+    <pre  class="brush:css;">
+    .p3 { 
+    	display: inline-block;
+    	background: linear-gradient(#ccc,#ccc) no-repeat;
+    	background-size: 100% 1px;
+    	background-position: 0 18px;
+    	text-shadow: .05em 0 #fff, -.05em 0 #fff;
+     }
+    </pre>
+    <p class="p3">这是一个有下划线的段落文字。This is an underlined passage.这是一个有下划线的段落文字。This is an underlined passage.这是一个有下划线的段落文字。This is an underlined passage.这是一个有下划线的段落文字。This is an underlined passage.</p>
+
+<hr />
+
+    <h5>4.虚线下划线</h5>
+    <pre  class="brush:css;">
+    .p4 {
+        display: inline-block;
+        background: linear-gradient(90deg, #f00 66%, transparent 0) repeat-x;
+        background-size: 14px 1px;
+        background-position: 0 18px;
+        text-shadow: .05em 0 #fff, -.05em 0 #fff;
+     }
+    </pre>
+    <p class="p4">这是一个有下划线的段落文字。这是一个有下划线的段落文字。这是一个有下划线的段落文字。这是一个有下划线的段落文字。</p>
+    <p class="p4">This is an underlined passage.This is an underlined passage.This is an underlined passage.This is an underlined passage.</p>
+
+    <h5>5.背景线条</h5>
+    <pre  class="brush:css;">
+    .p5 {
+        background: linear-gradient(0deg, #ccc 66%, transparent 0) repeat;
+        background-size: 100% 2px;
+        background-position: 0 17px;
+        text-shadow: .05em 0 #fff, -.05em 0 #fff;
+     }
+    </pre>
+    <p class="p5">这是一个有下划线的段落文字。这是一个有下划线的段落文字。这是一个有下划线的段落文字。这是一个有下划线的段落文字。This is an underlined passage.This is an underlined passage.This is an underlined passage.This is an underlined passage.</p>
+
+<hr />
+
+
+</section>
+
+<!--colorBorder-->
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+
+<script>
+
+</script>
+</body>
+</html>

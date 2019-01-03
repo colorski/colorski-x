@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-48-jquery-plugins-jqpagination</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<link type="text/css" rel="stylesheet" href="http://www.colorski.com/plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushJScript.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushCss.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushXml.js"></script>
+
+<style></style>
+</head>
+
+<body>
+<h1>jqpagination插件</h1>
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p></div>
+
+<section class="code">
+
+    <h5>需要的文件：</h5>
+    <a href="js/plugins/jquery.jqpagination.min.js">jquery.jqpagination.min.js</a><br />
+    <a href="css/plugins/jqpagination.css">jqpagination.css</a> 样式比较少，可以整理到一个公用css文件里
+    <h5>用法：</h5>
+    html：
+    <pre  class="brush:html;">
+    <div id = "jqPager" class="jqpager"></div>
+    </pre>
+    javascript:
+    <pre  class="brush:javascript;">
+    $('#jqPager').pager({
+		recordcount: data.count,
+		pagesize: data.pageSize,
+		pagenumber:data.page,
+		buttonClickCallback:function(n) {
+			getData(n);
+		},
+		firsttext: '首页',
+		prevtext: '前一页',
+		nexttext: '下一页',
+		lasttext: '尾页',
+		gotext:'跳转',
+		recordtext: '共{0}页,{1}条记录'
+	});
+
+	以上代码一般放在getData()方法中的success中的插入之后；
+
+	//需要的参数：
+	count -- 数据总数；
+	pageSize -- 每页展示数据数；
+	page -- 当前页数；
+    </pre>
+
+<hr />
+
+
+</section>
+
+<!--colorBorder-->
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+
+<script>
+
+</script>
+</body>
+</html>

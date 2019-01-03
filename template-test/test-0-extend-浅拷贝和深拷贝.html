@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-0-extend-浅拷贝和深拷贝</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<style>
+p { line-height: 24px; }
+</style>
+</head>
+
+<body>
+<h1>$.extend()-浅拷贝和深拷贝</h1>
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p></div>
+
+<pre  class="brush:javascript;">语法：$.extend([deep], target, object1, [, objectN]);</pre>
+<p>例：可直接看下边实例</p>
+<pre  class="brush:javascript;">$.extend(object1, object2);   //浅拷贝</pre>
+<pre  class="brush:javascript;">$.extend(true,object1, object2);   //深拷贝</pre>
+
+<p>描述：将两个或更多对象的内容合并到第一个对象。</p>
+深浅拷贝对应参数是[deep]，是可选的，为true或false。默认是false（浅拷贝），并且false是不能显写出来的。即只能在深拷贝的时候写true。</p>
+
+<pre  class="brush:javascript;">在默认情况下（浅拷贝），通过$.extend()合并操作不是递归的（浅拷贝）;如果第一个对象的属性本身是一个对象或数组，那么它将完全用第二个对象相同的key重写一个属性。这些值不会被合并。然而，如果将 true 作为该函数的第一个参数，那么会在对象上进行递归的合并（深拷贝）。</pre>
+
+<pre  class="brush:javascript;">浅拷贝（false 默认）：如果第二个参数对象有的属性第一个参数对象也有，那么不会进行相同参数内部的比较，直接将第一个对象的相同参数覆盖。</pre>
+
+<pre  class="brush:javascript;">深拷贝（true）：如果第二个参数对象有的属性第一个参数对象也有，还要继续在这个相同的参数向下一层找，比较相同参数的对象中是否还有不一样的属性，如果有，将其继承到第一个对象，如果没有，则覆盖。</pre>
+
+<p>实例：</p>
+<pre  class="brush:javascript;">
+var object1 = {
+    apple: 0,
+    banana: {
+        weight: 52,
+        price: 100
+    },
+    cherry: 97
+};
+var object2 = {
+    banana: {
+        price: 200
+    },
+    durian: 100
+};
+
+//默认情况浅拷贝
+//$.extend(object1, object2);
+//object1--->{"apple":0,"banana":{"price":200},"cherry":97,"durian":100}
+//object2的banner覆盖了object1的banner，但是weight属性未被继承
+
+
+//深拷贝
+$.extend(true,object1, object2);
+//object1--->{"apple":0,"banana":{"weight":52,"price":200},"cherry":97,"durian":100}
+//object2的banner覆盖了object1的banner，但是weight属性也被继承了
+
+console.log('object1--->'+JSON.stringify(object1));
+
+JSON.stringify(object1);  //是将json对象转为字符串的方法
+</pre>
+<p>---------------------文章摘自：<a href="http://www.cnblogs.com/yuqingfamily/p/5813650.html">http://www.cnblogs.com/yuqingfamily/p/5813650.html</a></p>
+<p>---------------------扩展文章：<a href="https://www.zhihu.com/question/23031215">https://www.zhihu.com/question/23031215</a></p>
+
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+<script src="js/common-1.js"></script>
+<script>
+var object1 = {
+    apple: 0,
+    banana: {
+        weight: 52,
+        price: 100
+    },
+    cherry: 97
+};
+var object2 = {
+    banana: {
+        price: 200
+    },
+    durian: 100
+};
+
+//默认情况浅拷贝
+//object1--->{"apple":0,"banana":{"price":200},"cherry":97,"durian":100}
+//object2的banner覆盖了object1的banner，但是weight属性未被继承
+//$.extend(object1, object2);
+
+//深拷贝
+//object1--->{"apple":0,"banana":{"weight":52,"price":200},"cherry":97,"durian":100}
+//object2的banner覆盖了object1的banner，但是weight属性也被继承了呦
+$.extend(true,object1, object2);
+
+console.log('object1--->'+JSON.stringify(object1));
+</script>
+<link type="text/css" rel="stylesheet" href="http://www.colorski.com/plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushJScript.js"></script>
+</body>
+</html>

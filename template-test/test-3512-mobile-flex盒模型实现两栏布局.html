@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-3512-mobile-flex盒模型实现两栏布局</title>
+<meta name="keywords" content="" />
+<meta name="description" content="左侧固定右侧自适应" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<link type="text/css" rel="stylesheet" href="http://www.colorski.com/plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushJScript.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushCss.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushXml.js"></script>
+
+<style>
+.parent{
+  height:500px;  
+  border:1px solid #222;  
+  display:flex;/*设为伸缩容器*/  
+  flex-flow:row;/*伸缩项目单行排列*/  
+}  
+.stable{  
+  width:200px;/*固定宽度*/  
+  border:1px solid  #ccc;  
+  margin:20px;  
+}  
+.change{  
+  flex:1;/*这里设置为占比1，填充满剩余空间*/  
+  border:1px solid #ff4400;  
+  margin:20px;  
+}  
+</style>
+</head>
+
+<body>
+<div class="parent">
+	<div class="stable">stable 固定宽度200px</div>  
+	<div class="change">changeable 可变宽度</div>  
+</div> 
+
+<pre  class="brush:css;">
+	.parent{
+		height:500px;  
+		border:1px solid #222;  
+		display:flex;/*设为伸缩容器*/  
+		flex-flow:row;/*伸缩项目单行排列*/  
+	}  
+	.stable{  
+		width:200px;/*固定宽度*/  
+		border:1px solid  #ccc;  
+		margin:20px;  
+	}  
+	.change{  
+		flex:1;/*这里设置为占比1，填充满剩余空间*/  
+		border:1px solid #ff4400;  
+		margin:20px;  
+	}  
+</pre>
+
+<script src="js/jquery-1.12.3.min.js"></script>
+</body>
+</html>

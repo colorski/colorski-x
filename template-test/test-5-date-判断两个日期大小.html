@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-5-date-判断两个日期大小</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+<style>
+
+</style>
+</head>
+
+<body>
+开始日期：<input type="text" id="ipt1" value="2017-06-01" /> <br />
+结束日期：<input type="text" id="ipt2" value="2017-06-05" /> <br />
+<input type="button" id="btn" value="提交" />
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+<script src="js/common-1.js"></script>
+<script>
+//源代码
+/*var startDate="2017-05-31";  
+var endDate="2017-05-30";  
+var d1 = new Date(startDate.replace(/\-/g, "\/"));  
+var d2 = new Date(endDate.replace(/\-/g, "\/"));  
+
+if(d1 > d2){
+	alert("开始时间不能大于结束时间！");
+	return false;
+}*/
+
+
+//判断两个日期大小的函数 - 注意返回的是布尔值
+function compareDate(startDate,endDate){
+	var d1 = new Date(startDate.replace(/\-/g, "\/"));  
+	var d2 = new Date(endDate.replace(/\-/g, "\/"));  
+
+	if(d1 > d2){
+		return false;
+	}else{
+		return true;
+	}
+}
+
+
+//获取方法：
+var sDate="2017-05-31";  
+var eDate="2017-05-30";  
+console.log(compareDate(sDate,eDate));
+
+
+//实例方法：
+$("#btn").click(function(){
+	var date1 = $("#ipt1").val();
+	var date2 = $("#ipt2").val();
+
+	if(compareDate(date1,date2)){
+		$.alerts("输入的时间大小正确");
+	}else{
+		$.alerts("开始时间大于了结束时间","warning");
+	}
+});
+
+
+</script>
+</body>
+</html>

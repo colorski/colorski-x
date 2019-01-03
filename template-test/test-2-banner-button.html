@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-2-banner</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+<style>
+/*banner*/
+.flexslider{position:relative;height:380px;overflow:hidden;}
+.slides{position:relative;z-index:1;}
+.slides li{height:380px;}
+.flex-control-nav{position:absolute;bottom:20px;z-index:20;width:100px;left:50%;margin-left:-50px;text-align:center; background:rgba(0,0,0,.3);border-radius: 10px;}
+.flex-control-nav li{display:inline-block;width:10px;height:10px;margin:0 5px;*display:inline;zoom:1;}
+.flex-control-nav a{display:inline-block;width:10px;height:10px;overflow:hidden;cursor:pointer;border-radius:10px; text-indent: 20px; background-color: #f00;}
+.flex-control-nav .flex-active{background-color: #fff;}
+
+.flex-direction-nav{position:absolute;z-index:3;width:100%;top:45%;}
+.flex-direction-nav li a{display:block;width:50px;height:50px;overflow:hidden;cursor:pointer;position:absolute; background-color: #000;}
+.flex-direction-nav li a.flex-prev{left:0px;background:url(http://www.17sucai.com/preview/22522/2014-03-25/%E7%B4%A0%E6%9D%90/images/prev.png) center center no-repeat;}
+.flex-direction-nav li a.flex-next{right:0px;background:url(http://www.17sucai.com/preview/22522/2014-03-25/%E7%B4%A0%E6%9D%90/images/next.png) center center no-repeat;}
+
+</style>
+</head>
+
+<body>
+
+<div class="flexslider">
+    <ul class="slides">
+        <li style="background:url(images/banner1.jpg) 50% 0 no-repeat;"></li>
+        <li style="background:url(images/banner2.jpg) 50% 0 no-repeat;"></li>
+        <li style="background:url(images/banner3.jpg) 50% 0 no-repeat;"></li>
+        <li style="background:url(images/banner4.jpg) 50% 0 no-repeat;"></li>
+    </ul>
+</div>
+
+
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+<script src="js/plugins/jquery.flexslider-min.js"></script>
+<script>
+$(document).ready(function(){
+    $('.flexslider').flexslider({
+        directionNav: true,
+        pauseOnAction: false
+    });
+});
+</script>
+</body>
+</html>

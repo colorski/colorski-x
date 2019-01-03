@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<title>伪类做的实三角</title>
+	<style>
+	/*上*/
+	.box1 { position: relative; padding: 2px 6px; border: 3px solid #ddd8ce; 
+		margin-bottom: 30px; margin-top: 30px;}
+	.box1:before{content:'';position:absolute;top:-15px;left:10px;width:0;height:0;border:6px solid transparent;border-bottom-color:#ddd8ce;}
+	
+	/*下*/
+	.box2 { position: relative; padding: 2px 6px; border: 3px solid #ddd8ce;
+		margin-bottom: 30px;}
+	.box2:before{content:'';position:absolute;bottom:-15px;left:10px;width:0;height:0;border:6px solid transparent;border-top-color:#ddd8ce;}
+
+	/*左*/
+	.box3 { position: relative; padding: 2px 6px; border: 3px solid #ddd8ce; 
+		margin-bottom: 30px; margin-left: 30px;}
+	.box3:before{content:'';position:absolute;top: 5px;left:-15px;width:0;height:0;border:6px solid transparent;border-right-color:#ddd8ce;}
+
+	/*右*/
+	.box4 { position: relative; padding: 2px 6px; border: 3px solid #ddd8ce; 
+		margin-bottom: 30px; margin-right: 30px;}
+	.box4:before{content:'';position:absolute;top: 5px;right:-15px;width:0;height:0;border:6px solid transparent;border-left-color:#ddd8ce;}
+
+	</style>
+</head>
+<body>
+<div class="box1">这是一个向上的实三角。</div>
+<div class="box2">这是一个向下的实三角。</div>
+<div class="box3">这是一个向左的实三角。</div>
+<div class="box4">这是一个向右的实三角。</div>
+</body>
+</html>

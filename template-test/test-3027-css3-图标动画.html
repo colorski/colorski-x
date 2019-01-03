@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-3027-css3-图标动画</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<style>
+.box {
+    position: relative;
+    z-index: 10;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    cursor: pointer;
+}
+.box1 i {
+    position: absolute;
+    top: 10px;
+    right: 5px;
+    z-index: 11;
+    width: 10px;
+    height: 10px;
+    background: url(images/pic_test_icon_cmn.png) 0px -30px no-repeat;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition-duration: 300ms;
+    transition-duration: 300ms;
+}
+.box1:hover i {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+
+.box2 i {
+    position: absolute;
+    top: 4px;
+    right: 45px;
+    z-index: 11;
+    width: 20px;
+    height: 20px;
+    background: url(images/pic_test_icon_cmn.png) 0px -908px no-repeat;
+    -webkit-transition:transform .2s ease-in;
+    -moz-transition:transform .2s ease-in;
+    -o-transition:transform .2s ease-in;
+    transition:transform .2s ease-in;
+    transform: rotateY(0deg);
+}
+.box2:hover i {
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+}
+
+
+.list3 {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  position: relative;
+  margin: 10px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  -ms-border-radius: 100px;
+  -o-border-radius: 100px;
+  border-radius: 100px; }
+  .list3:after {
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 48;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(100, 218, 194, 0.2);
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    -ms-border-radius: 100px;
+    -o-border-radius: 100px;
+    border-radius: 100px; }
+.list3_hover:hover:after {
+  -webkit-transform: scale(1.25);
+  -moz-transform: scale(1.25);
+  -ms-transform: scale(1.25);
+  -o-transform: scale(1.25);
+  transform: scale(1.25); }
+.list3_inner:hover {
+  -webkit-transform: scale(0.9);
+  -moz-transform: scale(0.9);
+  -ms-transform: scale(0.9);
+  -o-transform: scale(0.9);
+  transform: scale(0.9);
+  background-color: rgba(100, 218, 194, 0.5);
+  vertical-align: middle; }
+.list3_inner:hover i {
+    text-shadow: none; }
+.list3_inner:hover img {
+    vertical-align: middle; }
+.list3_inner {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  text-align: center;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  -ms-border-radius: 100px;
+  -o-border-radius: 100px;
+  border-radius: 100px;
+  -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
+  -ms-transition: all .3s ease;
+  -o-transition: all .3s ease;
+  transition: all .3s ease;
+  background-color: #64dac2;
+  color: #ececf5;
+  cursor: pointer;
+  position: relative;
+  z-index: 50; }
+.list3_inner i {
+    font-size: 40px;
+    line-height: 100px;
+    -webkit-transition: all .1s ease;
+    -moz-transition: all .1s ease;
+    -ms-transition: all .1s ease;
+    -o-transition: all .1s ease;
+    transition: all .1s ease;
+    text-shadow: 0px 0px 0 #5cd8bf,1px 1px 0 #5cd8bf,2px 2px 0 #5cd8bf,3px 3px 0 #5cd8bf,4px 4px 0 #5cd8bf,5px 5px 0 #5cd8bf,6px 6px 0 #5cd8bf,7px 7px 0 #5cd8bf,8px 8px 0 #5cd8bf,9px 9px 0 #5cd8bf,10px 10px 0 #5cd8bf,11px 11px 0 #5cd8bf,12px 12px 0 #5cd8bf,13px 13px 0 #5cd8bf,14px 14px 0 #5cd8bf,15px 15px 0 #5cd8bf,16px 16px 0 #5cd8bf,17px 17px 0 #5cd8bf,18px 18px 0 #5cd8bf,19px 19px 0 #5cd8bf,20px 20px 0 #5cd8bf,21px 21px 0 #5cd8bf,22px 22px 0 #5cd8bf,23px 23px 0 #5cd8bf,24px 24px 0 #5cd8bf,25px 25px 0 #5cd8bf,26px 26px 0 #5cd8bf,27px 27px 0 #5cd8bf,28px 28px 0 #5cd8bf,29px 29px 0 #5cd8bf,30px 30px 0 #5cd8bf,31px 31px 0 #5cd8bf,32px 32px 0 #5cd8bf,33px 33px 0 #5cd8bf,34px 34px 0 #5cd8bf,35px 35px 0 #5cd8bf,36px 36px 0 #5cd8bf,37px 37px 0 #5cd8bf,38px 38px 0 #5cd8bf,39px 39px 0 #5cd8bf,40px 40px 0 #5cd8bf,41px 41px 0 #5cd8bf,42px 42px 0 #5cd8bf,43px 43px 0 #5cd8bf,45px 45px 0 transparent; }
+
+
+@font-face {font-family: "iconfont";
+  src: url('fonts/iconfonts/iconfont.eot?t=1493707970999'); /* IE9*/
+  src: url('fonts/iconfonts/iconfont.eot?t=1493707970999#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('fonts/iconfonts/iconfont.woff?t=1493707970999') format('woff'), /* chrome, firefox */
+  url('fonts/iconfonts/iconfont.ttf?t=1493707970999') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('fonts/iconfonts/iconfont.svg?t=1493707970999#iconfont') format('svg'); /* iOS 4.1- */
+}
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-computer1:before { content: "\e63f"; }
+.icon-operation:before { content: "\e6e1"; }
+.icon-searchforfiles:before { content: "\e6e7"; }
+
+</style>
+</head>
+
+<body>
+
+<div class="box box1">个人中心<i></i></div>
+<div class="box box2">分享<i></i></div>
+
+<hr>
+
+<div class="list3 list3_hover">
+    <div class="list3_inner">
+        <i class="icon iconfont icon-computer1"></i>
+    </div>
+</div>
+<div class="list3 list3_hover">
+    <div class="list3_inner">
+        <i class="icon iconfont icon-operation"></i>
+    </div>
+</div>
+<div class="list3 list3_hover">
+    <div class="list3_inner">
+        <i class="icon iconfont icon-searchforfiles"></i>
+    </div>
+</div>
+
+<hr>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>test-10-css3-loading：animation-delay</title>
+<link rel="stylesheet" href="css/reset.css" /> 
+<style>
+.spinner{
+  width:80px;
+  height:50px;
+  margin:100px auto;
+  text-align:center;
+}
+.spinner > p{
+  display:inline-block;
+  width:6px;
+  height:100%;
+  background:green;
+  -webkit-animation: strechdelay 1.2s infinite ease-in-out ;
+}
+.spinner .line2{
+  -webkit-animation-delay:-1.1s;
+}
+.spinner .line3{
+  -webkit-animation-delay:-1.0s;
+}
+
+.spinner .line4{
+  -webkit-animation-delay:-0.9s;
+}
+
+.spinner .line5{
+  -webkit-animation-delay:-0.8s;
+}
+@-webkit-keyframes strechdelay{
+  0%,40%,100%{
+    -webkit-transform:scaleY(.4);
+  }
+  20%{
+    -webkit-transform:scaleY(1);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="spinner">
+    <p class="line1"></p>
+    <p class="line2"></p>
+    <p class="line3"></p>
+    <p class="line4"></p>
+    <p class="line5"></p>
+  </div>
+
+</body>
+</html>

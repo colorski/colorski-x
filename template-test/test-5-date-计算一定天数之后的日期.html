@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-5-date-计算一定天数之后的日期</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+<style>
+
+</style>
+</head>
+
+<body>
+你想显示几天之后的日期：
+<input type="text" value="" id="iptDays" /><input type="button" id="btn" value="提交" />
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+<script src="js/common-1.js"></script>
+<script> 
+function getDateDaysLater(days){
+	var startDate = new Date();
+	var intValue = 0;
+	var endDate = null;
+	var aimDate;
+	var days = days?days:days=0;
+
+	intValue = startDate.getTime();
+	intValue += days * (24 * 3600 * 1000);
+	endDate = new Date(intValue);
+
+	aimDate = endDate.getFullYear()+"-"+ (endDate.getMonth()+1)+"-"+ endDate.getDate();
+	
+	//注释的是加零之后的
+	//aimDate = endDate.getFullYear()+"-"+ ($.toDbl(endDate.getMonth()+1))+"-"+ $.toDbl(endDate.getDate());
+
+	return aimDate;
+};
+//获取方法：
+console.log(getDateDaysLater(1));
+
+
+//实例代码：
+$("#btn").click(function(){
+	var days = $("#iptDays").val();
+
+	$.alerts(getDateDaysLater(days),"info");
+});
+
+
+
+
+</script>
+</body>
+</html>

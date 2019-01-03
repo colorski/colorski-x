@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-43-jQuery-图片滚动加载</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<link type="text/css" rel="stylesheet" href="http://www.colorski.com/plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushJScript.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushCss.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushXml.js"></script>
+
+<style>
+#content { width: 900px; margin:50px auto; }
+#content hr { margin: 100px 0; }
+</style>
+</head>
+
+<body>
+<h1>图片滚动加载</h1>
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p></div>
+
+<section class="code">
+
+    <h5>图片滚动加载</h5>
+    <pre  class="brush:javascript;">
+    var imgScrollLoad =function(){
+    	$("#content img[_src]").each(function(){
+    			var t = $(this);
+    			if( t.offset().top<= $(document).scrollTop() + $(window).height()  )
+    			{
+    				t.attr( "src",t.attr("_src") ).removeAttr("_src");
+    			}
+    	});
+    };
+
+    imgScrollLoad();
+
+    $(window).scroll(function(){
+    	imgScrollLoad();
+    });
+    </pre>
+
+<hr />
+
+</section>
+
+<div id="content">
+	<img _src="http://www.colorski.com/i/images/first_feiji.png" alt="" />
+	<hr />
+	<img _src="http://www.colorski.com/i/images/third_img.png" alt="" />
+	<hr />
+	<img _src="http://www.colorski.com/i/images/forth_mi.png" alt="" />
+	<hr />
+	<img _src="http://www.colorski.com/i/images/forth_logo.png" alt="" />
+	<hr />
+	<img _src="http://www.colorski.com/i/images/circle.png" alt="" />
+	<hr />
+	<img _src="http://www.colorski.com/i/images/circle_1.png" alt="" />
+	<hr />
+	<img _src="http://www.colorski.com/i/images/circle_2.png" alt="" />
+	<hr />
+	<img _src="http://www.colorski.com/i/images/circle_3.png" alt="" />
+	<hr />
+	<img _src="http://www.colorski.com/i/images/circle_4.png" alt="" />
+	<hr />
+	<img _src="http://www.colorski.com/i/images/phone.png" alt="" />
+	<hr />
+	<img _src="http://www.colorski.com/images/banner1.png" alt="" />
+</div>
+
+<!--colorBorder-->
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+
+<script type="text/javascript">
+	//图片滚动加载
+	
+	//var isIE6 = !!window.ActiveXObject&&!window.XMLHttpRequest;
+	//滚动加载
+	var imgScrollLoad =function(){
+		$("#content img[_src]").each(function(){
+				var t = $(this);
+				if( t.offset().top<= $(document).scrollTop() + $(window).height()  )
+				{
+					t.attr( "src",t.attr("_src") ).removeAttr("_src");
+				}
+		});
+	};
+
+	imgScrollLoad();
+
+	$(window).scroll(function(){
+		//if(isIE6){ btb.css("top", $(document).scrollTop()+30) }
+		imgScrollLoad();
+	});
+</script>
+</body>
+</html>

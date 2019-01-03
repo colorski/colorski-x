@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+<title>test-117-css3-条纹边框</title>
+<link rel="stylesheet" href="css/reset.css" />
+<style>
+div { width: 200px; height: 200px; position: relative; margin: 30px auto; color: #000;}
+
+hr { margin: 30px 0; }
+
+div.s1 {
+
+	background-color: deeppink; 
+	border:20px dashed #2196f3;
+}
+.test1:after {
+	content: "如果一个标签，内容只能放在content里；也可以div里再放个标签定位后放内容";
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 1;
+	background-color: #fff;
+}
+div.s2 {
+	background-color: #fff;
+    background-clip:padding-box;
+    border:20px dashed #2196f3;
+}
+.test2:before{
+    content:"";
+    position:absolute;
+    top:-20px;
+    left:-20px;
+    bottom:-20px;
+    right:-20px;
+    background-color: deeppink; 
+    z-index:-1;
+}
+
+</style>
+</head>
+
+<body>
+<div class="s1 test1"></div>
+
+<hr />
+
+<div class="s2 test2">这个可以直接放文字还是不错的！</div>
+</body>
+</html>

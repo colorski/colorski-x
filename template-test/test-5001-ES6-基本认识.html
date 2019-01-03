@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-5001-ES6-基本认识</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<link type="text/css" rel="stylesheet" href="http://www.colorski.com/plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushJScript.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushCss.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushXml.js"></script>
+
+<style></style>
+</head>
+
+<body>
+<h1>ES6基本认识</h1>
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p></div>
+
+<section class="code">
+
+    <h5>简介</h5>
+    <p>ECMAScript 6（简称 ES6）是JavaScript语言的最新一代标准，发布于<b>2015年6月</b>。<br>
+    因ECMA委员会决定从ES6开始每年更新一次标准。所以2015年的ES6被称为 ES 2015。以后按照发布年份命名为 ES 2016 , ES 2017 ...</p>
+    <h5>ECMAScript 6与JavaScript的关系</h5>
+    <p>1.ES6是新一代的JavaScript。是JavaScript语言的最新一代标准。<br>2.ES6引入的许多新特性，解决了许多JS长久以来被诟病的缺点。比如：1.隐式类型转换混乱；2.没有局部作用域只有函数作用域；3.闭包的隐患...</p>
+    <h5>兼容</h5>
+    <p>当前主流浏览器对ES6还没有全面支持。<br>nodejs对ES6的支持性要优于浏览器。<br>可使用Babel等javascript预编译器将ES6代码转换为ES5代码。</p>
+    <h5>新特性！！！</h5>
+    <strong>模块</strong><br>
+    在ES6之前，流行的模块加载方案是 CommonJS（用于服务器环境）和 RequireJs（专注于浏览器环境）。<br>
+    export -- 对外暴露接口； export {diag, square}<br>
+    import -- 加载模块（文件）； import {diag, square} from './lib';<br>
+    <strong>let</strong><br>
+    let用于声明变量，用法与var类似。不过，let声明的变量只在let命令所在的<b>代码块 {} </b>内有效。<br>
+    1.let很适合用来声明循环变量。如： <br>
+    <pre  class="brush:javascript;">
+    	for(let i=0; i<10; i++){
+    		//..
+    	}
+    </pre>
+    2.let不允许重复声明。如：
+    <pre  class="brush:javascript;">
+    	{ 
+	    	let a='abc'; 
+	    	let a='def'; //报错  Identifier 'a' has already been declared
+    	}
+    </pre>
+    3.let不存在变量提升。即变量需要声明后才可以使用，否则会报错。如：
+    <pre  class="brush:javascript;">
+    	console.log(foo); //undefined
+    	console.log(bar); //Uncaught ReferenceError: bar is not defined
+
+    	var foo = 'abc';
+    	let bar = 'def';
+    </pre>
+    4.let存在暂时性死区（temporal deadzone，简称 TDZ）。即在当前代码块内如果使用了let声明变量，则在该条声明语句之前，该变量不可用。如：
+    <pre  class="brush:javascript;">
+    	if(true){
+    		//TDZ开始
+    		a = 'abc'; //a is not defined
+    		console.log(a);
+    		let a;//TDZ结束
+    		console.log(a); //undefined
+    		a = 'def';
+    		console.log(a); //def
+    	}
+    </pre>
+	<strong>const</strong><br>
+	const用于声明一个常量。一旦声明，常量的值不能再被改变。进入只读模式。如：<br>
+	<pre  class="brush:javascript;">
+    	const a = 'abc';
+    	const a = 'def'; //Uncaught SyntaxError: Identifier 'a' has already been declared
+    	console.log(a);
+    </pre>
+	使用const声明后不能再更改的特性，意味着在声明变量时就必须初始化，不能留到以后再赋值。如：
+	<pre  class="brush:javascript;">
+    	const a;
+    	a = 'def'; //Uncaught SyntaxError: Missing initializer in const declaration
+    	console.log(a);
+    </pre>
+	const的作用域与let相同，只在声明所在的 块级作用域 里有效。<br>
+	const与let一样，不允许重复声明，不存在变量提升及TDZ。
+<hr />
+<p>此知识点摘自：《Vue.js权威指南》p.474</p>
+<hr />
+<a href="http://es6.ruanyifeng.com/">《ECMAScript 6入门》- 阮一峰</a><br>
+<a href="http://es6-features.org/#Constants">英文版 ES6预览</a>
+
+</section>
+
+<!--colorBorder-->
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+
+<script>
+
+</script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-1015-js-闭包和匿名函数</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<link type="text/css" rel="stylesheet" href="http://www.colorski.com/plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushJScript.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushCss.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushXml.js"></script>
+</head>
+
+<body>
+<!--header-->
+<header>
+    <h1><a href="../x.html" class="fl spec-a" title="返回">《</a>闭包和匿名函数</h1>
+</header>
+
+<!--colorBorder-->
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+
+<section>
+	<pre class="brush:javascript;">
+想要学习闭包先来看看什么是匿名函数吧！  
+（一）匿名函数  
+     匿名函数就是没有名字的函数。他有两种声明方式：  
+     1.典型的函数声明：  
+     function functionName(arg0,arg1,arg2){  
+         //函数体  
+     }  
+     2.函数表达式:  
+     var functionName = function(arg0,arg1,arg2){  
+         //函数体  
+     }  
+虽然这两种方式在逻辑上市等价的，但是他们还是存在区别的。  
+区别1：前者会在代码执行以前被加载到作用域中，而后者则是在代码执行到那一行的时候才会有意义。  
+区别2：前者会给函数指定一个名字，而后者则是创建一个匿名函数，然后将这个匿名函数赋给一个变量。  
+       换句话说上面第二个例子：创建了一个带有3个参数的匿名函数，然后把这个匿名函数赋给了变量functionName，并没有给匿名函数指定名字。
+  
+（二）闭包  
+书上定义是这么说的：指有权访问另一个函数作用域中的变量的函数  
+可是这种说法令新手难以理解。其实，在本质上，闭包就是将函数内部和函数外部连接起来的一座桥梁。  
+   
+     1.那我先来说说为什么要有闭包这么个概念吧，它产生的意义是什么呢？  
+     （1）首先我们学过前面的作用域了，知道了一个概念：函数内部可以直接读取全局变量。  
+     那么看代码：  
+     var n=999;  
+　　 function f1(){  
+　　　　alert(n);  
+　　 }  
+　　 f1(); // 999  
+     （2）然后另外一个概念：在函数外部自然无法读取函数内的局部变量  
+      那么再看代码：  
+     function f1(){  
+　　　　var n=999;  
+　 　}  
+　 　alert(n); //输出错误  
+     （3）这里有一个地方需要注意，函数内部声明变量的时候，一定要使用var命令。如果不用的话，你实际上声明了一个全局变量！（我们以前也提到过的！）  
+     function f1(){  
+　　　　n=999;  
+　 　}  
+　 　f1();  
+　 　alert(n); // 999  
+     下面关键的来了！:那就是如何从外部读取局部变量呢？  
+      那就是在函数的内部，再定义一个函数。(也就是闭包！！)  
+     　function f1(){  
+　　　     var n=999;  
+　　　　   function f2(){  
+　　　　　     alert(n); // 999  
+　　　　   }  
+　　   }  
+     在上面的代码中，函数f2就被包括在函数f1内部，这时f1内部的所有局部变量，对f2都是可见的。但是反过来就不行，f2内部的局部变量，对f1就是不可见的。既然f2可以读取f1中的局部变量，那么只要把f2作为返回值，我们不就可以在f1外部读取它的内部变量了吗！来看代码：  
+     function f1(){  
+　　　     var n=999;  
+　　　　   function f2(){  
+　　　　　     alert(n);  
+　　　　   }  
+           return f2;  
+　　   }  
+       var result = f1();  
+       result(); //999  
+这段代码与上面的不同点就是把f2函数作为了一个返回值，然后在调用它。这时你肯定在想最后两行什么意思啊？其实开始我也没闹明白，经过高人指点，其实这最后两行的意思就是要调用f2这个函数的返回值。这两行如果我改写一下是不是更容易明白了呢？  
+     var result = f1();  
+     result();  
+     合并成为：f1()();其实结果是一样的  
+     也可以更好的说明f2这个闭包的作用是：通过把它作为返回值（因为它能访问函数f1内的局部变量），然后从全局环境中调用这个返回值，这样自然就达到了我们的目的---从全局作用域中读取局部函数内的变量！  
+     2.既然知道了闭包的意义，下面就来了解下闭包的用途吧！  
+     （1）闭包的第一个用途，其实上面已经提到了，就是产生它意义：可以读取函数内部的变量  
+     （2）闭包的第二个用途，那就是：可以让这些变量的值始终保持在内存中  
+     第二个用途怎么理解呢？来看代码：  
+     function f1(){  
+         var n=999;  
+         nAdd=function(){  
+             n+=1  
+         }  
+         function f2(){  
+　　　　　　 alert(n);  
+　　　　 }  
+         return f2;  
+  　 }  
+     var result=f1();   //把f1函数的返回值（而这个返回值是函数f2的形式）给result  
+     result();          // 999   输出这个f2的返回值  
+     nAdd();            //调用nAdd函数  
+     result();          // 1000  这里就是闭包的第二个用途：f2这个闭包会让变量n的值始终保存在内存中        
+   
+第二种用途其实就和作用域链产生联系了,我来解释下：  
+闭包f2从f1函数中被返回后，它的作用域链被初始化为包含f1函数的活动对象和全局变量对象（黑线部分）。这样f2就可以访问在f1()函数中定义的所有变量。更为重要的是就算f1()被执行完毕后，它的活动对象也不会被销毁，因为如图f2这个闭包还在引用f1函数的活动对象，这也就是为什么上述第二种用途的原因：闭包会让变量始终保存在内存中，直到闭包被摧毁。
+    </pre>
+</section>
+
+<!--colorBorder-->
+<div class="topclor mar-top"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+
+<!--footer-->
+<footer>
+    <a href="http://www.colorski.com/" class="fr footer-a" title="www.colorski.com/">www.colorski.com/</a>
+</footer>
+</body>
+</html>

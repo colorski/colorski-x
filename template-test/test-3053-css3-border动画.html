@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>border动画</title>
+	<link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+	<link href="css/reset.css" rel="stylesheet" type="text/css">
+<style>
+  .title h4 {
+    line-height: 40px;
+    margin: 20px;
+    overflow: hidden;
+
+    border-bottom: 1px solid #eee;
+  }
+  .title h4::after {
+    content: " ";
+    display: block;
+    width: 100%;
+    margin-left: -100%;
+    margin-top: 5px;
+  }
+  .title h4::after {
+    border-bottom: 1px solid #4D85D1;
+    animation: width-percentage 14s linear 1s infinite;
+    -webkit-animation: width-percentage 14s linear 1s infinite;
+    -moz-animation: width-percentage 14s linear 1s infinite;
+    -o-animation: width-percentage 14s linear 1s infinite;
+    -ms-animation: width-percentage 14s linear 1s infinite;
+  }
+  .title:hover h4::after {
+    border-bottom: 1px solid #4D85D1;
+    animation: width-percentage 1s linear infinite;
+    -webkit-animation: width-percentage 1s linear infinite;
+    -moz-animation: width-percentage 1s linear infinite;
+    -o-animation: width-percentage 1s linear infinite;
+    -ms-animation: width-percentage 1s linear infinite
+  }
+  @-webkit-keyframes width-percentage{
+    from{margin-left:-100%}
+    to{margin-left:100%}
+  }
+  @-moz-keyframes width-percentage{
+    from{margin-left:-100%}
+    to{margin-left:100%}
+  }
+  @-o-keyframes width-percentage{
+    from{margin-left:-100%}
+    to{margin-left:100%}
+  }
+  @keyframes width-percentage{
+    from{margin-left:-100%}
+    to{margin-left:100%}
+  }
+</style>
+</head>
+<body>
+<div class="title">
+  <h4>基本信息</h4>
+</div>
+</body>
+</html>

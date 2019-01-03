@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-2005-css-图片占满整个屏幕</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<link type="text/css" rel="stylesheet" href="http://www.colorski.com/plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushJScript.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushCss.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushXml.js"></script>
+
+<style></style>
+</head>
+
+<body>
+
+
+
+<div id="wrap_img_bg" style="position:absolute; width:100%; height:100%; z-index:-1">  
+<img src="images/banner1.jpg" height="100%" width="100%"/>  
+</div>
+
+<h1>一张图片占满整个屏幕</h1>
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p></div>
+
+<section class="code">
+
+<div>前提是这里的内容高度永远比屏幕小，不然内容高度之外就没图了。</div>
+    <pre  class="brush:html;">
+    <div id="wrap_img_bg" style="position:absolute; width:100%; height:100%; z-index:-1">  
+    <img src="http://img.pconline.com.cn/images/upload/upc/tx/wallpaper/1209/10/c1/13758581_1347257278695.jpg" height="100%" width="100%"/>
+    </div>
+    <h1>一张图片占满整个屏幕</h1>
+    </pre>
+</section>
+
+<!--colorBorder-->
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+
+<script src="js/jquery-1.12.3.min.js"></script>
+<script> 
+$(function(){
+	//缩放浏览器窗口时，保证图片填满浏览器窗口
+	var win = $(window);
+	var wrapBg = $('#wrap_img_bg');
+	win.resize(function(){
+		wrapBg.width(win.width());
+		wrapBg.height(win.height());
+	});
+});
+</script>
+</body>
+</html>

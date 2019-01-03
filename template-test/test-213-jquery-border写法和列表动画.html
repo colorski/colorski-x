@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>border写法和列表动画</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<style>
+.features-list{
+	margin: 0 auto;
+	padding: 0;
+	list-style: none;
+	width: 1140px;
+	height: 360px;
+	
+    -webkit-box-shadow: 0px -20px 60px 0px rgba(0,0,0,0.04);
+    -moz-box-shadow: 0px -20px 60px 0px rgba(0,0,0,0.04);
+    box-shadow: 0px -18px 20px 0px rgba(0,0,0,0.04);
+}
+.features-list li{
+	height: 180px;
+}
+.features-list .features,.features-list .features .img,.features-list .features img,.features-list .features span{
+	-webkit-transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    -ms-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+}
+.features-list .features{
+	width: 190px;
+	height: 100%;
+	float: left;
+	background-color: #fff;
+	    padding: 7px 14px 14px 14px;
+	    overflow: hidden;
+	
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+}
+.features-list .first-row .features{
+	-webkit-box-shadow: inset -1px -1px 0px 0px #ededed;
+    -moz-box-shadow: inset -1px -1px 0px 0px #ededed;
+    box-shadow: inset -1px -1px 0px 0px #ededed;
+}
+.features-list .second-column .features{
+	-webkit-box-shadow: inset -1px 0px 0px 0px #ededed;
+    -moz-box-shadow: inset -1px 0px 0px 0px #ededed;
+    box-shadow: inset -1px 0px 0px 0px #ededed;
+}
+.features-list .first-row .features.row-last{
+	-webkit-box-shadow: inset 0px -1px 0px 0px #ededed;
+    -moz-box-shadow: inset 0px -1px 0px 0px #ededed;
+    box-shadow: inset 0px -1px 0px 0px #ededed;
+}
+.features-list .second-column .features.row-last{
+	-webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+.features-list .features:hover{
+	-webkit-box-shadow: 0px 0px 77px -1px rgba(0,0,0,0.37) !important;
+	-moz-box-shadow: 0px 0px 77px -1px rgba(0,0,0,0.37) !important;
+	box-shadow: 0px 0px 77px -1px rgba(0,0,0,0.37) !important;
+	-webkit-transform: scale(1.15);
+	-ms-transform: scale(1.15);
+	transform: scale(1.15);
+	z-index: 999;
+}
+.features-list .features:hover .img,.features-list .features:hover img{
+	-webkit-transform: scale(1.2);
+	-ms-transform: scale(1.2);
+	transform: scale(1.2);
+}
+.features-list .features:hover h4,.features-list .features:hover p{
+	-webkit-transform: scale(1);
+	-ms-transform: scale(1);
+	transform: scale(1);
+}
+.features-list .features .img{
+	display: block;
+	text-align: center;
+}
+.features-list .features .img img{
+	width: 75px;
+	height: 75px;
+}
+.features-list .features h4,.features-list .features p{
+	margin: 0;
+	text-align: center;
+}
+.features-list .features h4{
+	font-size: 14px;
+	padding: .7em;
+	
+	    -moz-transition: .2s ease-in-out;
+    -o-transition: .2s ease-in-out;
+    -webkit-transition: .2s ease-in-out;
+    transition: .2s ease-in-out;
+}
+.features-list .features p{
+	padding: 0 1em;
+	color: #565656;
+	font-size: 12px;
+}
+</style>
+</head>
+
+<body>
+<ul class="features-list">
+  	<li class="first-row">
+  		<div class="features">
+  			<i class="img">
+  				<img src="http://www.jq22.com/tp/187bf65b-fafa-4434-8f85-ca0678bb663c.jpg" style="display: inline;">
+  				<span style="display: none;">
+  					<img data="http://www.jq22.com/tp/d03471a1-c99b-411f-821f-58e3ce3a8730.gif">
+  				</span>
+  			</i>
+  			<h4>高速通讯</h4>
+  			<p>总线可供电，最远通讯距离可达3000米</p>
+  		</div>
+  	</li>
+  	<li class="second-column"></li>
+</ul>
+
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+<script>
+$(function(){
+	for(var i = 0;i<5;i++){
+		$(".first-row").append($(".features:eq(0)").clone());
+	}
+	var row1 = $(".first-row .features");
+	$(row1[row1.length-1]).addClass("row-last");
+	$(".features-list .features").hover(function(){
+		$(this).find(".img>img").hide();
+		$(this).find(".img>span").show();
+		var gifImg = $(this).find(".img>span>img");
+		gifImg.attr("src",gifImg.attr("data")+"?"+new Date().getTime());
+	},function(){
+		$(this).find(".img>img").show();
+		$(this).find(".img>span").hide();
+	});
+});
+</script>
+</body>
+</html>

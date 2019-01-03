@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>test-3035-css3-给input的placeholder设置颜色</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<link type="text/css" rel="stylesheet" href="http://www.colorski.com/plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushJScript.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushCss.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushXml.js"></script>
+<style>
+input {
+  width:200px;
+  height:28px;}
+
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #f00;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #f00;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #f00;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    #f00;
+}
+</style>
+</head>
+
+<body>
+<!--header-->
+<header>
+    <h1><a href="../x.html" class="fl spec-a" title="返回">《</a>按钮样式（背景渐变和hover和active）</h1>
+</header>
+
+<!--colorBorder-->
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+
+<section>
+<p>可以给input的placeholder设置颜色，兼容ie10+</p>
+<p>例如：</p>
+<p>这是一个input：<input type="text" placeholder="可以设置颜色" /></p>
+<p>样式为：</p>
+<pre class="brush:css;">
+::-webkit-input-placeholder { /* WebKit browsers */
+    color:#f00;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:#f00;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:#f00;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:#f00;
+}
+</pre>
+</section>
+
+<!--colorBorder-->
+<div class="topclor mar-top"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+
+<!--footer-->
+<footer>
+    <a href="www.colorski.com/" class="fr footer-a" title="www.colorski.com/">www.colorski.com/</a>
+</footer>
+
+</body>
+</html>

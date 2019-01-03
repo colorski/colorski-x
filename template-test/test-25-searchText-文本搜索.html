@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-25-searchText-文本搜索</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+<style>
+hr { margin: 20px 0; }
+
+.search_listem { padding-left: 20px; }
+.search_listem .on{ font-weight:700; color:#f00;}
+
+</style>
+</head>
+
+<body>
+输入你所要查找的文字，比如“山东”：<input type="text" name="searchTxt" id="search_ipt" />
+<ul class="search_listem">
+	<li>我的名字叫王伟</li>
+	<li>山东泰安人，目前在北京工作</li>
+	<li>我的个人博客网址是<a href="http://www.colorski.com/">http://www.colorski.com/</a></li>
+	<li>我的职业是前端开发工程师，其实我现在做美工！</li>
+	<li>公司是北京凤凰学易科技有限公司</li>
+	<li>前端开发的主要工作职责是开发高性能的客户端页面</li>
+	<li>前端开发的技能要（X）HTML，CSS，javascript</li>
+</ul>
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+<script src="js/common-1.js"></script>
+<script>
+	ski.cmn.searchText();
+</script>
+</body>
+</html>

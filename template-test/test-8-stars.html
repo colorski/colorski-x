@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-8-stars</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+<style>
+.cmt_star {
+	padding-left: 10px;
+	height: 16px;
+	line-height: 16px;
+	margin: 10px 0;
+}
+.cmt_star span {
+	float: left;
+	font-size: 14px;
+	color: #666;
+}
+#star {
+	float: left;
+}
+</style>
+</head>
+
+<body>
+<div class="cmt_star">
+	<span>给资源打分：</span><div id="star"></div><div id="result"></div>
+</div>
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+<script src="js/common-1.js"></script>
+<script src="js/plugins/jquery.raty.js"></script><!--星星评分插件-->
+<script>
+//星星评分
+rat('star','result',1);
+function rat(star,result,m){
+	star= '#' + star;
+	result= '#' + result;
+	$(result).hide();//将结果DIV隐藏
+
+	$(star).raty({
+		//源代码最底部有全的
+		hints: ['很差', '不太好', '好','很好', '非常好'],//鼠标移入显示的内容
+		path: "images",//存放两张星星图片的路径
+		starOff: 'star-off-big.png',
+		starOn: 'star-on-big.png',
+		number: 5,//星星数量
+		size: 16,//图片size 16px*16px
+		score: 4,//默认分数
+		showHalf: false,
+		target: result,
+		targetKeep : true,
+		click: function (score, evt) {
+			alert('你的评分是'+score*m+'分');
+		}
+	});
+};
+</script>
+</body>
+</html>

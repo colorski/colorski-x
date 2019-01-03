@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+<title>test-103-css3-box-shadow-投影</title>
+<meta name="keywords" content="" />
+<meta name="description" content="详细讲解地址：http://www.w3cplus.com/content/css3-gradient" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<link type="text/css" rel="stylesheet" href="http://www.colorski.com/plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushJScript.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushCss.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushXml.js"></script>
+<style>
+hr { margin: 30px 0; }
+p {
+	margin: 20px 0;
+	text-align: center;
+}
+p.l {
+	text-align: left;
+	padding-left: 20px;
+}
+.box-first {
+	width:300px; height:200px; margin:0 auto;
+	
+	background: -webkit-linear-gradient(90deg, #4fd4bc, #299edf);
+	background: -o-linear-gradient(90deg, #4fd4bc, #299edf);
+	background: -moz-linear-gradient(90deg, #4fd4bc, #299edf);
+	background: linear-gradient(90deg, #4fd4bc, #299edf);
+	border-radius: 5px;
+}
+
+.box {
+	width: 650px; height: 200px;
+	margin: 30px auto 0;
+	background-color: #05ccfa;
+	line-height: 30px;
+	text-align: center;
+	color: #fff;
+	text-shadow: 1px 1px 2px #333;
+}
+.linear_0 {
+	/* Firefox 3.6+ */ 
+	background: -moz-linear-gradient(top, #05ccfa, #dd19db); 
+	/* Safari 4-5, Chrome 1-9 */ 
+	/* -webkit-gradient(,  [, ]?,  [, ]? [, ]*) */
+	background: -webkit-gradient(linear,top,from(#05ccfa),to(#dd19db));
+	/* Safari 5.1+, Chrome 10+ */
+	background: -webkit-linear-gradient(top, #05ccfa, #dd19db);
+	/* Opera 11.10+ */
+	background: -o-linear-gradient(top, #05ccfa, #dd19db);
+}
+.linear_1 {
+	/* Firefox 3.6+ */
+	background: -moz-linear-gradient(left, #05ccfa, #dd19db);
+	/* Safari 5.1+, Chrome 10+ */
+	background: -webkit-linear-gradient(left, #05ccfa, #dd19db);
+	/* Opera 11.10+ */
+	background: -o-linear-gradient(left, #05ccfa, #dd19db);
+}
+.linear_2 {
+	background: -moz-linear-gradient(left top, #05ccfa, #dd19db);
+	background: -webkit-linear-gradient(left top, #05ccfa, #dd19db);
+	background: -o-linear-gradient(left top, #05ccfa, #dd19db);
+}
+.linear_3 {
+	background: -moz-linear-gradient(135deg, #05ccfa, #dd19db);
+	background: -webkit-gradient(linear,100% 100%,0 0,from(#05ccfa),to(#dd19db));
+	background: -webkit-linear-gradient(135deg, #05ccfa, #dd19db);
+	background: -o-linear-gradient(135deg, #05ccfa, #dd19db);
+}
+.linear_4 {
+	height: 300px;
+	background: -webkit-linear-gradient(78deg, #d33f34 50%, #a61322 50.1%);
+	background: linear-gradient(12deg, #d33f34 50%, #a61322 50.1%);
+}
+</style>
+</head>
+
+<body>
+
+<section>
+    <div class="box-first"></div>
+    <pre class="brush:css;">
+		background-image: -webkit-linear-gradient(to right, #4fd4bc, #299edf);
+		background-image: linear-gradient(to right, #4fd4bc, #299edf);
+    </pre>
+    <p class="l">注意：to right不兼容safari，最好使用角度。</p>
+    <pre class="brush:css;">
+		background-image: -webkit-linear-gradient(90deg, #4fd4bc, #299edf);
+		background-image: linear-gradient(90deg, #4fd4bc, #299edf);
+    </pre>
+    <p class="l">0度表示渐变方向从下向上，90度表示渐变方向从左向右。还可用用其它角度改变不同渐变方向。</p>
+    <p class="l">注意：使用角度deg在safari和其它浏览器中的表现是不一样的。</p>
+    
+    <p class="l">参考：http://www.w3cplus.com/css3/new-css3-linear-gradient.html</p>
+</section>
+<hr />
+
+<div class="box linear_0">
+	background: -moz-linear-gradient(top, #05ccfa, #dd19db); <br />
+	background: -webkit-gradient(linear,top,from(#05ccfa),to(#dd19db));<br />
+	background: -webkit-linear-gradient(top, #05ccfa, #dd19db);<br />
+	background: -o-linear-gradient(top, #05ccfa, #dd19db);</div>
+<hr />
+
+<div class="box linear_1">
+	background: -moz-linear-gradient(left, #05ccfa, #dd19db);<br />
+	background: -webkit-linear-gradient(left, #05ccfa, #dd19db);<br />
+	background: -o-linear-gradient(left, #05ccfa, #dd19db);</div>
+<hr />
+
+<div class="box linear_2">
+	background: -moz-linear-gradient(left top, #05ccfa, #dd19db);<br />
+	background: -webkit-linear-gradient(left top, #05ccfa, #dd19db);<br />
+	background: -o-linear-gradient(left top, #05ccfa, #dd19db);</div>
+<hr />
+
+<div class="box linear_3">
+	background: -moz-linear-gradient(135deg, #05ccfa, #dd19db);<br />
+	background: -webkit-gradient(linear,100% 100%,0 0,from(#05ccfa),to(#dd19db));<br />
+	background: -webkit-linear-gradient(135deg, #05ccfa, #dd19db);<br />
+	background: -o-linear-gradient(135deg, #05ccfa, #dd19db);</div>
+
+<p>http://www.w3cplus.com/content/css3-gradient</p>
+<hr />
+
+<p>背景双色</p>
+<div class="linear_4"></div>
+<hr />
+</body>
+</html>

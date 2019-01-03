@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-210-jquery-jquery操作各表单元素-select</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<link type="text/css" rel="stylesheet" href="http://www.colorski.com/plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushJScript.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushCss.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushXml.js"></script>
+
+<style></style>
+</head>
+
+<body>
+<h1>jquery操作各表单元素-select</h1>
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p></div>
+
+<section class="code">
+
+    <h5>1.获取下拉框选中项的值、文本、索引</h5>
+    <pre  class="brush:javascript;">
+    	$("#id option:selected").val();
+        $("#id").find('option:selected').text();
+        $(this).get(0).selectedIndex
+    </pre>
+    <p>实例：f12</p>
+    <select name="slt" id="test1">
+    	<option value="t1">选项1</option>
+    	<option value="t2" selected="true">选项2</option>
+    	<option value="t3">选项3</option>
+    </select>
+    <p>实例代码：</p>
+    <pre  class="brush:javascript;">
+		console.log($("#test1 option:selected").val());
+		console.log($("#test1").find('option:selected').text());
+		console.log($(this).get(0).selectedIndex); //undefind 只在选择的时候才有
+
+		$("#test1").change(function(){
+			console.log(
+				'值='+$(this).val() + 
+				'文本='+$(this).find('option:selected').text() + 
+				'索引='+$(this).get(0).selectedIndex);
+		});
+    </pre>
+    
+<hr />
+
+	<h5>2.设置下拉框选中</h5>
+    <pre  class="brush:javascript;">
+    	//设置value值为“v2”的项选中
+    	$("#test2").val('v2');
+
+    	//设置text为“选项3”的项选中
+    	//$(".selector").find("option[text='选项3']").attr("selected",true); //有问题
+    	$("#test2-1").find("option:contains('选项3')").attr("selected",true);
+    </pre>
+    <p>设置value值为“v2”的项选中</p>
+    <select name="slt2" id="test2">
+    	<option value="v1" selected="true">选项1</option>
+    	<option value="v2">选项2</option>
+    	<option value="v3">选项3</option>
+    </select>
+    <p>设置text为“选项3”的项选中</p>
+    <select name="slt2-1" id="test2-1">
+    	<option value="v1" selected="true">选项1</option>
+    	<option value="v2">选项2</option>
+    	<option value="v3">选项3</option>
+    </select>
+
+
+
+
+</section>
+
+<!--colorBorder-->
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+
+<script>
+/*****1.获取下拉框选中项的值、文本、索引****/
+(function(){
+	console.log($("#test1 option:selected").val());
+	console.log($("#test1 option:selected").text());
+	console.log($(this).get(0).selectedIndex);
+
+	$("#test1").change(function(){
+		console.log(
+			'值='+$(this).val() + 
+			'文本='+$(this).find('option:selected').text() + 
+			'索引='+$(this).get(0).selectedIndex);
+	});
+})();
+
+/*****2.设置下拉框选中****/
+(function(){
+	//设置value值为“v2”的项选中
+	$("#test2").val('v2');
+
+	//设置text为“选项3”的项选中
+	//$(".selector").find("option[text='选项3']").attr("selected",true); //有问题
+	$("#test2-1").find("option:contains('选项3')").attr("selected",true);
+})();
+
+</script>
+</body>
+</html>

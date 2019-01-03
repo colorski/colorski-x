@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-201-jquery-stopPropagation阻止冒泡</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+<style>
+.show_bg {
+	display: none;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.5);
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 5000;
+}
+.show_con {
+	width: 300px;
+	height: 200px;
+	background-color: #fff;
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	z-index: 5001;
+	margin-top: -100px;
+	margin-left: -150px;
+}
+
+</style>
+</head>
+
+<body>
+<a href="javascript:void(0);">点我</a>
+<div class="show_bg">
+	<div class="show_con">
+		这是弹出框内容
+	</div>
+</div>
+
+<script src="js/jquery-1.12.3.min.js"></script>
+<!--<script src="js/common-1.js"></script>-->
+<script>
+$(function(){
+	var $a = $('a');
+	var $con = $('.show_con');
+	var $bg = $('.show_bg');
+
+	$a.click(function(){
+		$bg.show();
+	});
+	$bg.click(function(){
+		$(this).hide();
+	});
+	$con.click(function(event){
+		event.stopPropagation();
+	});
+});
+</script>
+</body>
+</html>

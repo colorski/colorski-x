@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-208-jquery-jquery操作各表单元素</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<link type="text/css" rel="stylesheet" href="http://www.colorski.com/plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushJScript.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushCss.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushXml.js"></script>
+
+<style></style>
+</head>
+
+<body>
+<h1>jquery操作各表单元素-radio</h1>
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p></div>
+
+<section class="code">
+
+    <h5>1.获取单选按钮的值</h5>
+    <pre  class="brush:javascript;">
+    	var v_radio = $(":radio[name='iptName']:checked").val();
+    </pre>
+    <p>实例代码：</p>
+    <pre  class="brush:javascript;">
+    	var btn = $('#btn1');
+    	//默认选中项的值
+    	var v_radio = $(":radio[name='iptName']:checked").val();
+
+    	$(":radio[name='iptName']").change(function() {
+    		//改变选择后选中项的值
+    		v_radio = $(this).val(); 
+
+    		//根据选中项做一些事
+    		if(v_radio == 3){
+    			alert('我被选中了！我的值是'+v_radio);
+    		}
+    	});
+    	
+    	btn.click(function(){
+    		alert(v_radio);
+    	});
+    </pre>
+    <form action="" id="test1">
+    	<input type="radio" name="iptName" value="1" checked="checked" />选项1
+    	<input type="radio" name="iptName" value="2" />选项2
+    	<input type="radio" name="iptName" value="3" />选项3
+
+    	<input type="button" id="btn1" value="按钮" />
+    </form>
+    <p>如果在ie下有兼容问题：http://www.angelweb.cn/Html/jquery/jqueryjiaocheng/2589.html</p>
+
+
+<hr />
+
+    <h5>2.设置单选按钮被选中</h5>
+    <pre  class="brush:javascript;">
+        $('#btn2').click(function(){
+            //$("#test2 :radio[value=2]").attr("checked",true);  //这种方式在重新点击的时候有问题
+            $("#test2 :radio[name=iptName2]").val(["iptName2","2"]); //经测试这种方式可以
+            alert($("#test2 :radio[name='iptName2']:checked").val());
+        });
+    </pre>
+    <form action="" id="test2">
+        <input type="radio" name="iptName2" value="1" checked="checked" />选项1
+        <input type="radio" name="iptName2" value="2" />选项2
+        <input type="radio" name="iptName2" value="3" />选项3
+
+        <input type="button" id="btn2" value="点我让 选项2 被选中" />
+        <input type="button" id="btn3" value="点我测试被选中的值" />
+    </form>
+    
+
+<hr />
+
+
+
+</section>
+
+<!--colorBorder-->
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+
+<script>
+/*****1.获取单选按钮的值****/
+(function(){
+	var btn = $('#btn1');
+	//默认选中项的值
+	var v_radio = $("#test1 :radio[name='iptName']:checked").val();
+
+	$("#test1 :radio[name='iptName']").change(function() {
+		//改变选择后选中项的值
+        $(this).attr("checked",true);
+		v_radio = $(this).val(); 
+
+		//根据选中项做一些事
+		if(v_radio == 3){
+			alert('我被选中了！我的值是'+v_radio);
+		}
+	});
+	
+	btn.click(function(){
+		alert(v_radio);
+	});
+})();
+
+/*****2.设置单选按钮被选中****/
+(function(){
+    $('#btn2').click(function(){
+        //$("#test2 :radio[value=2]").attr("checked",true);  //这种方式在重新点击的时候有问题
+        $("#test2 :radio[name=iptName2]").val(["iptName2","2"]); //经测试这种方式可以
+        alert($("#test2 :radio[name='iptName2']:checked").val());
+    });
+
+    $('#btn3').click(function(){
+    	alert($("#test2 :radio[name='iptName2']:checked").val());
+    });
+})();
+
+
+</script>
+</body>
+</html>

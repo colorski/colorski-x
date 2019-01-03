@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-211-jquery-replaceWith-内容可编辑</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+<style>
+.u_user { width: 500px; margin: 0 auto; }
+.u_tit { height: 30px; line-height: 30px; margin-bottom: 20px; border-bottom: 2px solid #2f8ae4; }
+.u_tit h5 { float: left; margin: 0; padding:0 0 0 35px; font-size: 16px;color: #2f8ae4; font-weight: normal;}
+.u_tit a { float: right; margin-right: 10px; font-size: 15px; color: #42ab52; }
+.u_li { height: 24px; line-height: 24px; margin-bottom: 12px; }
+.u_li p { float: left; width: 100px; text-align: right; }
+.u_tit h5.pwd { background-position: -4px -427px;}
+.u_items input { width: 200px; height: 16px; line-height: 16px; padding: 3px 5px; border: 1px solid #ccc; }
+.u_items .btn_sub { display: block; border: none; width: 92px; height: 30px; margin: 10px auto; padding: 0; line-height: 30px; text-align: center; background-color: #2f8ae4; color: #fff;
+border-radius: 2px; cursor: pointer; }
+</style>
+</head>
+
+<body>
+<!--用户中心-->
+<div class="u_user">
+	<div class="u_tit"><h5>用户中心</h5><a id="btn_edit_user" href="javascript:;">编辑</a></div>
+	<div class="u_items" id="u_info_items">
+		<form action="">
+			<div class="u_li"><p>单位名称：</p><span name-tag="companyName">北方工业大学</span></div>
+			<div class="u_li"><p>部门名称：</p><span name-tag="deptName">教研组</span></div>
+			<div class="u_li"><p>联系人姓名：</p><span name-tag="contactName">王晓伟</span></div>
+			<div class="u_li"><p>联系人手机：</p><span name-tag="contactPhone">13811148807</span></div>
+			<div class="u_li"><p>邮箱：</p><span name-tag="contactEmail">142525@163.com</span></div>
+			<input type="submit" value="确定" class="btn_sub" id="btn_u_user" style="display: none;" />
+		</form>
+	</div>
+</div>
+<script src="js/jquery-1.12.3.min.js"></script>
+<script>
+//编辑用户信息
+(function(){
+	var btn_edit_user = $('#btn_edit_user');
+	var btn_u_user = $('#btn_u_user');
+	var u_span = $('#u_info_items span');
+
+	btn_edit_user.click(function(){
+		btn_u_user.show();
+		u_span.each(function(){
+			var _this = $(this);
+			var _txt = _this.text();
+			var _name = _this.attr('name-tag');
+			_this.replaceWith('<input type="text" value="'+_txt+'" name="'+_name+'" />');
+		});
+	});
+
+	//测试第一个非空验证
+	btn_u_user.click(function(){
+		var _val = $('input[name="companyName"]').val();
+		if(_val == '' || _val == null){
+			alert('空！');
+			return false;
+		}
+	});
+})();
+</script>
+</body>
+</html>

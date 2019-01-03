@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-1016-js-延迟提示框</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<link type="text/css" rel="stylesheet" href="../plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="../plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="../plugins/codeView/shBrushJScript.js"></script>
+<script type="text/javascript" src="../plugins/codeView/shBrushCss.js"></script>
+<script type="text/javascript" src="../plugins/codeView/shBrushXml.js"></script>
+
+<style>
+	.testdiv { float:left; margin:10px;}
+	#div1, #div3 { width:50px; height:50px; background:#F00;}
+	#div2, #div4 { width:200px; height:50px; background:#ccc; display:none;}
+
+</style>
+</head>
+
+<body>
+<h1>延迟提示框</h1>
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p></div>
+
+
+<section class="code">
+
+    <h5>js延迟提示框</h5>
+    <pre  class="brush:javascript;">
+    	window.onload = function(){
+    		var oDiv1=document.getElementById('div1');
+    		var oDiv2=document.getElementById('div2');
+    		var Timer=null;
+    		
+    		oDiv2.onmouseover=oDiv1.onmouseover=function(){
+    			oDiv2.style.display="block";
+    			clearTimeout(Timer);
+    		};
+    		oDiv2.onmouseout=oDiv1.onmouseout=function(){
+    			Timer=setTimeout(function(){
+    				oDiv2.style.display="none";
+    			},300);
+    		};
+    	}; 
+    </pre>
+
+<div class="cf">
+	<div class="testdiv" id="div1">div1</div>
+	<div class="testdiv" id="div2">div2</div>
+</div>
+
+<hr />
+
+</section>
+
+<section class="code">
+
+    <h5>jquery延迟提示框</h5>
+    <pre  class="brush:javascript;">
+    	$(function(){
+    		var $body=$('body');
+    		var $Div4=$('#div4');
+    		var Timer=null;
+
+    		$body.delegate('#div3,#div4','mouseover',function(){
+    			$Div4.show();
+    			clearTimeout(Timer);
+    		});
+    		$body.delegate('#div3,#div4','mouseout',function(){
+    			Timer=setTimeout(function(){
+    				$Div4.hide();
+    			},300);
+    		});
+    	});
+    </pre>
+
+<div class="cf">
+	<div class="testdiv" id="div3">div3</div>
+	<div class="testdiv" id="div4">div4</div>
+</div>
+
+<hr />
+
+</section>
+
+<!--colorBorder-->
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+
+<script>
+//js
+window.onload = function(){
+	var oDiv1=document.getElementById('div1');
+	var oDiv2=document.getElementById('div2');
+    var Timer=timer=null;
+	
+	oDiv2.onmouseover=oDiv1.onmouseover=function(){
+        timer=setTimeout(function(){
+            oDiv2.style.display="block";
+        },200);
+		clearTimeout(Timer);
+	};
+	oDiv2.onmouseout=oDiv1.onmouseout=function(){
+		Timer=setTimeout(function(){
+			oDiv2.style.display="none";
+		},300);
+        clearTimeout(timer);
+	};
+};
+
+//jquery
+$(function(){
+	var $body=$('body');
+	var $Div4=$('#div4');
+	var Timer=timer=null;
+
+	$body.delegate('#div3,#div4','mouseover',function(){
+		timer=setTimeout(function(){
+            $Div4.show();
+        },200);
+		clearTimeout(Timer);
+	});
+	$body.delegate('#div3,#div4','mouseout',function(){
+		Timer=setTimeout(function(){
+			$Div4.hide();
+		},300);
+        clearTimeout(timer);
+	});
+});
+
+</script>
+
+</body>
+</html>

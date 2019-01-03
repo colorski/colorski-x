@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-3511-mobile-1px边框描边的写法</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<link type="text/css" rel="stylesheet" href="http://www.colorski.com/plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushJScript.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushCss.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushXml.js"></script>
+
+<style>
+.listem1 li{
+	padding: 10px;
+	background-color: #fff;
+
+	background-image: -webkit-linear-gradient(#eee 50%,transparent 50%);
+	background-image: -moz-linear-gradient(#eee 50%,transparent 50%);
+	background-image: -o-linear-gradient(#eee 50%,transparent 50%);
+	background-image: linear-gradient(#eee 50%,transparent 50%);
+	background-size:  100% 1px;
+	background-repeat: no-repeat;
+	background-position: bottom;
+}
+
+
+.listem2 li{
+	padding: 10px; 
+
+	box-shadow: inset 0 -1px 1px #ccc;
+	background: #fff;
+	margin-left: -1px;
+	position: relative;
+}
+.listem2 li::after{
+	content:'';
+	position: absolute;
+	top:0;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	border: 1px solid #fff;
+}
+</style>
+</head>
+
+<body>
+<h1>细线边框的写法</h1>
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p></div>
+
+<p class="tips">一般的app边框描边的线都小于一像素，如果直接给1px的border，虽然是1px可是结果和app里的描边完全不一样“粗了”，以下是查找资料后总结的两个写法。</p>
+
+<p class="tips">方法一：利用css3的linear-gradient</p>
+<ul class="listem1">
+    <li>linear-gradient</li>
+    <li>linear-gradient</li>
+    <li>linear-gradient</li>
+</ul>
+
+<pre  class="brush:css;">
+	.listem1 li{  
+		background-image: -webkit-linear-gradient(#eee 50%,transparent 50%);
+		background-image: -moz-linear-gradient(#eee 50%,transparent 50%);
+		background-image: -o-linear-gradient(#eee 50%,transparent 50%);
+		background-image: linear-gradient(#eee 50%,transparent 50%);
+		background-size:  100% 1px;
+		background-repeat: no-repeat;
+		background-position: bottom;
+	}
+</pre>
+
+<p class="tips">方法二：利用CSS3阴影（box-shadow），就是用阴影做描边然后用伪类把多余的给遮罩着</p>
+<ul class="listem2">
+    <li>box-shadow</li>
+    <li>box-shadow</li>
+    <li>box-shadow</li>
+</ul>
+
+<pre  class="brush:css;">
+	.listem2 li{
+		box-shadow: inset 0 -1px 1px #ccc;
+		background: #fff;
+		margin-left: -1px;
+		margin-bottom: 10px;
+		position: relative;
+	}
+	.listem2 li::after{
+		content:'';
+		position: absolute;
+		top:0;
+		left: 0px;
+		right: 0px;
+		bottom: 0px;
+		border: 1px solid #fff;
+	}
+</pre>
+
+<script src="js/jquery-1.12.3.min.js"></script>
+</body>
+</html>

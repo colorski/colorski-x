@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas刮刮乐效果</title>
+	<link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+	<link href="css/reset.css" rel="stylesheet" type="text/css">
+<style>
+  #mycan {
+	background-color:transparent;
+	top:0px;
+	left:50px;
+	position:absolute;
+	z-index:10
+}
+.myimg {
+	height:300px;
+	width:500px;
+	position:absolute;
+	top:0px;
+	left:50px;
+}
+#img1 {
+	transform:rotateX(180deg);
+}
+</style>
+</head>
+
+<body>
+	<h1>注意：刚加载的时候有问题</h1>
+<img id="img" class="myimg" src="http://www.jq22.com/img/cs/500x300-1.png">
+<img id="img1" class="myimg myimg1" src="http://www.jq22.com/img/cs/500x300-2.png">
+<canvas id="mycan" height="300" width="500"></canvas>
+
+<script>
+    var can = document.getElementById("mycan");
+    var ctx = can.getContext("2d");
+    //加载图片
+    var img = document.getElementById("img")
+    ctx.drawImage(img, 0, 0);
+    //关键--在与源不重叠的区域上保留目标。其他部分都变成透明的。
+    ctx.globalCompositeOperation = "destination-out";
+    //按住鼠标事件触发刮奖效果
+    can.onmousedown = function() {
+        //鼠标移动事件
+        can.onmousemove = function(e) {
+            e = event || e;
+            var x = e.offsetX;
+            var y = e.offsetY;
+            ctx.beginPath();
+            ctx.arc(x, y, 25, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.closePath();
+        }
+    }
+    //松开鼠标事件取消刮奖效果
+    can.onmouseup = function() {
+        can.onmousemove = function(e) {}
+    }
+</script>
+</body>
+</html>

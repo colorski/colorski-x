@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-24-vtip-鼠标移入提示title</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+<style>
+hr { margin: 20px 0; }
+#vtip { display: none; position: absolute; padding: 10px; left: 5px; font-size: 0.8em; background-color: #fff; border: 1px solid #a6c9e2; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; z-index: 2000 }
+#vtip:before,
+#vtip:after{content: "";position: absolute;left: 11px;top: -12px;width: 0px;height: 0px;border: 6px solid transparent;border-bottom-color: #fff;}
+#vtip:before{left: 10px;top: -14px;border: 7px solid transparent;border-bottom-color: #a6c9e2;}
+</style>
+</head>
+
+<body>
+<a href="#" title="This is an example of a link tooltip." class="vtip">Link Tooltip</a>
+<hr />
+<div class="vtip" title="只要写title，什么标签都可以">只要写title，什么标签都可以。在公用里执行，在标签上给个类.vtip就可以用了。函数名：vtip</div>
+<hr />
+<img class="vtip" src="images/pic_test_1.jpg" title="这是一张很古老的图片" alt="" />
+<hr />
+<input type="text" class="vtip" title="必须输入密码" />
+
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+<script src="js/common-1.js"></script>
+</body>
+</html>

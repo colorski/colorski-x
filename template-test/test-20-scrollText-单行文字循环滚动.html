@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-20-scrollText-单行文字循环滚动</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+<style>
+.news_box{ height:36px; background:#000; overflow:hidden; font-size: 12px;}
+.t_news{ height:20px; color:#fff; padding-left:10px; margin:8px 0; overflow:hidden; position:relative;}
+.t_news b{ line-height:20px; font-weight:bold; display:inline-block;}
+.news_li,.swap{ line-height:20px; display:inline-block; position:absolute; top:0; left:72px;}
+.news_li a,.swap a{ display: block; color:#fff; text-decoration: underline;}
+.news_li a:hover,.swap a:hover{ color:#f00;}
+.swap{top:20px;}
+</style>
+</head>
+
+<body>
+
+<div class="news_box">
+	<div class="t_news">
+		<b>最新播报：</b>
+		<ul class="news_li">
+			<li><a href="#" target="_blank">文字播报第一条</a></li>
+			<li><a href="#" target="_blank">奥运会播报第二条</a></li>
+			<li><a href="#" target="_blank">第三条来个劲爆的</a></li>
+			<li><a href="#" target="_blank">第四条就为了多一点文字而已看看超过了会怎么样</a></li>
+		</ul>
+		<ul class="swap"></ul>
+	</div>
+</div>
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+<script src="js/common-1.js"></script>
+<script>
+	ski.cmn.scrollText();
+</script>
+</body>
+</html>

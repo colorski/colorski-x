@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-2009-css-图片占满整个屏幕并随机背景图</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<style></style>
+</head>
+
+<body>
+<img id="wrap_img_bg" src="" alt="登录页背景图" />
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+<script src="js/common-1.js"></script>
+<script> 
+$(function(){
+	//缩放浏览器窗口时，保证图片填满浏览器窗口
+	var win = $(window);
+	var wrapBg = $('#wrap_img_bg');
+
+	//背景图随机
+	wrapBg.attr('src','images/login-bg-'+$.rdm(0,1)+'.jpg');
+	var iWinWidth = win.width();
+	var iWinHeight = win.height();
+	wrapBg.width(iWinWidth).height(iWinHeight);
+	
+	win.resize(function(){
+		wrapBg.width(win.width());
+		wrapBg.height(win.height());
+	});
+});
+</script>
+</body>
+</html>

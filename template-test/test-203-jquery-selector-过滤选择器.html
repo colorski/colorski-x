@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-203-jquery-selector-过滤选择器</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+<style type="text/css">
+.htmleaf-container{
+	margin: 0 auto;
+	overflow: hidden;
+}
+.col-md-4 {
+	float: left;
+	width: 20%;
+}
+.col-md-8 {
+	width: 70%;
+	float: left;
+}
+	ul li{list-style: none;}
+	ul#bar{width: 100%;}
+	ul#bar li{list-style: none;}
+	
+	ul#bar li.circle{
+		position: relative;
+		float: left;
+		margin-left: 8px;
+		display: inline-block;
+		width: 50px;
+		height: 50px;
+		background-color: #f2f2f2;
+		border-radius: 50%;
+		overflow: hidden;
+	}
+	ul#bar li.circle:before{
+		content: attr(data-num);
+		display: inline-block;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		font-family: '微软雅黑';
+		font-size: 1.5em;
+		font-weight: 700;
+		-webkit-transform: translate(-50%,-50%);
+		-ms-transform: translate(-50%,-50%);
+		-o-transform: translate(-50%,-50%);
+		transform: translate(-50%,-50%);
+	}
+
+	ul#bar li.circle span{
+		display: inline-block;
+		position: absolute;
+		margin-top: -100%;
+	}
+	
+
+	.highlight {
+	  background-color: #FFFF88;
+	}
+	ul#bar li.red{
+		background-color: #d2527f;
+		color: #fff;
+	}
+
+	.tag {
+	  color: blue;
+	}
+
+	.attribute-value {
+	  color: maroon;
+	}
+
+	.btn {
+	  margin-bottom: 5px;
+	  font-family:consolas;
+	  cursor: pointer;
+	}
+
+	#html-content,#html-content-2, .html-content {
+	  font-family: consolas;
+	  font-size: 1.2em;
+	}
+	h3.demo-title,p.demo-title{font-family: '微软雅黑';font-size: 1.2em;}
+	.mt50{margin-top: 50px;}
+	.pb30{padding-bottom: 30px;}
+	.line{border-bottom: 1px solid #f2f2f2;}
+</style>
+</head>
+
+<body>
+<section class="htmleaf-container">
+	<div class="col-md-4">
+		<p class="demo-title"><strong>基本过滤选择器</strong></p>
+	    <div class="btn btn-success" id="first-button">:first</div>
+	    <div class="btn btn-success" id="last-button">:last</div>
+	    <div class="btn btn-success" id="not-button">:not(.circle5)</div>
+	    <div class="btn btn-success" id="even-button">:even</div>
+	    <div class="btn btn-success" id="odd-button">:odd</div>
+	    <div class="btn btn-success" id="eq-button">:eq(3)</div>
+	    <div class="btn btn-success" id="gt-button">:gt(3)</div>
+	    <div class="btn btn-success" id="lt-button">:lt(3)</div>
+	    <div class="btn btn-success" id="header-button">:header</div>
+
+	    <p class="demo-title"><strong>内容过滤选择器</strong></p>
+	    <div class="btn btn-success" id="contains-button">:contains(6)</div>
+	    <div class="btn btn-success" id="empty-button">:empty</div>
+	    <div class="btn btn-success" id="has-button">:has(i)</div>
+	    <div class="btn btn-success" id="parent-button">:parent</div>
+
+
+	    <p class="demo-title"><strong>子元素过滤器</strong></p>
+	    <div class="btn btn-success" id="nth-child-button">:nth-child(5)</div>
+	    <div class="btn btn-success" id="nth-child-even-button">:nth-child(even)</div>
+	    <div class="btn btn-success" id="nth-child-odd-button">:nth-child(odd)</div>
+	    <div class="btn btn-success" id="nth-child-equation-button">:nth-child(3n+1)</div>
+	    <div class="btn btn-success" id="first-child-button">:first-child</div>
+	    <div class="btn btn-success" id="last-child-button">:last-child</div>
+	    <div class="btn btn-success" id="only-child-button">:only-child</div>
+	  </div>
+	  <div class="col-md-8">
+	    <p class="demo-title"><strong>HTML</strong></p>
+	    <div id="html-content">
+	    	<h3 class="demo-title">过滤选择器</h3>
+		    <ul id="foo" class="foo">
+			    <li class="circle circle1" data-num="1"><span>1</span></li>
+			    <li class="circle circle2" data-num="2"><span>2</span></li>
+			    <li class="circle circle3" data-num="3"><span>3</span></li>
+			    <li class="circle circle4" data-num="4"><span>4</span></li>
+			    <li class="circle circle5" data-num="5"><span>5</span></li>
+			    <li class="circle circle6" data-num="6"><span>6</span></li>
+			    <li class="circle circle7" data-num="7"><span>7</span></li>
+			    <li class="circle circle8" data-num="8"><span>8</span></li>
+			    <li class="circle circle9" data-num="9"><span>9</span></li>
+			    <li class="circle circle10" data-num="10"><span>10</span></li>
+			    <li class="empty"></li>
+			    <li><i></i></li>
+			</ul>
+			<ul id="baz">
+				<li>only-child</li>
+			</ul>
+		</div>
+		<p class="demo-title"><strong>Result</strong></p>
+		<ul id="bar" class="bar">
+		    <li class="circle circle1" data-num="1"><span>1</span></li>
+		    <li class="circle circle2" data-num="2"><span>2</span></li>
+		    <li class="circle circle3" data-num="3"><span>3</span></li>
+		    <li class="circle circle4" data-num="4"><span>4</span></li>
+		    <li class="circle circle5" data-num="5"><span>5</span></li>
+		    <li class="circle circle6" data-num="6"><span>6</span></li>
+		    <li class="circle circle7" data-num="7"><span>7</span></li>
+		    <li class="circle circle8" data-num="8"><span>8</span></li>
+		    <li class="circle circle9" data-num="9"><span>9</span></li>
+		    <li class="circle circle10" data-num="10"><span>10</span></li>
+		</ul>
+	  </div>
+	</div>
+</section>
+
+<script src="js/jquery-1.12.3.min.js"></script>
+<!--<script src="js/common-1.js"></script>-->
+<script type="text/javascript">
+	var $startingHtml = null;
+	$(function() {
+	  $startingHtml = $('#html-content').clone();
+	  displayHtml();
+	});
+
+	function resetHtml() {
+	  $('#html-content').replaceWith($startingHtml.clone());
+	}
+
+	function displayHtml(data) {
+	  if(data === undefined) data = '#html-content';
+	 
+	  $.each($(data).children(), function() {
+	    createHtml(this);
+	  });
+	}
+
+	function createHtml(element) {
+	  element = $(element);
+	  
+	  if (element.children().length > 0) {
+	    displayHtml(element);
+	  }
+
+	  var startingTag = element.prop('outerHTML').substring(0, element.prop('outerHTML').indexOf('>') + 1);
+	  var tagName = '';
+	  if(startingTag.indexOf(' ') > -1)
+	    tagName = startingTag.substring(1, startingTag.indexOf(' '));
+	  else
+	    tagName = startingTag.substring(1, startingTag.indexOf('>'));
+	  var formattedTag = '&lt;<span class="tag">' + tagName + '</span>attributes&gt;';
+	  
+	  attributesString = '';
+	  $.each(element.prop('attributes'), function() {
+	    attributesString += ' ' + this.nodeName + '=';
+	    attributesString += '<span class="attribute-value">"' + this.nodeValue + '"</span>';
+	  });
+	  
+	  startingTag = formattedTag.replace('attributes', attributesString);
+	  element.prepend(startingTag);
+	  element.append(formattedTag.replace('attributes', '').replace('&lt;', '&lt;/'));
+	    
+	  element.css('padding-left', '20px');
+	}
+</script>
+<script type="text/javascript">
+	$(function(){
+		$('#first-button').click(function () {
+	        resetHtml();
+	        $('ul#foo li:first').addClass('highlight');
+	        displayHtml();
+	        $('ul#bar li').removeClass('red');
+	        $('ul#bar li:first').addClass('red')
+	    });
+	    $('#last-button').click(function () {
+	        resetHtml();
+	        $('ul#foo li:last').addClass('highlight');
+	        displayHtml();
+	        $('ul#bar li').removeClass('red');
+	        $('ul#bar li:last').addClass('red')
+	    });
+	    $('#not-button').click(function () {
+	        resetHtml();
+	        $('ul#foo li:not(.circle5)').addClass('highlight');
+	        displayHtml();
+	        $('ul#bar li').removeClass('red');
+	        $('ul#bar li:not(.circle5)').addClass('red')
+	    });
+	    $('#even-button').click(function () {
+	        resetHtml();
+	        $('ul#foo li:even').addClass('highlight');
+	        displayHtml();
+	        $('ul#bar li').removeClass('red');
+	        $('ul#bar li:even').addClass('red')
+	    });
+	    $('#odd-button').click(function () {
+	        resetHtml();
+	        $('ul#foo li:odd').addClass('highlight');
+	        displayHtml();
+	        $('ul#bar li').removeClass('red');
+	        $('ul#bar li:odd').addClass('red')
+	    });
+	    $('#eq-button').click(function () {
+	        resetHtml();
+	        $('ul#foo li:eq(3)').addClass('highlight');
+	        displayHtml();
+	        $('ul#bar li').removeClass('red');
+	        $('ul#bar li:eq(3)').addClass('red')
+	    });
+	    $('#gt-button').click(function () {
+	        resetHtml();
+	        $('ul#foo li:gt(3)').addClass('highlight');
+	        displayHtml();
+	        $('ul#bar li').removeClass('red');
+	        $('ul#bar li:gt(3)').addClass('red')
+	    });
+	    $('#lt-button').click(function () {
+	        resetHtml();
+	        $('ul#foo li:lt(3)').addClass('highlight');
+	        displayHtml();
+	        $('ul#bar li').removeClass('red');
+	        $('ul#bar li:lt(3)').addClass('red')
+	    });
+	    $('#header-button').click(function () {
+	        resetHtml();
+	        $('#html-content :header').addClass('highlight');
+	        displayHtml();
+	        $('ul#bar li').removeClass('red');
+	    });
+
+	    $('#nth-child-button').click(function () {
+	        resetHtml();
+	        $('ul#foo li:nth-child(5)').addClass('highlight');
+	        displayHtml();
+	        $('ul#bar li').removeClass('red');
+	        $('ul#bar li:nth-child(5)').addClass('red')
+	    });
+
+	    $('#nth-child-even-button').click(function () {
+	        resetHtml();
+	        $('ul#foo li:nth-child(even)').addClass('highlight');
+	        displayHtml();
+	        $('ul#bar li').removeClass('red');
+	        $('ul#bar li:nth-child(even)').addClass('red')
+	    });
+
+	    $('#nth-child-odd-button').click(function () {
+	        resetHtml();
+	        $('ul#foo li:nth-child(odd)').addClass('highlight');
+	        displayHtml();
+	        $('ul#bar li').removeClass('red');
+	        $('ul#bar li:nth-child(odd)').addClass('red')
+	    });
+
+	    $('#nth-child-equation-button').click(function () {
+	        resetHtml();
+	        $('ul#foo li:nth-child(3n+1)').addClass('highlight');
+	        displayHtml();
+	        $('ul#bar li').removeClass('red');
+	        $('ul#bar li:nth-child(3n+1)').addClass('red')
+	    });
+
+	    $('#first-child-button').click(function () {
+	        resetHtml();
+	        $('ul#foo li:first-child').addClass('highlight');
+	        displayHtml();
+	        $('ul#bar li').removeClass('red');
+	        $('ul#bar li:first-child').addClass('red')
+	    });
+
+	    $('#last-child-button').click(function () {
+	        resetHtml();
+	        $('ul#foo li:last-child').addClass('highlight');
+	        displayHtml();
+	        $('ul#bar li').removeClass('red');
+	        $('ul#bar li:last-child').addClass('red')
+	    });
+
+	    $('#only-child-button').click(function () {
+	        resetHtml();
+	        $('ul li:only-child').addClass('highlight');
+	        displayHtml();
+	    });
+
+	    $('#contains-button').click(function () {
+	        resetHtml();
+	        $('ul li:contains("6")').addClass('highlight');
+	        displayHtml();
+	        $('ul#bar li').removeClass('red');
+	        $('ul#bar li:contains("6")').addClass('red')
+	    });
+
+	    $('#empty-button').click(function () {
+	        resetHtml();
+	        $('ul li:empty').addClass('highlight');
+	        displayHtml();
+	    });
+
+	    $('#has-button').click(function () {
+	        resetHtml();
+	        $('ul li:has(i)').addClass('highlight');
+	        displayHtml();
+	    });
+
+	    $('#parent-button').click(function () {
+	        resetHtml();
+	        $('ul li:parent').addClass('highlight');
+	        displayHtml();
+	    });
+
+
+	    $('.col-md-4 .btn').click(function(){
+	    	$('.col-md-4 .btn').css('color','black');
+	    	$(this).css('color','red');
+	    });
+	})
+</script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+<title>test-3510-mobile-滑动解锁效果</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<style>
+.lock_stage{position:relative;padding: 0 15px;height:55px;z-index: 10;}
+.lock_slider{position:absolute;height:52px;box-shadow:0 0 3px #999;background-color:#ddd;left:15px;right:15px;z-index: 11;}
+.lock_label {
+    background: -webkit-gradient(linear, left top, right top, color-stop(0, #4d4d4d), color-stop(.4, #4d4d4d), color-stop(.5, white), color-stop(.6, #4d4d4d), color-stop(1, #4d4d4d));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: slidetounlock 3s infinite;
+    -webkit-text-size-adjust: none;
+    line-height: 52px;
+    height: 52px;
+    text-align: center;
+    font-size: 16px;
+    width: 100%;
+    color: #aaa;
+}
+.lock_label_success {
+    display: none;
+    height: 52px;
+    line-height: 52px;
+    text-align: center;
+    font-size: 16px;
+    width: 100%;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 12;
+}
+@keyframes slidetounlock
+{
+    0%     {background-position:-200px 0;}
+    100%   {background-position:200px 0;}
+}
+@-webkit-keyframes slidetounlock
+{
+    0%     {background-position:-200px 0;}
+    100%   {background-position:200px 0;}
+}
+.lock_button{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 52px;
+    height: 52px;
+    background-color: #fff;
+    transition: left 0s;
+    -webkit-transition: left 0s;
+}
+.lock_button-on{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 52px;
+    height: 52px;
+    background-color: #fff;
+    transition: left 1s;
+    -webkit-transition: left .5s;
+}
+.lock_track{
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0;
+    overflow: hidden;
+    transition: width 0s;
+    -webkit-transition: width 0s;
+}
+.lock_track-on{
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0;
+    overflow: hidden;
+    transition: width 1s;
+    -webkit-transition: width .5s;
+}
+.lock_icon  {
+    width: 32px;
+    height: 32px;
+    position: relative;
+    top:10px;
+    left:20px;
+    font-family: sans-serif;
+}
+.lock_icon:before{
+    content:'>>';
+    color:#ccc;
+    line-height:32px;
+}
+.lock_spinner {
+    width: 32px;
+    height: 32px;   
+    background: url('images/ok.png') no-repeat;
+    position: relative;
+    top:10px;
+    left:10px;
+    display: none;
+}
+
+@-webkit-keyframes bouncedelay {
+    0%, 80%, 100% { -webkit-transform: scale(0.0) }
+    40% { -webkit-transform: scale(1.0) }
+}
+@keyframes bouncedelay {
+    0%, 80%, 100% {
+        transform: scale(0.0);
+        -webkit-transform: scale(0.0);
+    } 40% {
+          transform: scale(1.0);
+          -webkit-transform: scale(1.0);
+      }
+}
+.lock_bg-green {
+    line-height: 52px;
+    height: 52px;
+    text-align: center;
+    font-size: 16px;
+    background-color: #78c430;
+}
+</style>
+</head>
+
+<body>
+<div class="lock_stage">
+    <div class="lock_slider" id="lock_slider">
+        <div class="lock_label">向右滑动验证</div>
+        <div class="lock_label_success" id="lock_label_success">解锁成功！</div>
+        <div class="lock_track" id="lock_track">
+            <div class="lock_bg-green"></div>
+        </div>
+        <div class="lock_button" id="lock_btn">
+            <div class="lock_icon" id="lock_icon"></div>
+            <div class="lock_spinner" id="lock_spinner"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+//滑动解锁
+(function(){
+    var oBtn = document.getElementById('lock_btn');
+    var oW,oLeft;
+    var oSlider=document.getElementById('lock_slider');
+    var oTrack=document.getElementById('lock_track');
+    var oIcon=document.getElementById('lock_icon');
+    var oSpinner=document.getElementById('lock_spinner');
+    var oTipSuc = document.getElementById('lock_label_success');
+    var flag=1;
+
+    oBtn.addEventListener('touchstart',function(e){
+        if(flag==1){
+            //console.log(e);
+            var touches = e.touches[0];
+            oW = touches.clientX - oBtn.offsetLeft;
+            oBtn.className="lock_button";
+            oTrack.className="lock_track";
+        }
+        
+    },false);
+
+    oBtn.addEventListener("touchmove", function(e) {
+        if(flag==1){
+            var touches = e.touches[0];
+            oLeft = touches.clientX - oW;
+            if(oLeft < 0) {
+                oLeft = 0;
+            }else if(oLeft > document.documentElement.clientWidth - oBtn.offsetWidth-30) {
+                oLeft = (document.documentElement.clientWidth - oBtn.offsetWidth-30);
+            }
+            oBtn.style.left = oLeft + "px";
+            oTrack.style.width=oLeft+ 'px';         
+        }
+        
+    },false);
+
+    oBtn.addEventListener("touchend",function() {
+        if(oLeft>=(oSlider.clientWidth-oBtn.clientWidth)){
+            oBtn.style.left = (document.documentElement.clientWidth - oBtn.offsetWidth-30);
+            oTrack.style.width= (document.documentElement.clientWidth - oBtn.offsetWidth-30);
+            oIcon.style.display='none';
+            oSpinner.style.display='block';
+            oTipSuc.style.display='block';
+            flag=0;         
+        }else{
+            oBtn.style.left = 0;
+            oTrack.style.width= 0;
+        }
+        oBtn.className="lock_button-on";
+        oTrack.className="lock_track-on";       
+    },false); 
+})();
+</script>
+</body>
+</html>

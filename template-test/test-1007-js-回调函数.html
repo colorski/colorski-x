@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-1007-js-回调函数</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<link type="text/css" rel="stylesheet" href="http://www.colorski.com/plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushJScript.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushCss.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushXml.js"></script>
+
+<style></style>
+</head>
+
+<body>
+<h1>回调函数</h1>
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p></div>
+
+<section class="code">
+
+    <h5>定义与理解</h5>
+    <p>jQuery对回调函数的定义：</p>
+    <pre class="brush:javascript;">
+    A callback is a function that is passed as an argument to another function and is executed after its parent function has completed.
+    </pre>
+    <p>字面上理解下来就是，回调就是一个函数的调用过程。那么就从理解这个调用过程开始吧。<b>函数a有一个参数，这个参数是个函数b，当函数a执行完以后执行函数b。那么这个过程就叫回调。</b></p>
+    <pre class="brush:javascript;">
+    	function a(callback){      
+    		alert("我是parent函数a！");
+    		alert("调用回调函数");
+    		callback();
+    	}
+    	function b(){   
+    		alert("我是回调函数b"); 
+    	}
+    	function c(){   
+    		alert("我是回调函数c");
+    	}
+    	function test(){   
+    		a(b);
+    		a(c);
+    	}
+
+    	<button onClick=test()>click me</button>
+    </pre>
+    测试一：<button onClick=test()>click me</button>
+
+<hr />
+
+	<h5>传参的回调函数</h5>
+	<pre class="brush:javascript;">
+		function a2(callback){      
+			alert("我是parent函数a2！");
+			var param = {'haha':123,'hehe':456};
+			alert("开始调用回调函数");
+			callback(param);
+		}
+		function b2(param){
+			alert("我是回调函数b2，我传了参数"); 
+			alert("参数值是："+param.haha+' '+param.hehe);
+		}
+		function c2(){   
+			alert("我是回调函数c2");
+		}
+		function test2(){   
+			a2(b2);
+			a2(c2);
+		}
+
+		<button onClick=test2()>click me</button>
+	</pre>
+	测试二：<button onClick=test2()>click me</button>
+</section>
+
+<!--colorBorder-->
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+
+<script>
+/******测试一*****/
+function a(callback){      
+	alert("我是parent函数a！");
+	alert("开始调用回调函数");
+	callback();
+}
+function b(){   
+	alert("我是回调函数b"); 
+}
+function c(){   
+	alert("我是回调函数c");
+}
+function test(){   
+	a(b);
+	a(c);
+}
+/******测试二*****/
+function a2(callback){      
+	alert("我是parent函数a2！");
+	var param = {'haha':123,'hehe':456};
+	alert("开始调用回调函数");
+	callback(param);
+}
+function b2(param){
+	alert("我是回调函数b2，我传了参数"); 
+	alert("参数值是："+param.haha+' '+param.hehe);
+}
+function c2(){   
+	alert("我是回调函数c2");
+}
+function test2(){   
+	a2(b2);
+	a2(c2);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-1008-js-判断是否断网联网</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<link type="text/css" rel="stylesheet" href="http://www.colorski.com/plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushJScript.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushCss.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushXml.js"></script>
+
+<style></style>
+</head>
+
+<body>
+<h1>test-1008-js-判断网络状态</h1>
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p></div>
+
+<section class="code">
+
+    <h5>判断网络状态</h5>
+    <pre  class="brush:javascript;">
+    
+    var EventUtil = { 
+    	addHandler: function (element, type, handler) { 
+    	if (element.addEventListener) { 
+    		element.addEventListener(type, handler, false); 
+    	} else if (element.attachEvent) { 
+    		element.attachEvent("on" + type, handler); 
+    	} else { 
+    		element["on" + type] = handler; 
+    		} 
+    	} 
+    }; 
+
+    EventUtil.addHandler(window, "online", function () { 
+    	alert("Online"); 
+    }); 
+
+    EventUtil.addHandler(window, "offline", function () { 
+    	alert("Offline"); 
+    });
+
+    //http://www.jb51.net/article/40449.htm
+    </pre>
+    你敢把网线拔掉试试！
+
+<hr />
+
+
+</section>
+
+<!--colorBorder-->
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+
+<script>
+//http://www.jb51.net/article/40449.htm
+var EventUtil = { 
+	addHandler: function (element, type, handler) { 
+	if (element.addEventListener) { 
+		element.addEventListener(type, handler, false); 
+	} else if (element.attachEvent) { 
+		element.attachEvent("on" + type, handler); 
+	} else { 
+		element["on" + type] = handler; 
+		} 
+	} 
+}; 
+
+EventUtil.addHandler(window, "online", function () { 
+	alert("Online"); 
+}); 
+
+EventUtil.addHandler(window, "offline", function () { 
+	alert("Offline"); 
+});
+</script>
+</body>
+</html>

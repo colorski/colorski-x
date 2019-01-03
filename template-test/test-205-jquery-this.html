@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-205-jquery-this</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+<style>
+
+</style>
+</head>
+
+<body>
+<div id="nav"> 
+<a href="javascript:;">111111111</a> 
+<a href="javascript:;">2222222222</a> 
+<a href="javascript:;">33333333</a> 
+<a href="javascript:;">44444444</a> 
+</div> 
+<script src="js/jquery-1.12.3.min.js"></script>
+<script>
+	$("#nav a").click(function(){ 
+		//四个经典的用法 
+		var index1 = $("#nav a").index(this); 
+		var index2 = $("#nav a").index($(this)); 
+		var index3 = $(this).index();
+		var index4 = $(this).index("a"); 
+		console.log(index3); 
+		return false; 
+	}); 
+</script>
+</body>
+</html>

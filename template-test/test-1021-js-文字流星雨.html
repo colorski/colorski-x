@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>文字流星雨</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+</head>
+
+<body>
+<canvas id="canvas"></canvas>
+
+<script>
+(function matrix() {
+
+    var w, h, row, col, array;
+    var fontSize = 18;
+    var str = "123456789αβγδεζηθικλμνξοπρστυφχψω";
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+
+    function resize() {
+        w = window.innerWidth;
+        h = window.innerHeight;
+        canvas.width = w;
+        canvas.height = h;
+        row = Math.ceil(h / fontSize);
+        col = Math.ceil(w / fontSize);
+        //设置一个记录每列元素的位置的数组，长度等于列数，初始位置从零开始
+        array = (new Array(col)).fill(0);
+    }
+
+    function draw() {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+        ctx.fillRect(0, 0, w, h);
+        ctx.font = fontSize + "px";
+        ctx.fillStyle = "rgb(19, 255, 75)";
+        for (var i = 0; i < col; i++) {
+            //设置一个概率事件，让每列元素的位置随机增加
+            if (Math.random() > 0.5) {
+                var s = str[Math.floor(Math.random() * str.length)];
+                ctx.fillText(s, i * fontSize, array[i] * fontSize);
+                array[i] += 0.5;
+                //当元素的位置大于行数时重置其位置
+                if (array[i] > row) {
+                    array[i] = 0;
+                }
+            }
+        }
+    }
+
+    window.onresize = resize;
+    resize();
+    setInterval(draw, 1000 / 60);
+
+})()
+</script>
+</body>
+</html>

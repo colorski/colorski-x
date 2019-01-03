@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>test-3027-css3-音乐图标1</title>
+<style>
+.music_icon {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  position: relative;
+}
+
+.music_icon i {
+  width: 2px;
+  height: 15px;
+  position: absolute;
+  bottom: 8px;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transform: rotate(rotate(0deg)) scale(1) skew(1deg) translate(10px);
+  -moz-transform: rotate(rotate(0deg)) scale(1) skew(1deg) translate(10px);
+  -o-transform: rotate(rotate(0deg)) scale(1) skew(1deg) translate(10px);
+  -ms-transform: rotate(rotate(0deg)) scale(1) skew(1deg) translate(10px);
+  transform: rotate(rotate(0deg)) scale(1) skew(1deg) translate(10px);
+  background-color: #333;
+}
+
+.music_icon i:nth-of-type(1) {
+  left: 0;
+  -webkit-animation: piano_wave 0.66s linear infinite;
+  animation: piano_wave 0.66s linear infinite;
+}
+
+.music_icon i:nth-of-type(2) {
+  left: 6px;
+  -webkit-animation: piano_wave 0.8s linear infinite;
+  animation: piano_wave 0.8s linear infinite;
+}
+
+.music_icon i:nth-of-type(3) {
+  left: 12px;
+  -webkit-animation: piano_wave 0.7s linear infinite;
+  animation: piano_wave 0.7s linear infinite;
+}
+
+.music_icon i:nth-of-type(4) {
+  left: 18px;
+  -webkit-animation: piano_wave 0.5s linear infinite;
+  animation: piano_wave 0.5s linear infinite;
+}
+
+.music_icon i:nth-of-type(5) {
+  left: 24px;
+  -webkit-animation: piano_wave 0.9s linear infinite;
+  animation: piano_wave 0.9s linear infinite;
+}
+
+@-webkit-keyframes piano_wave {
+  0% {
+    height: 4px;
+  }
+
+  50% {
+    height: 18px;
+  }
+
+  100% {
+    height: 10px;
+  }
+}
+
+@keyframes piano_wave {
+  0% {
+    height: 4px;
+  }
+
+  50% {
+    height: 18px;
+  }
+
+  100% {
+    height: 10px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="music_icon" title="钢琴节奏">
+    <i></i>
+    <i></i>
+    <i></i>
+    <i></i>
+    <i></i>
+</div>
+
+</body>
+</html>

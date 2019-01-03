@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-2007-css-分割线写法</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<link type="text/css" rel="stylesheet" href="http://www.colorski.com/plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushJScript.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushCss.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushXml.js"></script>
+
+<style>
+.line_01 {
+    height: 1px;
+    border-top: 1px solid #ddd;
+    text-align: center;
+}
+.line_01 span{
+    position: relative;
+    top: -10px;
+    background: #f9f9f9;
+    padding: 0 20px;
+}
+
+.line_box {
+	width: 600px;
+	margin: 0 auto;
+}
+.line_02 {
+    padding: 0 20px 0;
+    margin: 20px 0;
+    line-height: 1px;
+    border-left: 200px solid #ddd;
+    border-right: 200px solid #ddd;
+    text-align: center;
+}
+</style>
+</head>
+
+<body>
+<h1>分割线写法</h1>
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p></div>
+
+<section class="code">
+
+    <h5  class="tips">利用背景色负margin -- 推荐 -- 可自适应宽度</h5>
+    <div class="line_01"><span>小小分隔线 巧用背景色实现</span></div>
+    <pre  class="brush:css;">
+    	.line_01 {
+    	    height: 1px;
+    	    border-top: 1px solid #ddd;
+    	    text-align: center;
+    	}
+    	.line_01 span{
+    	    position: relative;
+    	    top: -10px;
+    	    background: #fff;
+    	    padding: 0 20px;
+    	}
+    </pre>
+
+    <h5  class="tips">利用border -- 如果固定宽度的可以用，并且文字多少也要固定</h5>
+    <div class="line_box"><div class="line_02">小小分隔线 单标签实现</div></div>
+    <pre  class="brush:css;">
+    	.line_02 {
+    	    padding: 0 20px 0;
+    	    margin: 20px 0;
+    	    line-height: 1px;
+    	    border-left: 200px solid #ddd;
+    	    border-right: 200px solid #ddd;
+    	    text-align: center;
+    	}
+    </pre>
+
+<hr />
+
+<p class="tips">其它方法不推荐：<a href="http://www.daqianduan.com/4258.html">CSS巧妙实现分隔线的几种方法</a></p>
+
+</section>
+
+<!--colorBorder-->
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+</body>
+</html>

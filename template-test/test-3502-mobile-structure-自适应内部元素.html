@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+<title>test-3502-mobile-structure-自适应内部元素</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<link type="text/css" rel="stylesheet" href="http://www.colorski.com/plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushJScript.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushCss.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushXml.js"></script>
+<style>
+.pre, .result { background-color: #fff; }
+.pre figure { border: 1px dashed #ccc; padding: 15px; }
+
+.result figure {  border: 1px dashed #ccc; padding: 15px;
+	max-width: 300px;
+	max-width: min-content;
+	margin: auto;
+ }
+ .result figure > img { max-width: inherit; }
+</style>
+</head>
+
+<body>
+<h1>自适应内部元素</h1>
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p></div>
+
+<section class="code">
+	<p><strong>需求：</strong>一个元素，内部有一张图片和一段图片的描述。图片尺寸不定，想让这个元素与图片宽度相适应，并居中显示。</p>
+	<p><strong>code：</strong></p>
+	<pre class="brush:html">
+		<p>这是在楼顶的围观群众甲。这是在楼顶的围观群众甲。这是在楼顶的围观群众甲。这是在楼顶的围观群众甲。</p>
+		<figure>
+			<img src="images/img03.jpg" alt="">
+			<figcaption>上边的图片才是主角，我是配角，其它都是吃瓜群众。</figcaption>
+		</figure>
+		<p>这是在底部的吃瓜群众乙，当然我也可以是其它元素了。</p>
+	</pre>
+	<p><strong>一般效果是这样：</strong></p>
+	<div class="pre">
+		<p>这是在楼顶的围观群众甲。这是在楼顶的围观群众甲。这是在楼顶的围观群众甲。这是在楼顶的围观群众甲。</p>
+		<figure>
+			<img src="images/img03.jpg" alt="">
+			<figcaption>上边的图片才是主角，我是配角，其它都是吃瓜群众。</figcaption>
+		</figure>
+		<p>这是在底部的吃瓜群众乙，当然我也可以是其它元素了。</p>
+	</div>
+	<p><strong>分析：</strong></p>
+	<p>众所周知，如果不给一个元素指定height，它会自适应其内容的高度。假如我们希望width也具有类似的行为，即上边的需求。</p>
+	<p><strong>code：</strong></p>
+	<pre class="brush:css">
+		.result figure {  border: 1px dashed #ccc; padding: 15px;
+			max-width: 300px;
+			max-width: min-content;
+			margin: auto;
+		 }
+		 .result figure > img { max-width: inherit; }
+	</pre>
+	<p><strong>需求结果是这样：</strong></p>
+	<div class="result">
+		<p>这是在楼顶的围观群众甲。这是在楼顶的围观群众甲。这是在楼顶的围观群众甲。这是在楼顶的围观群众甲。</p>
+		<figure>
+			<img src="images/img03.jpg" alt="">
+			<figcaption>上边的图片才是主角，我是配角，其它都是吃瓜群众。</figcaption>
+		</figure>
+		<p>这是在底部的吃瓜群众乙，当然我也可以是其它元素了。</p>
+	</div>
+	<p><strong>解释：</strong></p>
+	<p>css3的<b>css内部与外部尺寸模型</b>为width和height属性定义了一些新的关键字。如<code class="cd">min-content</code>，这个关键字浏览器将解析为自适应这个容器内部最大的<b>不可断行元素</b>的宽度（即最宽的单词、图片或具有固定宽度的盒元素）</p>
+	<p><code class="cd">max-width:300px;</code>是为适应旧浏览器的回退样式；</p>
+	<p>对应其它关键字：<code class="cd">max-content</code> <code class="cd">fit-content</code></p>
+
+</section>
+
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+
+
+</body>
+</html>

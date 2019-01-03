@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-206-jquery-ajax加载并解析XML</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+<style>
+
+</style>
+</head>
+
+<body>
+
+<body>
+<div class="tips">
+	<p>1.xml特点（英文、语法注意4个、结构）</p>
+	<p>2.xml获取</p>
+	<p>3.xml解析</p>
+	<hr />
+	<p>注意在localhost下运行；《锋利的jQuery》p354</p>
+</div>
+<hr />
+
+<ul id="load"></ul> 
+
+<script src="js/jquery-1.12.3.min.js"></script>
+<script>
+	$.ajax({
+		url:'folder/ajaxXML.xml',
+		type:'GET', //如果不传参给服务器，只从服务器请求数据用GET？如果用post放到colorski上报405错误。
+		dataType:'xml',
+		timeout:1000,
+		cache:false,
+		error:function(){
+			alert("加载错误");
+		},
+		success:function(xml){
+			console.log(xml);
+
+			var frag = $('#load');
+			$(xml).find('student').each(function(i){
+				var name = $(this).children('name').text();
+				var email = $(this).attr('email');
+
+				console.log(name);
+
+				frag.append('<li>'+name+' - '+email+'</li>');
+
+			});
+		}
+	});
+</script>
+</body>
+</html>

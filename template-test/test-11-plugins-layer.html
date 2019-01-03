@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>layer API测试</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+<style>
+h1 { padding: 15px 0; text-align: center; font-size: 20px; }
+h2 { padding: 10px 0; font-weight: bold;}
+p { line-height: 22px; font-size: 12px; }
+hr { margin: 10px 0; }
+a.test {float:left; margin:5px 20px 0 0; font-size: 12px; color: #f00;}
+</style>
+</head>
+
+<body>
+<h1>layer内置方法-不兼容ie7</h1><hr />
+<h2>layer.config();方法</h2>
+<p>如果您是采用seajs或者requirejs加载layer，你需要执行该方法来完成初始化的配置。</p>
+<p>它还可以配置层默认的基础参数。如默认动画风格，默认皮肤等。</p>
+
+<hr />
+
+<h2>layer.ready();方法</h2>
+<p>页面加载完成后执行的一些动作。</p>
+
+<hr />
+
+<h2>layer.open(options) - 原始核心方法</h2>
+<p>此方法创建的索引是关闭该层的关键。</p>
+<a href="javascript:void(0);" id="test_open" class="test test_open">测试open方法</a>
+
+<div class="clear"></div>
+<hr />
+
+<h2>layer.alert(content, options, yes) - 普通信息框</h2>
+<a href="javascript:void(0);" id="test_alert_1" class="test test_alert_1">测试alert方法一</a>
+<a href="javascript:void(0);" id="test_alert_2" class="test test_alert_2">测试alert方法二</a>
+<a href="javascript:void(0);" id="test_alert_3" class="test test_alert_3">测试alert方法三</a>
+
+<div class="clear"></div>
+<hr />
+
+<h2>layer.confirm(content, options, yes, cancel) - 询问框</h2>
+<a href="javascript:void(0);" id="test_confirm_1" class="test test_confirm_1">测试confirm方法一</a>
+<a href="javascript:void(0);" id="test_confirm_2" class="test test_confirm_2">测试confirm方法二</a>
+
+<div class="clear"></div>
+<hr />
+
+<h2>layer.msg(content, options, end) - 提示框</h2>
+<a href="javascript:void(0);" id="test_msg_1" class="test test_msg_1">测试msg方法一</a>
+<a href="javascript:void(0);" id="test_msg_2" class="test test_msg_2">测试msg方法二</a>
+<a href="javascript:void(0);" id="test_msg_3" class="test test_msg_3">测试msg方法三</a>
+<a href="javascript:void(0);" id="test_msg_4" class="test test_msg_4">测试msg方法四</a>
+
+<div class="clear"></div>
+<hr />
+
+<h2>layer.load(icon, options) - 加载层</h2>
+<a href="javascript:void(0);" id="test_load_1" class="test test_load_1">测试load方法一</a>
+<a href="javascript:void(0);" id="test_load_2" class="test test_load_2">测试load方法二</a>
+<a href="javascript:void(0);" id="test_load_3" class="test test_load_3">测试load方法三</a>
+
+<div class="clear"></div>
+<hr />
+
+<h2>layer.tips(content, follow, options) - tips层</h2>
+<p>tips层的私有参数。支持上右下左四个方向，通过1-4进行方向设定。默认：2。如tips: 3则表示在元素的下面出现。有时你还可能会定义一些颜色，可以设定tips: [1, '#c00']</p>
+<a href="javascript:void(0);" id="test_tips_1" class="test test_tips_1">测试tips方法一</a>
+<a href="javascript:void(0);" id="test_tips_2" class="test test_tips_2">测试tips方法二</a>
+<a href="javascript:void(0);" id="test_tips_3" class="test test_tips_3">测试tips方法三</a>
+
+<div class="clear"></div>
+<hr />
+
+<h2>layer.style(index, cssStyle) - 重新定义层的样式</h2>
+<a href="javascript:void(0);" id="test_style_1" class="test test_style_1">测试style方法和open方法一</a>
+<a href="javascript:void(0);" id="test_style_2" class="test test_style_2">测试style方法和open方法二</a>
+
+
+<div class="clear"></div>
+<hr />
+
+
+<!-- 只需引入jquery 和 layer.js即可 -->
+<script src="js/jquery-1.12.3.min.js"></script>
+<script src="js/plugins/layer/layer.js"></script>
+<!-- API: http://layer.layui.com/api.html -->
+<script>
+
+layer.ready(function(){
+    //layer.msg('加载完成我就显示！这种样式是用的layer.msg();');
+});
+
+//测试open方法
+$('.test_open').on('click', function(){
+    var index = layer.open({
+        title: '这是标题',//默认为“信息”
+        content: '这是测试内容',
+        /*success: function(layero, index){
+            console.log(layero,index);
+        }*/
+    });
+});
+
+//测试alert_1方法
+$('.test_alert_1').on('click', function(){
+    layer.alert('这是简单的提示');
+});
+
+//测试alert_2方法
+$('.test_alert_2').on('click', function(){
+    layer.alert('我在左侧加了个图标', {icon: 1}); //信息框默认不显示图标。当你想显示图标时，默认皮肤可以传入0-6如果是加载层，可以传入0-2
+});
+
+//测试alert_3方法
+$('.test_alert_3').on('click', function(){
+    layer.alert('点确定之后有回调函数'/*, {icon: 1}*/, function(index){
+        console.log('点击确定之后显示我'+index);
+        layer.close(index);
+    });
+});
+
+//测试confirm_1方法
+$('.test_confirm_1').on('click', function(){
+    layer.confirm('确定要重置吗?', {icon: 3, title:'提示'}, function(index){
+            console.log('你点了确定');
+            //执行确定后的函数
+            layer.close(index);
+        }, function(){
+            console.log('你点了取消');
+            //不执行操作函数
+        });
+});
+
+//测试confirm_2方法
+$('.test_confirm_2').on('click', function(){
+    layer.confirm('确定要重置吗?', function(index){
+            console.log('你点了确定');
+            //执行确定后的函数
+            layer.close(index);
+        }, function(){
+            console.log('你点了取消');
+            //不执行操作函数
+        });
+});
+
+//测试msg_1方法
+$('.test_msg_1').on('click', function(){
+    layer.msg('我在3秒之后消失！');
+});
+
+//测试msg_2方法
+$('.test_msg_2').on('click', function(){
+    layer.msg('有表情地提示', {icon: 6});
+});
+
+//测试msg_3方法
+$('.test_msg_3').on('click', function(){
+    layer.msg('提示时间为2秒', {icon: 5, time: 2000});
+});
+
+//测试msg_4方法
+$('.test_msg_4').on('click', function(){
+    layer.msg('有回调的提示', function(){
+        //...
+        console.log('我在提示完成之后显示');
+    });
+});
+
+//测试load_1方法
+$('.test_load_1').on('click', function(){
+    var index = layer.load(0, {time: 2000});
+    //如果不加时间永不消失，如果用ajax，完成后消失用 layer.close(index);
+});
+
+//测试load_2方法
+$('.test_load_2').on('click', function(){
+    var index = layer.load(1, {time: 2000});
+});
+
+//测试load_3方法
+$('.test_load_3').on('click', function(){
+    var index = layer.load(2, {time: 2000});
+});
+
+//测试tips_1方法
+$('.test_tips_1').on('click', function(){
+    layer.tips('只想提示地精准些', '.test_tips_1');
+});
+
+//测试tips_2方法
+$('.test_tips_2').on('click', function(){
+    var _this = this;
+    layer.tips('测试tips_2方法', _this, {tips: [1, '#f00']});
+});
+
+//测试tips_3方法
+$('.test_tips_3').on('click', function(){
+    var _this = this;
+    layer.tips('测试tips_3方法', _this, {tips: 3});
+});
+
+//测试style_1方法
+$('.test_style_1').on('click', function(){
+    var idx = layer.open({
+        type: 1,
+        area: ['400px','300px'],
+        maxmin: true,
+        title: '这是标题',//默认为“信息”
+        content: '这是内容，这是内容啊'
+    });
+    layer.style(idx, {
+        border: '2px dashed #f00'
+    });
+});
+
+//测试style_2方法
+$('.test_style_2').on('click', function(){
+    var idx = layer.open({
+        type: 2,
+        maxmin: true,
+        title: '这是我的个人站',//默认为“信息”
+        content: 'http://www.colorski.com/'
+    });
+    layer.style(idx, {
+      width: '1200px',
+      height: '500px',
+      top: '10px',
+      left: '50%',
+      marginLeft: '-600px'
+    });
+});
+
+</script>
+</body>
+</html>

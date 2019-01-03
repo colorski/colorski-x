@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>test-3029-css3-鼠标移入多彩导航</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<link rel="stylesheet" href="css/reset.css" />
+<style>
+.header_nav {
+  float: left;
+  width: 810px;
+  height: 70px;
+  overflow: hidden;
+}
+
+.header_nav li {
+  float: left;
+  width: 90px;
+  position: relative;
+  display: inline-block;
+  -webkit-transition: all 0.2s cubic-bezier(0.4, 0, 1, 1);
+  -moz-transition: all 0.2s cubic-bezier(0.4, 0, 1, 1);
+  -o-transition: all 0.2s cubic-bezier(0.4, 0, 1, 1);
+  transition: all 0.2s cubic-bezier(0.4, 0, 1, 1);
+}
+
+.header_nav li a {
+  position: relative;
+  color: #333;
+  text-decoration: none;
+  text-align: center;
+  line-height: 70px;
+  font-family: "Microsoft YaHei";
+  font-size: 14px;
+  display: block;
+  z-index: 100;
+}
+
+.header_nav li::after {
+  content: "";
+  position: absolute;
+  left: 0px;
+  bottom: 0;
+  width: 100%;
+  height: 70px;
+  top: 66px;
+  -webkit-transition: 0.2s all ease-in-out;
+  -moz-transition: 0.2s all ease-in-out;
+  -o-transition: 0.2s all ease-in-out;
+  transition: 0.2s all ease-in-out;
+}
+
+.header_nav li:hover::after {
+  top: 0px;
+}
+
+.menu li:nth-child(1)::after {
+  background: #b9d329;
+}
+
+.menu li:nth-child(2)::after {
+  background: #c0ebf7;
+}
+
+.menu li:nth-child(3)::after {
+  background: #69bcf3;
+}
+
+.menu li:nth-child(4)::after {
+  background: #79d9f3;
+}
+
+.menu li:nth-child(5)::after {
+  background: #ffae5b;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header_nav">
+    <ul class="menu">
+        <li><a href="#">首页</a></li>
+        <li><a href="#">Web前端</a></li>
+        <li><a href="#">技术概览</a></li>
+        <li><a href="#">UI设计</a></li>
+        <li><a href="#">美图酷览</a></li>
+    </ul>
+</div>
+
+</body>
+</html>

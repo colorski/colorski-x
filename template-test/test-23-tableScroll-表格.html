@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-23-tableScroll-表格</title>
+<meta name="keywords" content="" />
+<meta name="description" content="版本：1.1 官网：http://laydate.layui.com/" />
+
+<link rel="stylesheet" href="css/reset.css" />
+<style>
+.demo{width:500px;margin:40px auto 0 auto; font-size: 12px; font-family: "SimSun";}
+/* tablescroll */
+.tablescroll{font:12px normal Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;background-color:#fff;}
+.tablescroll td,.tablescroll_wrapper,.tablescroll_head,.tablescroll_foot{border:1px solid #ccc;}
+.tablescroll td{padding:5px;}
+.tablescroll_wrapper{border-left:0;}
+.tablescroll_head{font-size:12px;font-weight:bold;background-color:#eee;border-left:0;border-top:0;margin-bottom:3px;}
+.tablescroll thead td{border-right:0;border-bottom:0;}
+.tablescroll tbody td{border-right:0;border-bottom:0;}
+.tablescroll tbody tr.first td{border-top:0;}
+.tablescroll_foot{font-weight:bold;background-color:#eee;border-left:0;border-top:0;margin-top:3px;}
+.tablescroll tfoot td{border-right:0;border-bottom:0;}
+</style>
+</head>
+
+<body>
+<div class="demo">
+    <table id="thetable">
+        <thead>
+            <tr>
+                <td>城市</td>
+                <td>状态代码</td>
+                <td>zip</td>
+                <td>纬度</td>
+                <td>经度</td>
+                <td>县</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="first">
+                <td>中国</td>
+                <td>NY</td>
+                <td>00501</td>
+                <td>40.8152</td>
+                <td>-73.0455</td>
+                <td>Suffolk</td>
+            </tr>
+            <tr>
+                <td>中国</td>
+                <td>NY</td>
+                <td>00544</td>
+                <td>40.8152</td>
+                <td>-73.0455</td>
+                <td>Suffolk</td>
+            </tr>
+            <tr>
+                <td>韩国</td>
+                <td>PR</td>
+                <td>00601</td>
+                <td>18.1788</td>
+                <td>-66.7516</td>
+                <td>韩国</td>
+            </tr>
+            <tr>
+                <td>Aguada</td>
+                <td>PR</td>
+                <td>00602</td>
+                <td>18.381389</td>
+                <td>-67.188611</td>
+                <td>Aguada</td>
+            </tr>
+            <tr>
+                <td>Aguadilla</td>
+                <td>PR</td>
+                <td>00603</td>
+                <td>18.4554</td>
+                <td>-67.1308</td>
+                <td>Aguadilla</td>
+            </tr>
+            <tr>
+                <td>Aguadilla</td>
+                <td>PR</td>
+                <td>00604</td>
+                <td>18.4812</td>
+                <td>-67.1467</td>
+                <td>Aguadilla</td>
+            </tr>
+            <tr>
+                <td>Aguadilla</td>
+                <td>PR</td>
+                <td>00605</td>
+                <td>18.429444</td>
+                <td>-67.154444</td>
+                <td>Aguadilla</td>
+            </tr>
+            <tr>
+                <td>Maricao</td>
+                <td>PR</td>
+                <td>00606</td>
+                <td>18.182778</td>
+                <td>-66.980278</td>
+                <td>Maricao</td>
+            </tr>
+            <tr>
+                <td>Anasco</td>
+                <td>PR</td>
+                <td>00610</td>
+                <td>18.284722</td>
+                <td>-67.14</td>
+                <td>Anasco</td>
+            </tr>
+            <tr>
+                <td>Angeles</td>
+                <td>PR</td>
+                <td>00611</td>
+                <td>18.286944</td>
+                <td>-66.799722</td>
+                <td>Utuado</td>
+            </tr>
+            <tr>
+                <td>Arecibo</td>
+                <td>PR</td>
+                <td>00612</td>
+                <td>18.4389</td>
+                <td>-66.6924</td>
+                <td>Arecibo</td>
+            </tr>
+            <tr>
+                <td>Arecibo</td>
+                <td>PR</td>
+                <td>00613</td>
+                <td>18.1399</td>
+                <td>-66.6344</td>
+                <td>Arecibo</td>
+            </tr>
+            <tr>
+                <td>Arecibo</td>
+                <td>PR</td>
+                <td>00614</td>
+                <td>18.1399</td>
+                <td>-66.6344</td>
+                <td>Arecibo</td>
+            </tr>
+            <tr>
+                <td>Bajadero</td>
+                <td>PR</td>
+                <td>00616</td>
+                <td>18.428611</td>
+                <td>-66.683611</td>
+                <td>Arecibo</td>
+            </tr>
+            <tr>
+                <td>Barceloneta</td>
+                <td>PR</td>
+                <td>00617</td>
+                <td>18.4525</td>
+                <td>-66.538889</td>
+                <td>Barceloneta</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>10</td>
+                <td>2</td>
+                <td>15</td>
+                <td>-</td>
+                <td>-</td>
+                <td>9</td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+<script src="js/plugins/jquery.tablescroll.js"></script>
+<script>
+$(function(){
+    $('#thetable').tableScroll({
+        width:480,
+        height:150
+    });
+});
+</script>
+</body>
+</html>

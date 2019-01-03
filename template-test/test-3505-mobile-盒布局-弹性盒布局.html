@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+<title>test-3505-mobile-盒布局-弹性盒布局</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<style>
+.container {
+	display:-moz-box;
+	display:-webkit-box;
+	display:box; /*设定外部盒子采用盒布局模式，注意写法*/}
+.left {
+	width:200px;
+	background-color:#C00;}
+.content {
+	margin:0 10px;
+	min-width: 300px;
+	background-color:#F6C;
+	-moz-box-flex:1;
+	-webkit-box-flex:1;
+	box-flex:1;/*中间内容部分自适应*/}
+.right {
+	max-width: 200px;
+	background-color:#90F;/*注意right部分没加box-flex:1和加了的时候的变化；*/
+	-moz-box-flex:1;
+	-webkit-box-flex:1;
+	box-flex:1;}
+.left, .content, .right {
+	padding:10px;
+	word-break:break-all;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	box-sizing:border-box;/*border-box值的意义是实际宽度包含了content-width和padding和border；*/}
+
+</style>
+</head>
+
+<body>
+<div class="container">
+	<div class="left">左侧固定了宽度</div>
+    <div class="content">中间内容根据内容自适应</div>
+    <div class="right">右侧可以固定宽度也可以根据内容自适应，注意使用box-flex:1和不使用的区别；</div>
+</div>
+</body>
+</html>

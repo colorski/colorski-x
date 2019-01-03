@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<title>伪类做的线三角</title>
+<style>
+/*上*/
+.box1 {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); 
+    position: relative;
+
+    margin: 20px;
+}
+.box1:before,
+.box1:after{
+    content: "";
+    position: absolute;
+    left: 40px;
+    top: -20px;
+    width: 0px;
+    height: 0px;
+    border: 10px solid transparent;
+    border-bottom-color: rgb(255,255,255);
+
+}
+.box1:before{
+    left: 39px;
+    top: -22px;
+    border: 11px solid transparent;
+    border-bottom-color: #ccc;
+}
+
+	
+/*下*/
+.box2 {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #ccc;
+    box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.2); 
+    position: relative;
+
+    margin: 20px;
+}
+.box2:before,
+.box2:after{
+    content: "";
+    position: absolute;
+    left: 40px;
+    top: 100px;
+    width: 0px;
+    height: 0px;
+    border: 10px solid transparent;
+    border-top-color: rgb(255,255,255);
+
+}
+.box2:before{
+    left: 39px;
+    border: 11px solid transparent;
+    border-top-color: #ccc;
+}
+
+
+/*左*/
+.box3 {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.2); 
+    position: relative;
+
+    margin: 20px;
+}
+.box3:before,
+.box3:after{
+    content: "";
+    position: absolute;
+    top: 40px;
+    right: 100px;
+    width: 0px;
+    height: 0px;
+    border: 10px solid transparent;
+    border-right-color: rgb(255,255,255);
+
+}
+.box3:before{
+    top: 39px;
+    border: 11px solid transparent;
+    border-right-color: #ccc;
+}
+
+
+/*右*/
+.box4 {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.2); 
+    position: relative;
+
+    margin: 20px;
+}
+.box4:before,
+.box4:after{
+    content: "";
+    position: absolute;
+    top: 40px;
+    left: 100px;
+    width: 0px;
+    height: 0px;
+    border: 10px solid transparent;
+    border-left-color: rgb(255,255,255);
+
+}
+.box4:before{
+    top: 39px;
+    border: 11px solid transparent;
+    border-left-color: #ccc;
+}
+
+</style>
+</head>
+<body>
+<div class="box1">这是一个向上的线三角。</div>
+<div class="box2">这是一个向下的线三角。</div>
+<div class="box3">这是一个向左的线三角。</div>
+<div class="box4">这是一个向右的线三角。</div>
+</body>
+</html>

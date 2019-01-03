@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-1009-js手记</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<style>
+/******common*****/
+.list { padding: .8em; border-bottom: 1px solid #eee;}
+.list h6 { padding-bottom:.2em; font-size: 1.15rem; color: #f00; }
+.list em { display: inline-block; padding: 0.2em 0.4em; margin: 0 1em; background-color: #50bfff; color: #fff; font-style: normal; cursor: pointer;}
+</style>
+</head>
+
+<body>
+<div class="list">
+    <h6>实现base64解码</h6>
+    <pre  class="brush:javascript;">
+        function base64_decode(data){
+            var b64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+            var o1, o2, o3, h1, h2, h3, h4, bits, i = 0,ac = 0,dec = "",tmp_arr = [];
+            if (!data) { return data; }
+            data += '';
+            do {
+                h1 = b64.indexOf(data.charAt(i++));
+                h2 = b64.indexOf(data.charAt(i++));
+                h3 = b64.indexOf(data.charAt(i++));
+                h4 = b64.indexOf(data.charAt(i++));
+                bits = h1 << 18 | h2 << 12 | h3 << 6 | h4;
+                o1 = bits >> 16 & 0xff;
+                o2 = bits >> 8 & 0xff;
+                o3 = bits & 0xff;
+                if (h3 == 64) {
+                    tmp_arr[ac++] = String.fromCharCode(o1);
+                } else if (h4 == 64) {
+                    tmp_arr[ac++] = String.fromCharCode(o1, o2);
+                } else {
+                    tmp_arr[ac++] = String.fromCharCode(o1, o2, o3);
+                }
+            } while (i < data.length);
+            dec = tmp_arr.join('');
+            dec = utf8_decode(dec);
+            return dec;
+        }
+    </pre>
+</div>
+
+<div class="list">
+    <h6>实现utf8解码</h6>
+    <pre  class="brush:javascript;">
+        function utf8_decode(str_data){
+            var tmp_arr = [],i = 0,ac = 0,c1 = 0,c2 = 0,c3 = 0;str_data += '';
+            while (i < str_data.length) {
+                c1 = str_data.charCodeAt(i);
+                if (c1 < 128) {
+                    tmp_arr[ac++] = String.fromCharCode(c1);
+                    i++;
+                } else if (c1 > 191 && c1 < 224) {
+                    c2 = str_data.charCodeAt(i + 1);
+                    tmp_arr[ac++] = String.fromCharCode(((c1 & 31) << 6) | (c2 & 63));
+                    i += 2;
+                } else {
+                    c2 = str_data.charCodeAt(i + 1);
+                    c3 = str_data.charCodeAt(i + 2);
+                    tmp_arr[ac++] = String.fromCharCode(((c1 & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+                    i += 3;
+                }
+            }
+            return tmp_arr.join('');
+        }
+    </pre>
+</div>
+
+<div class="list">
+    <h6>半角转换为全角函数</h6>
+    <pre  class="brush:javascript;">
+        function ToDBC(str){
+            var result = '';
+            for(var i=0; i < str.length; i++){
+                code = str.charCodeAt(i);
+                if(code >= 33 && code <= 126){
+                    result += String.fromCharCode(str.charCodeAt(i) + 65248);
+                }else if (code == 32){
+                    result += String.fromCharCode(str.charCodeAt(i) + 12288 - 32);
+                }else{
+                    result += str.charAt(i);
+                }
+            }
+            return result;
+        }
+    </pre>
+</div>
+
+<div class="list">
+    <h6>全角转换为半角函数</h6>
+    <pre  class="brush:javascript;">
+        function ToCDB(str){
+            var result = '';
+            for(var i=0; i < str.length; i++){
+                code = str.charCodeAt(i);
+                if(code >= 65281 && code <= 65374){
+                    result += String.fromCharCode(str.charCodeAt(i) - 65248);
+                }else if (code == 12288){
+                    result += String.fromCharCode(str.charCodeAt(i) - 12288 + 32);
+                }else{
+                    result += str.charAt(i);
+                }
+            }
+            return result;
+        }
+    </pre>
+</div>
+
+<div class="list">
+    <h6>用正则表达式清除html代码中的脚本</h6>
+    <pre  class="brush:javascript;">
+        function clear_script(html){
+            在common-1.js中搜索此方法名
+        }
+    </pre>
+</div>
+
+<div class="list">
+    <h6>获取当前元素样式</h6>
+    <pre  class="brush:javascript;">
+        function getStyle(oElm, strCssRule){
+            var strValue = "";
+            if(document.defaultView && document.defaultView.getComputedStyle){
+                strValue = document.defaultView.getComputedStyle(oElm, "").getPropertyValue(strCssRule);
+            }
+            else if(oElm.currentStyle){
+                strCssRule = strCssRule.replace(/\-(\w)/g, function (strMatch, p1){
+                    return p1.toUpperCase();
+                });
+                strValue = oElm.currentStyle[strCssRule];
+            }
+            return strValue;
+        }
+    </pre>
+</div>
+
+<div class="list">
+    <h6>注意：</h6>
+    <p>最终所有手记查看js文件 -- 《js手记.js》</p>
+</div>
+
+
+<link type="text/css" rel="stylesheet" href="../plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="../plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="../plugins/codeView/shBrushJScript.js"></script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-1004-js-屏蔽右键和f12键</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<link type="text/css" rel="stylesheet" href="http://www.colorski.com/plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushJScript.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushCss.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushXml.js"></script>
+
+<style>
+    #txt1,#txt2 { display: none; color: #f00;}
+</style>
+</head>
+
+<body>
+<h1>屏蔽右键和f12键</h1>
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p></div>
+
+<section class="code">
+
+    <h5>屏蔽右键</h5>
+
+    <p>测试：右键试试 <span id="txt1">右键已经被屏蔽了！</span></p>
+    <p>测试：f12试试 <span id="txt2">f12已经被屏蔽了！</span></p>
+    <pre  class="brush:javascript;">
+    	var txt1 = document.getElementById("txt1");
+        var txt2 = document.getElementById("txt2");
+        //屏蔽右键
+        document.oncontextmenu = function(){
+            txt1.style.display = 'inline-block';
+            return false;
+        };
+
+        //屏蔽f12
+        document.onkeydown = function(ev){
+            if(ev.keyCode === 123){ 
+                txt2.style.display = 'inline-block';
+                return false;
+            }
+        };
+    </pre>
+
+<hr />
+
+
+</section>
+
+<!--colorBorder-->
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+
+<script>
+window.onload=function(){
+    var txt1 = document.getElementById("txt1");
+    var txt2 = document.getElementById("txt2");
+    //屏蔽右键
+    document.oncontextmenu = function(){
+        txt1.style.display = 'inline-block';
+        return false;
+    };
+
+    //屏蔽f12
+    document.onkeydown = function(ev){
+        if(ev.keyCode === 123){ 
+            txt2.style.display = 'inline-block';
+            return false;
+        }
+    };
+};
+</script>
+</body>
+</html>

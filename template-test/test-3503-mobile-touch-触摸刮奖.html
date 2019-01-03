@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+<title>test-3503-mobile-touch-触摸刮奖</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<link type="text/css" rel="stylesheet" href="http://www.colorski.com/plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushJScript.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushCss.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushXml.js"></script>
+<style>
+body { background-color: green; text-align: center; }
+h1 { padding: 1em 0; color: #fff; font-size: 20px; }
+#guajiang { width: 200px; height: 50px; background-repeat:no-repeat; background-position:center center;  margin: 0 auto; }
+#tips { padding: .5em; color: #fff; }
+.x { padding: 1em; color: #fff; }
+</style>
+</head>
+
+<body>
+<h1>刮一刮</h1>
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p></div>
+
+<p class="x">请在触摸屏上看</p>
+<div id="guajiang" style="background-image:url(images/result.jpg);">
+	<canvas id="mask" width="200" height="50"></canvas>
+</div>
+<p id="tips">请在以上刮奖区刮奖</p>
+
+
+
+<section class="code">
+	<pre class="brush:javascript;">
+		var cvs = document.getElementById('mask');
+		var cxt = cvs.getContext("2d");
+		cxt.fillStyle = "#D1D1D1"; //填充色为浅灰色
+		cxt.fillRect(0,0,200,50); //填充形状
+
+		cxt.globalCompositeOperation = 'destination-out';
+
+		cvs.addEventListener('touchmove',function(event){
+			event.preventDefault(); //先去除默认的响应行为
+			var touch = event.touches[0]; //获取触摸的第一个点
+			cxt.beginPath(); // 绘制开始路径
+			cxt.arc(touch.pageX-cvs.offsetLeft, touch.pageY-cvs.offsetTop,15,0,Math.PI*2); //在所在触摸处绘制圆形，半径为15像素
+			cxt.closePath(); //绘制结束路径
+			cxt.fillStyle = '#f00'; //随便设置一种绘制颜色
+			cxt.fill(); //填充该颜色
+			//...
+		});
+	</pre>
+
+</section>
+
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+
+<script>
+	window.onload=function(){
+		var cvs = document.getElementById('mask');
+		var cxt = cvs.getContext("2d");
+		cxt.fillStyle = "#D1D1D1"; //填充色为浅灰色
+		cxt.fillRect(0,0,200,50); //填充形状
+
+		cxt.globalCompositeOperation = 'destination-out';
+
+		cvs.addEventListener('touchmove',function(event){
+			event.preventDefault(); //先去除默认的响应行为
+			var touch = event.touches[0]; //获取触摸的第一个点
+			cxt.beginPath(); // 绘制开始路径
+			cxt.arc(touch.pageX-cvs.offsetLeft, touch.pageY-cvs.offsetTop,15,0,Math.PI*2); //在所在触摸处绘制圆形，半径为15像素
+			cxt.closePath(); //绘制结束路径
+			cxt.fillStyle = '#f00'; //随便设置一种绘制颜色
+			cxt.fill(); //填充该颜色
+
+			/***当看到完整结果之后，说明已经刮开***/
+			var imgData = cxt.getImageData(0,0,200,50); //获取画布中的所有像素
+			var pixelsArr = imgData.data; //得到像素的字节数据
+			var loop = pixelsArr.length; //获取该数据的长度
+			var transparent = 0; //设置一个变量来记录已经变为透明像素点的数量
+			for(var i=0; i<loop; i+=4){ //循环遍历每一个像素
+				var alpha = pixelsArr[i+3]; //获取每一个像素的透明度数值
+				if(alpha<10){ //当透明度小于10时，认为它已经被删除
+					transparent++; //使transparent数值加1
+				}
+			}
+			var percentage = transparent / (loop / 4); //计算透明像素在所有像素点中所占比例
+			if(percentage > .5){ //当该比例大于50%时（也就是显示了这个canvas的一半时），修改下方提示信息
+				document.getElementById('tips').innerHTML = "结果已显示！";
+			}
+		});
+	};
+</script>
+</body>
+</html>

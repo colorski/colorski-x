@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>laydate-日期</title>
+<meta name="keywords" content="" />
+<meta name="description" content="版本：1.1 官网：http://laydate.layui.com/" />
+
+<link rel="stylesheet" href="css/reset.css" />
+<style>
+.laydate-icon {
+	cursor: pointer;
+}
+
+</style>
+</head>
+
+<body>
+<input type="text" id="test" class="laydate-icon" name="time" readonly />
+
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+<script src="js/plugins/laydate/laydate.js"></script>
+<script>
+laydate({//注意，若有无反应可能是下面的参数位置不对
+	elem: '#test',
+    //elem: '#id', //需显示日期的元素选择器
+    //event: 'click', //触发事件
+    format: 'YYYY-MM-DD', //日期格式  YYYY-MM-DD hh:mm:ss
+    //istime: true, //是否开启时间选择
+    //isclear: true, //是否显示清空dd
+    //istoday: true, //是否显示今天
+    //issure: true, 是否显示确认
+    //festival: true //是否显示节日
+	//min: laydate.now(), //-1代表昨天，-2代表前天，以此类推
+    //max: laydate.now(+1) //+1代表明天，+2代表后天，以此类推
+    //min: '1900-01-01 00:00:00', //最小日期
+    //max: '2099-12-31 23:59:59', //最大日期
+    //start: '2014-6-15 23:00:00',    //开始日期
+    //fixed: false, //是否固定在可视区域
+    //zIndex: 99999999, //css z-index
+    //choose: function(dates){ //选择好日期的回调}
+});
+$('#test').val(laydate.now());  //默认显示今天
+//laydate.skin('molv');//皮肤选择 灰色-默认 墨绿-molv 大红-dahong
+
+</script>
+</body>
+</html>

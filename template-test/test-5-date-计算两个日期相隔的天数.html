@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-5-date-计算两个日期相隔的天数</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+<style>
+
+</style>
+</head>
+
+<body>
+开始日期：<input type="text" id="ipt1" value="2017-06-01" /> <br />
+结束日期：<input type="text" id="ipt2" value="2017-06-05" /> <br />
+<input type="button" id="btn" value="提交" />
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+<script src="js/common-1.js"></script>
+<script> 
+function DateDiff(sDate1,sDate2){
+	var  aDate,oDate1,oDate2,iDays;
+	aDate = sDate1.split("-");
+	oDate1 = new Date(aDate[1] + '-' + aDate[2] + '-' + aDate[0]); //转换为12-18-2002格式  
+	aDate = sDate2.split("-");
+	oDate2 = new Date(aDate[1] + '-' + aDate[2] + '-' + aDate[0]);
+	iDays = parseInt(Math.abs(oDate1 - oDate2)/1000/60/60/24);    //把相差的毫秒数转换为天数  
+	return  iDays;
+}
+//获取方法：
+//DateDiff(date1,date2);
+var days = DateDiff("2017-04-27","2017-05-27");
+console.log(days);
+
+//实例方法：
+$("#btn").click(function(){
+	var date1 = $("#ipt1").val();
+	var date2 = $("#ipt2").val();
+
+	$.alerts(DateDiff(date1,date2),"info");
+});
+
+
+</script>
+</body>
+</html>

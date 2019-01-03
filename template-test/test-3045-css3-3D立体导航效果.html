@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>3D立体导航效果</title>
+	<link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+	<link href="css/reset.css" rel="stylesheet" type="text/css">
+<style>
+.nav {
+    width:722px;
+    margin:50px auto;
+    background-color:#6cf;
+    border:1px #ccc solid;
+}
+.nav:after {
+    clear:both;
+    display:block;
+    overflow:hidden;
+    content:"";
+}
+.nav ul li {
+    width:140px;
+    height:60px;
+    margin-right:5px;
+    float:left;
+    perspective:4000px;
+    -webkit-perspective:4000px;
+}
+.nav ul li:nth-last-child(1) {
+    margin-right:0;
+}
+.nav ul li a {
+    display:block;
+    height:60px;
+    text-decoration:none;
+    transition:all .5s;
+    transform-style:preserve-3d;
+}
+.nav ul li a p {
+    height:60px;
+    margin:0;
+    line-height:60px;
+    color:#fff;
+    text-align:center;
+    font-size:16px;
+    font-family:"Microsoft Yahei";
+    border-radius:2px;
+    transition:all .5s;
+}
+.nav ul li a p:first-child {
+    background-color:#090;
+    transform:translateZ(30px);
+}
+.nav ul li a p:last-child {
+    background-color:#009;
+    transform:translateZ(30px) rotateX(-90deg);
+    margin-top:-30px;
+}
+.nav ul li a:hover {
+    transform:rotateX(90deg);
+}
+.nav ul li a:hover p:last-child {
+    margin-top:0;
+    transform:translateZ(0) rotateX(-90deg);
+}
+</style>
+</head>
+
+<body>
+<header class="nav">
+    <ul>
+        <li><a href="#"><p>首页</p><p>Home</p></a></li>
+        <li><a href="#"><p>产品展示</p><p>Product display</p></a></li>
+        <li><a href="#"><p>关于我们</p><p>About us</p></a></li>
+        <li><a href="#"><p>公司案例</p><p>Company case</p></a></li>
+        <li><a href="#"><p>联系我们</p><p>Contact us</p></a></li>
+    </ul>
+</header>
+</body>
+</html>

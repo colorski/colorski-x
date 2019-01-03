@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>css3-气泡bubbleLoading</title>
+	<link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+	<link href="css/reset.css" rel="stylesheet" type="text/css">
+<style>
+.bubbleLoading {
+    width:60px;
+    height:60px;
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin-left:-25px;
+}
+.bubbleBox {
+    width:40px;
+    height:40px;
+    margin:-20px 0px 0px -20px;
+    top:50%;
+    left:50%;
+    position:absolute;
+}
+.bubbleBox p {
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    position:absolute;
+    animation:move 1.5s infinite linear;
+    background:radial-gradient(transparent 10%,rgba(16,47,91,.2) 100%);
+}
+.bubbleBox p:after {
+    content:"";
+    position:absolute;
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    -webkit-backface-visibility:hidden;
+    backface-visibility:hidden;
+    background-color:rgba(126,169,232,.4);
+}
+.bubbleBox p:nth-of-type(1) {
+    left:0;
+    top:0;
+}
+.bubbleBox p:nth-of-type(2) {
+    right:0;
+    top:0;
+}
+.bubbleBox p:nth-of-type(3) {
+    right:0;
+    bottom:0;
+}
+.bubbleBox p:nth-of-type(4) {
+    left:0;
+    bottom:0;
+}
+.bubbleBox:nth-of-type(2) {
+    transform:rotate(45deg);
+}
+.bubbleBox:nth-of-type(1) p:nth-of-type(1) {
+    animation-delay:-0.1s
+}
+.bubbleBox:nth-of-type(1) p:nth-of-type(2) {
+    animation-delay:-0.5s
+}
+.bubbleBox:nth-of-type(1) p:nth-of-type(3) {
+    animation-delay:-0.9s
+}
+.bubbleBox:nth-of-type(1) p:nth-of-type(4) {
+    animation-delay:-0.13s
+}
+.bubbleBox:nth-of-type(2) p:nth-of-type(1) {
+    animation-delay:-0.7s
+}
+.bubbleBox:nth-of-type(2) p:nth-of-type(2) {
+    animation-delay:-0.11s
+}
+.bubbleBox:nth-of-type(2) p:nth-of-type(3) {
+    animation-delay:-0.15s
+}
+.bubbleBox:nth-of-type(2) p:nth-of-type(4) {
+    animation-delay:-0.3s
+}
+@keyframes move {
+    0% {
+    transform:scale(0);
+    }
+    50% {
+        transform:scale(1.5);
+    }
+    100% {
+        transform:scale(0);
+    }
+}
+</style>
+</head>
+
+<body>
+<div class="bubbleLoading">
+    <div class="bubbleBox">
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+    </div>
+    <div class="bubbleBox">
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+    </div>
+</div>
+</body>
+</html>

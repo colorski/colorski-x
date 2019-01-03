@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-209-jquery-jquery操作各表单元素-checkbox</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<link type="text/css" rel="stylesheet" href="http://www.colorski.com/plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushJScript.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushCss.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushXml.js"></script>
+
+<style>
+    #test4 input[name='password'] { width: 100px; height: 26px; line-height: 18px; padding: 4px; }
+    .checkBox { padding-bottom: 8px; margin-top: 8px; margin-bottom: 8px; border-bottom: 1px dashed #ccc; }
+</style>
+</head>
+
+<body>
+<h1>jquery操作各表单元素-checkbox</h1>
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p></div>
+
+<p>本页测试用jQuery版本：jquery-1.12.3.min.js</p>
+<section class="code">
+
+    <p>具有 true 和 false 两个值的属性，如 checked, selected 或者 disabled 使用prop()，其他的使用 attr()。</p>
+    <h5>1.判断复选框是否被选中-方法1</h5>
+    <pre  class="brush:javascript;">
+    	if($("#test1 :checkbox[name='iptName']").is(":checked")){
+            console.log("选中了");
+        }
+    </pre>
+    <p>f12测试</p>
+    <form action="" id="test1">
+    	<input type="checkbox" name="iptName" value="1" checked="checked" />我同意协议
+        <input type="button" id="btn1" value="点我看看选没选中">
+    </form>
+
+<hr />
+
+    <h5>2.判断复选框是否被选中-方法2</h5>
+    <pre  class="brush:javascript;">
+        if($("#test2 :checkbox[name='iptName']").prop("checked")){
+            console.log("选中了");
+        }
+    </pre>
+    <p>f12测试</p>
+    <form action="" id="test2">
+        <input type="checkbox" name="iptName" value="2" />我同意协议2
+        <input type="button" id="btn2" value="点我看看选没选中">
+    </form>
+
+<hr />
+<p>注意：对表单元素自身的点击操作用change事件</p>
+<hr />
+
+    <h5>3.获取选择项的总价</h5>
+    <pre  class="brush:javascript;">
+        var total = new Number();
+        $('#btn3').click(function(){
+            total = 0;
+            $('#test3 :checkbox[name=iptName3]:checked').each(function(){
+                total=total+Number($(this).val());
+            });
+            total=total.toFixed(2);  //会出现6.6000000000000005
+
+            $('#test3 span').empty().text(total);
+        });
+    </pre>
+    <form action="" id="test3">
+        <input type="checkbox" name="iptName3" value="1.2" />1.2元
+        <input type="checkbox" name="iptName3" value="2.2" />2.2元
+        <input type="checkbox" name="iptName3" value="3.2" />3.2元
+        <input type="checkbox" name="iptName3" value="4.2" />4.2元
+        <input type="button" id="btn3" value="点我获取总价">
+        <span></span>
+    </form>
+
+<hr />
+
+    <h5>4.是否显示密码</h5>
+    <pre  class="brush:javascript;">
+        var iptPwd = $('input[name=password]');
+        var ipt4 = $('input[name=iptName4]');
+
+        ipt4.change(function(){
+            if(ipt4.is(':checked')){
+                iptPwd.attr('type','text');
+            }else{
+                iptPwd.attr('type','password');
+            }
+        });
+    </pre>
+    <form action="" id="test4">
+        <input type="password" name="password" value="123456" />
+        <input type="checkbox" name="iptName4" />显示密码
+    </form>
+<hr />
+
+    <h5>5.全选</h5>
+    <form action="" id="test5">
+        <div class="checkBox">
+            <input type="checkbox" name="iptAll5" />全选
+        </div>
+        <div class="checkList">
+            <input type="checkbox" name="check5" value="1" />选项1
+            <input type="checkbox" name="check5" value="2" />选项2
+            <input type="checkbox" name="check5" value="3" />选项3
+            <input type="checkbox" name="check5" value="4" />选项4
+        </div>
+    </form>
+    <pre  class="brush:javascript;">
+        var _iptAll = $('input[name=iptAll5]');
+        var _iptCheck = $('input[name=check5]');
+
+        //全选
+        _iptAll.change(function() {
+            if($(this).prop('checked') == true){
+                _iptCheck.prop('checked',true);  //设置checkbox被选中
+            }else{
+                _iptCheck.prop('checked',false);  //checkbox取消选中
+            }
+        });
+
+        _iptCheck.change(function(){
+            var numAll = _iptCheck.size();
+            var num = 0;
+            _iptCheck.each(function(){
+               if($(this).prop('checked') == true){
+                    num++;
+                } 
+            });
+            if(num == numAll){_iptAll.prop('checked',true);}else{_iptAll.prop('checked',false);}
+        });
+    </pre>
+
+<hr />
+
+    <h5>6.全选全不选</h5>
+    <form action="" id="test6">
+        <div class="checkBox">
+            <input type="checkbox" name="iptAll" />全选
+            <!-- <input type="checkbox" name="iptInvert" />全选 -->
+            <input type="checkbox" name="iptNone" checked="false" />全不选
+        </div>
+        <div class="checkList">
+            <input type="checkbox" name="check" value="1" />选项1
+            <input type="checkbox" name="check" value="1" />选项2
+            <input type="checkbox" name="check" value="1" />选项3
+            <input type="checkbox" name="check" value="1" />选项4
+        </div>
+    </form>
+    <pre  class="brush:javascript;">
+        var _iptAll = $('input[name=iptAll]');
+        var _iptNone = $('input[name=iptNone]');
+        var _iptCheck = $('input[name=check]');
+
+        //全选
+        _iptAll.change(function() {
+            _iptCheck.prop('checked',true);  //设置checkbox被选中
+            _iptNone.prop('checked',false);  //checkbox取消选中
+        });
+
+        //全不选
+        _iptNone.change(function() {
+            _iptCheck.prop('checked',false);
+            _iptAll.prop('checked',false);
+        });
+
+        _iptCheck.change(function(){
+            var numAll = _iptCheck.size();
+            var num = 0;
+            _iptCheck.each(function(){
+               if($(this).prop('checked') == true){
+                    num++;
+                } 
+            });
+            if(num == numAll){_iptAll.prop('checked',true);}else{_iptAll.prop('checked',false);}
+            if(num == 0){_iptNone.prop('checked',true);}else{_iptNone.prop('checked',false);}
+        });
+    </pre>
+
+<hr />
+
+    <h5>7.把选中的值放到数组里或拼成字符串</h5>
+    <form action="" id="test7">
+        <input type="checkbox" name="check" checked="true" value="1" />选项1
+        <input type="checkbox" name="check" checked="true" value="2" />选项2
+        <input type="checkbox" name="check" checked="true" value="3" />选项3
+        <input type="checkbox" name="check" checked="true" value="4" />选项4
+    </form>
+    <pre  class="brush:javascript;">
+
+        //把选中的值放到数组里
+        var id_array=new Array();//定义一个空的数组，用来存放checkbox的值
+        $('#test7 :checkbox[checked]').each(function(){//这一句就是用来读取所选中的checkbox的
+            id_array.push($(this).val());//把值添加进数组中
+        });
+        console.log(id_array);
+
+        var idstr=id_array.join(',');//通过逗号把数组元素连接起来以构建成一个字符串
+        console.log(idstr);
+
+
+        /*//获取值拼成字符串 如1,2,3,4
+        var str = $("#test7 :checkbox[checked]").map(function(){return $(this).val(); }).get().join(',');
+        console.log(str);
+        console.log(typeof str);*/
+    </pre>
+
+<hr />
+
+
+
+
+
+</section>
+
+<!--colorBorder-->
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+
+<script>
+/*****1.判断复选框是否被选中-方法1****/
+(function(){
+	$("#test1 :checkbox[name='iptName']").change(function() {
+		if($(this).is(":checked")){
+            console.log("选中了");
+        }else{
+            console.log("没选中");
+        }
+	});
+
+    $("#btn1").click(function(){
+        if($("#test1 :checkbox[name='iptName']").is(":checked")){
+            console.log("选中了");
+        }else{
+            console.log("没选中");
+        }
+    });
+})();
+
+/*****2.判断复选框是否被选中-方法2****/
+(function(){
+    $("#test2 :checkbox[name='iptName']").change(function() {
+        if($(this).prop("checked")){
+            console.log("选中了");
+        }else{
+            console.log("没选中");
+        }
+    });
+
+    $("#btn2").click(function(){
+        if($("#test2 :checkbox[name='iptName']").prop("checked")){
+            console.log("选中了");
+        }else{
+            console.log("没选中");
+        }
+    });
+})();
+
+/*****3.获取总价****/
+(function(){
+
+    var total = new Number();
+
+    //若点击每一个多选框就加使用change事件
+    $('#btn3').click(function(){
+        total = 0;
+        $('#test3 :checkbox[name=iptName3]:checked').each(function(){
+            total=total+Number($(this).val());
+        });
+        total=total.toFixed(2);  //会出现6.6000000000000005
+
+        $('#test3 span').empty().text(total);
+        //console.log(total);
+    });
+
+})();
+
+/*****4.是否显示密码****/
+(function(){
+
+    var iptPwd = $('input[name=password]');
+    var ipt4 = $('input[name=iptName4]');
+
+    ipt4.change(function(){
+        if(ipt4.is(':checked')){
+            iptPwd.attr('type','text');
+        }else{
+            iptPwd.attr('type','password');
+        }
+    });
+
+})();
+
+/*****5.全选****/
+(function(){
+
+    var _iptAll = $('input[name=iptAll5]');
+    var _iptCheck = $('input[name=check5]');
+
+    //全选
+    _iptAll.change(function() {
+        if($(this).prop('checked') == true){
+            _iptCheck.prop('checked',true);
+        }else{
+            _iptCheck.prop('checked',false);
+        }
+    });
+
+    _iptCheck.change(function(){
+        var numAll = _iptCheck.size();
+        var num = 0;
+        _iptCheck.each(function(){
+           if($(this).prop('checked') == true){
+                num++;
+            } 
+        });
+        if(num == numAll){_iptAll.prop('checked',true);}else{_iptAll.prop('checked',false);}
+    });
+
+})();
+
+/*****6.全选全不选****/
+(function(){
+
+    var _iptAll = $('input[name=iptAll]');
+    //var _iptInvert = $('input[name=iptInvert]');
+    var _iptNone = $('input[name=iptNone]');
+    var _iptCheck = $('input[name=check]');
+
+    //全选
+    _iptAll.change(function() {
+        _iptCheck.prop('checked',true);
+        _iptNone.prop('checked',false);
+    });
+
+    //全不选
+    _iptNone.change(function() {
+        _iptCheck.prop('checked',false);
+        _iptAll.prop('checked',false);
+    });
+
+    _iptCheck.change(function(){
+        var numAll = _iptCheck.size();
+        var num = 0;
+        _iptCheck.each(function(){
+           if($(this).prop('checked') == true){
+                num++;
+            } 
+        });
+        if(num == numAll){_iptAll.prop('checked',true);}else{_iptAll.prop('checked',false);}
+        if(num == 0){_iptNone.prop('checked',true);}else{_iptNone.prop('checked',false);}
+    });
+
+    //反选
+    /*_iptInvert.change(function() {
+        _iptCheck.each(function(){
+            $(this).prop('checked',!$(this).prop('checked'));
+        });
+    });*/
+
+})();
+
+/*****7.把选中的值放到数组里或拼成字符串****/
+(function(){
+    /*//获取值拼成字符串 如1,2,3,4
+    var str = $("#test7 :checkbox[checked]").map(function(){return $(this).val(); }).get().join(',');
+    console.log(str);
+    console.log(typeof str);*/
+
+    //把选中的值放到数组里
+    var id_array=new Array();//定义一个空的数组，用来存放checkbox的值
+    id_array = [];
+
+    $('#test7 :checkbox[checked]').each(function(){//这一句就是用来读取所选中的checkbox的
+        id_array.push($(this).val());//把值添加进数组中
+    });
+    console.log(id_array);
+
+    var idstr=id_array.join(',');//通过逗号把数组元素连接起来以构建成一个字符串
+    console.log(idstr);
+})();
+
+</script>
+</body>
+</html>

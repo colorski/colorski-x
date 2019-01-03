@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-5003-ES6-curry-函数柯里化</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<link type="text/css" rel="stylesheet" href="http://www.colorski.com/plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushJScript.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushCss.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushXml.js"></script>
+
+<style></style>
+</head>
+
+<body>
+<h1>curry-函数柯里化</h1>
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p></div>
+
+<section class="code">
+	<p>函数柯里化（curry）过程是通过逐步传参，在每一步中返回一个更具体的部分配置的函数的过程。通过不断传参的过程，我们可以实现对函数的高度复用。<b>函数柯里化是利用闭包、高阶函数特性来实现动态创建函数、参数复用的过程。</b></p>
+	<p>两种用法：<br><b>1.动态创建函数</b><br><b>2.参数复用</b></p>
+
+    <h5>动态创建函数</h5>
+    <p>通常，我们使用以下方法来注册DOM事件。</p>
+    <pre  class="brush:javascript;">
+    var addEvent = function(el, type, fn, capture){
+    	if(window.addEventListener){
+			el.addEventListener(type,function(e){
+				fn.call(el,e);
+			},capture)
+    	}else if(window.attachEvent){
+			el.attachEvent("on"+type,function(e){
+				fn.call(el,e);
+			});
+    	}
+    };
+    </pre>
+    <p>使用这种方法的问题是每次调用addEvent方法时，都会执行一次判断来决定使用哪个方法注册事件。实际上，我们可以在页面载入后只进行一次判断，然后使用同一注册方法注册不同事件。我们使用函数柯里化来实现：</p>
+    <pre  class="brush:javascript;">
+    var addEvent = (function(){
+    	if(window.addEventListener){
+			return function(el, sType, fn, capture){
+				el.addEventListener(sType, function(e){
+					fn.call(el, e);
+				}, capture);
+			}
+    	}else if(window.attachEvent){
+			return function(el, sType, fn, capture){
+				el.attachEvent("on"+sType, function(){
+					fn.call(el, e);
+				});
+			}
+    	}
+    })();
+    </pre>
+    <p>以上自执行代码首先会判断浏览器支持的事件注册方法，根据不同的注册方法，返回一个事件注册的函数值给addEvent，以后调用addEvent方法注册事件时，内部就不会再次进行判断了，而是直接使用当前浏览器支持的事件注册方法来注册相应的事件。</p>
+<hr />
+	<h5>参数复用</h5>
+	<p>如果我们需要求10与任意数的和，可能会这么写：</p>
+	<pre  class="brush:javascript;">
+    function sum(x,y){
+    	return x + y;
+    };
+    sum(10,20); //30
+    sum(10,44); //54
+    </pre>
+    <p>当然上边只是个引子，正常估计大家都这么写：</p>
+    <pre  class="brush:javascript;">
+    function sum(x){
+    	return 10 + x;
+    };
+    sum(20); //30
+    sum(44); //54
+    </pre>
+    <p>上边第一种方法，我们在调用时会传入相同的参数10，如果使用函数柯里化，就可以实现参数复用：</p>
+	<pre  class="brush:javascript;">
+    //参数复用
+    function sum(x){
+    	return function(y){
+    		return x + y;
+    	}
+    };
+    var addTen = sum(10);
+    addTen(20); //30
+    addTen(44); //54
+    </pre>
+</section>
+<hr />
+<p>此知识点摘自：《Vue.js权威指南》p.488</p>
+<!--colorBorder-->
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+
+<script>
+//参数复用
+var sum = function(x){
+	return function(y){
+		return x + y;
+	}
+};
+//es6写法
+const sum = (x) => (y) => x + y;
+
+var addTen = sum(10);
+addTen(20);
+addTen(44);
+
+console.log(addTen(20));
+console.log(addTen(44));
+</script>
+</body>
+</html>

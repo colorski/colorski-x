@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-5004-ES6-ES6代码片段</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<link type="text/css" rel="stylesheet" href="http://www.colorski.com/plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushJScript.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushCss.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushXml.js"></script>
+
+<style></style>
+</head>
+
+<body>
+<h1>ES6代码片段</h1>
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p></div>
+
+<section class="code">
+<h2>数组</h2>
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p></div>
+
+    <h5>数组平均数、求平均数、求数组平均数</h5>
+    <p>使用reduce（）将每个值添加到累加器，初始值为0，总和除以数组长度。</p>
+    <pre  class="brush:javascript;">
+    const average = arr => arr.reduce((acc, val) => acc + val, 0) / arr.length;
+    // average([1,2,3,4]) -> 2.5
+    </pre>
+<hr />
+
+    <h5>计数数组中值的出现次数</h5>
+    <p>每次遇到数组中的特定值时，使用reduce（）来递增计数器。</p>
+    <pre  class="brush:javascript;">
+    const countOccurrences = (arr, value) => arr.reduce((a, v) => v === value ? a + 1 : a + 0, 0);
+    // countOccurrences([1,1,2,1,2,3], 1) -> 3
+    // 即1在这个数组中出现了3次
+    </pre>
+<hr />
+
+<h2>字符串</h2>
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p></div>
+
+    <h5>字符串重排</h5>
+    <p>使用reduce（）将每个值添加到累加器，初始值为0，总和除以数组长度。</p>
+    <pre  class="brush:javascript;">
+    const anagrams = str => {
+      if (str.length <= 2) return str.length === 2 ? [str, str[1] + str[0]] : [str];
+      return str.split('').reduce((acc, letter, i) =>
+        acc.concat(anagrams(str.slice(0, i) + str.slice(i + 1)).map(val => letter + val)), []);
+    };
+    console.log(anagrams('cba')); -> ["cba", "cab", "bca", "bac", "acb", "abc"]
+    </pre>
+<hr />
+
+    <h5>大写每个单词的首字母</h5>
+    <p>使用replace（）匹配每个单词的第一个字符，并使用toUpperCase（）来将其大写。</p>
+    <pre  class="brush:javascript;">
+    const capitalizeEveryWord = str => str.replace(/[a-z]/g, char => char.toUpperCase());
+    // capitalizeEveryWord('hello world!') -> 'Hello World!'
+    </pre>
+<hr />
+
+    <h5>首字母大写</h5>
+    <p>使用slice（0,1）和toUpperCase（）大写第一个字母，slice（1）获取字符串的其余部分。 省略lowerRest参数以保持字符串的其余部分不变，或将其设置为true以转换为小写。（注意：这和上一个示例不是同一件事情）</p>
+    <pre  class="brush:javascript;">
+    const capitalize = (str, lowerRest = false) =>
+      str.slice(0, 1).toUpperCase() + (lowerRest ? str.slice(1).toLowerCase() : str.slice(1));
+    // capitalize('myName', true) -> 'Myname'
+    </pre>
+<hr />
+
+    <h5>检查回文</h5>
+    <p>将字符串转换为toLowerCase（），并使用replace（）从中删除非字母的字符。然后，将其转换为tolowerCase（），将（''）拆分为单独字符，reverse（），join（''），与原始的非反转字符串进行比较，然后将其转换为tolowerCase（）。</p>
+    <pre  class="brush:javascript;">
+    const palindrome = str => {
+      const s = str.toLowerCase().replace(/[W_]/g,'');
+      return s === s.split('').reverse().join('');
+    }
+    // palindrome('taco cat') -> true
+    </pre>
+<hr />
+
+    <h5>当前URL</h5>
+    <p>使用window.location.href来获取当前URL。</p>
+    <pre  class="brush:javascript;">
+    const currentUrl = _ => window.location.href;
+    // currentUrl() -> 'https://google.com'
+    </pre>
+<hr />
+
+    <h5>Curry</h5>
+    <p>使用递归。如果提供的参数（args）数量足够，则调用传递函数f，否则返回一个curried函数f。</p>
+    <pre  class="brush:javascript;">
+    const curry = (fn, arity = fn.length, ...args) =>
+      arity <= args.length
+        ? fn(...args)
+        : curry.bind(null, fn, arity, ...args);
+    // curry(Math.pow)(2)(10) -> 1024
+    // curry(Math.min, 3)(10)(50)(2) -> 2
+    </pre>
+<hr />
+
+    <h5>Deep flatten array</h5>
+    <p>使用递归，使用reduce（）来获取所有不是数组的元素，flatten每个元素都是数组。</p>
+    <pre  class="brush:javascript;">
+    const deepFlatten = arr =>
+      arr.reduce((a, v) => a.concat(Array.isArray(v) ? deepFlatten(v) : v), []);
+    // deepFlatten([1,[2],[[3],4],5]) -> [1,2,3,4,5]
+    </pre>
+<hr />
+
+    <h5>数组之间的区别</h5>
+    <p>从b创建一个Set，然后在a上使用Array.filter（），只保留b中不包含的值。</p>
+    <pre  class="brush:javascript;">
+    const difference = (a, b) => { const s = new Set(b); return a.filter(x => !s.has(x)); };
+    // difference([1,2,3], [1,2]) -> [3]
+    </pre>
+<hr />
+
+    <h5>两点之间的距离</h5>
+    <p>使用Math.hypot（）计算两点之间的欧几里德距离。</p>
+    <pre  class="brush:javascript;">
+    const distance = (x0, y0, x1, y1) => Math.hypot(x1 - x0, y1 - y0);
+    // distance(1,1, 2,3) -> 2.23606797749979
+    </pre>
+<hr />
+
+    <h5>可以按数字整除</h5>
+    <p>使用模运算符（％）来检查余数是否等于0。</p>
+    <pre  class="brush:javascript;">
+    const isDivisible = (dividend, divisor) => dividend % divisor === 0;
+    // isDivisible(6,3) -> true
+    </pre>
+<hr />
+
+    <h5>转义正则表达式</h5>
+    <p>使用replace（）来转义特殊字符。</p>
+    <pre  class="brush:javascript;">
+    const escapeRegExp = str => str.replace(/[.*+?^${}()|[]\]/g, '\$&');
+    // escapeRegExp('(test)') -> \(test\)
+    </pre>
+<hr />
+
+    <h5>偶数或奇数</h5>
+    <p>使用Math.abs（）将逻辑扩展为负数，使用模（％）运算符进行检查。 如果数字是偶数，则返回true；如果数字是奇数，则返回false。</p>
+    <pre  class="brush:javascript;">
+    const isEven = num => num % 2 === 0;
+    // isEven(3) -> false
+    </pre>
+<hr />
+
+    <h5>阶乘</h5>
+    <p>使用递归。如果n小于或等于1，则返回1。否则返回n和n - 1的阶乘的乘积。</p>
+    <pre  class="brush:javascript;">
+    const factorial = n => n <= 1 ? 1 : n * factorial(n - 1);
+    // factorial(6) -> 720
+    </pre>
+<hr />
+
+    <h5>斐波那契数组生成器</h5>
+    <p>创建一个特定长度的空数组，初始化前两个值（0和1）。使用Array.reduce（）向数组中添加值，后面的一个数等于前面两个数相加之和（前两个除外）。</p>
+    <pre  class="brush:javascript;">
+    const fibonacci = n =>
+      Array(n).fill(0).reduce((acc, val, i) => acc.concat(i > 1 ? acc[i - 1] + acc[i - 2] : i), []);
+    // fibonacci(5) -> [0,1,1,2,3]
+    </pre>
+<hr />
+
+    <h5>过滤数组中的非唯一值</h5>
+    <p>将Array.filter（）用于仅包含唯一值的数组。</p>
+    <pre  class="brush:javascript;">
+    const filterNonUnique = arr => arr.filter(i => arr.indexOf(i) === arr.lastIndexOf(i));
+    // filterNonUnique([1,2,2,3,4,4,5]) -> [1,3,5]
+    </pre>
+<hr />
+
+    <h5>Flatten数组</h5>
+    <p>使用reduce（）来获取数组中的所有元素，并使用concat（）来使它们flatten。</p>
+    <pre  class="brush:javascript;">
+    const flatten = arr => arr.reduce((a, v) => a.concat(v), []);
+    // flatten([1,[2],3,4]) -> [1,2,3,4]
+    </pre>
+<hr />
+
+    <h5>从数组中获取最大值</h5>
+    <p>使用Math.max（）与spread运算符（...）结合得到数组中的最大值。</p>
+    <pre  class="brush:javascript;">
+    const arrayMax = arr => Math.max(...arr);
+    // arrayMax([10, 1, 5]) -> 10
+    </pre>
+<hr />
+
+    <h5>从数组中获取最小值</h5>
+    <p>使用Math.min（）与spread运算符（...）结合得到数组中的最小值。</p>
+    <pre  class="brush:javascript;">
+    const arrayMin = arr => Math.min(...arr);
+    // arrayMin([10, 1, 5]) -> 1
+    </pre>
+<hr />
+
+    <h5>获取滚动位置</h5>
+    <p>如果已定义，请使用pageXOffset和pageYOffset，否则使用scrollLeft和scrollTop，可以省略el来使用window的默认值。</p>
+    <pre  class="brush:javascript;">
+    const getScrollPos = (el = window) =>
+      ({x: (el.pageXOffset !== undefined) ? el.pageXOffset : el.scrollLeft,
+        y: (el.pageYOffset !== undefined) ? el.pageYOffset : el.scrollTop});
+    // getScrollPos() -> {x: 0, y: 200}
+    </pre>
+<hr />
+
+    <h5>最大公约数（GCD）</h5>
+    <p>使用递归。基本情况是当y等于0时。在这种情况下，返回x。否则，返回y的GCD和x / y的其余部分。</p>
+    <pre  class="brush:javascript;">
+    const gcd = (x, y) => !y ? x : gcd(y, x % y);
+    // gcd (8, 36) -> 4
+    </pre>
+<hr />
+
+    <h5>Head of list</h5>
+    <p>返回ARR[0]</p>
+    <pre  class="brush:javascript;">
+    const head = arr => arr[0];
+    // head([1,2,3]) -> 1
+    </pre>
+<hr />
+
+    <h5>list初始化</h5>
+    <p>返回arr.slice（0，-1）</p>
+    <pre  class="brush:javascript;">
+    const initial = arr => arr.slice(0, -1);
+    // initial([1,2,3]) -> [1,2]
+    </pre>
+<hr />
+
+    <h5>用range初始化数组</h5>
+    <p>使用Array（end-start）创建所需长度的数组，使用map（）来填充范围中的所需值，可以省略start使用默认值0。</p>
+    <pre  class="brush:javascript;">
+    const initializeArrayRange = (end, start = 0) =>
+      Array.apply(null, Array(end - start)).map((v, i) => i + start);
+    // initializeArrayRange(5) -> [0,1,2,3,4]
+    </pre>
+<hr />
+
+    <h5>用值初始化数组</h5>
+    <p>使用Array（n）创建所需长度的数组，fill(v)以填充所需的值，可以忽略value使用默认值0。</p>
+    <pre  class="brush:javascript;">
+    const initializeArray = (n, value = 0) => Array(n).fill(value);
+    // initializeArray(5, 2) -> [2,2,2,2,2]
+    </pre>
+<hr />
+
+    <h5>列表的最后</h5>
+    <p>返回arr.slice（-1）[0]</p>
+    <pre  class="brush:javascript;">
+    const last = arr => arr.slice(-1)[0];
+    // last([1,2,3]) -> 3
+    </pre>
+<hr />
+
+    <h5>测试功能所花费的时间</h5>
+    <p>使用performance.now（）获取函数的开始和结束时间，console.log（）所花费的时间。第一个参数是函数名，随后的参数传递给函数。</p>
+    <pre  class="brush:javascript;">
+    const timeTaken = callback => {
+      console.time('timeTaken');
+      const r = callback();
+      console.timeEnd('timeTaken');
+      return r;
+    };
+    // timeTaken(() => Math.pow(2, 10)) -> 1024
+    // (logged): timeTaken: 0.02099609375ms
+    </pre>
+<hr />
+
+    <h5>来自键值对的对象</h5>
+    <p>使用Array.reduce（）来创建和组合键值对。</p>
+    <pre  class="brush:javascript;">
+    const objectFromPairs = arr => arr.reduce((a, v) => (a[v[0]] = v[1], a), {});
+    // objectFromPairs([['a',1],['b',2]]) -> {a: 1, b: 2}
+    </pre>
+<hr />
+
+    <h5>管道</h5>
+    <p>使用Array.reduce（）通过函数传递值。</p>
+    <pre  class="brush:javascript;">
+    const pipe = (...funcs) => arg => funcs.reduce((acc, func) => func(acc), arg);
+    // pipe(btoa, x => x.toUpperCase())("Test") -> "VGVZDA=="
+    </pre>
+<hr />
+
+    <h5>Powerset</h5>
+    <p>使用reduce（）与map（）结合来遍历元素，并将其组合成包含所有组合的数组。</p>
+    <pre  class="brush:javascript;">
+    const powerset = arr =>
+      arr.reduce((a, v) => a.concat(a.map(r => [v].concat(r))), [[]]);
+    // powerset([1,2]) -> [[], [1], [2], [2,1]]
+    </pre>
+<hr />
+
+    <h5>范围内的随机整数</h5>
+    <p>使用Math.random（）生成一个随机数并将其映射到所需的范围，使用Math.floor（）使其成为一个整数。</p>
+    <pre  class="brush:javascript;">
+    const randomIntegerInRange = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+    // randomIntegerInRange(0, 5) -> 2
+    </pre>
+<hr />
+
+    <h5>范围内的随机数</h5>
+    <p>使用Math.random（）生成一个随机值，使用乘法将其映射到所需的范围。</p>
+    <pre  class="brush:javascript;">
+    const randomInRange = (min, max) => Math.random() * (max - min) + min;
+    // randomInRange(2,10) -> 6.0211363285087005
+    </pre>
+<hr />
+
+    <h5>随机化数组的顺序</h5>
+    <p>使用sort（）重新排序元素，利用Math.random（）来随机排序。</p>
+    <pre  class="brush:javascript;">
+    const shuffle = arr => arr.sort(() => Math.random() - 0.5);
+    // shuffle([1,2,3]) -> [2,3,1]
+    </pre>
+<hr />
+
+    <h5>重定向到URL</h5>
+    <p>使用window.location.href或window.location.replace（）重定向到url。 传递第二个参数来模拟链接点击（true - default）或HTTP重定向（false）。</p>
+    <pre  class="brush:javascript;">
+    const redirect = (url, asLink = true) =>
+      asLink ? window.location.href = url : window.location.replace(url);
+    // redirect('https://google.com')
+    </pre>
+<hr />
+
+    <h5>反转一个字符串</h5>
+    <p>使用数组解构和Array.reverse（）来颠倒字符串中的字符顺序。合并字符以使用join('')获取字符串。</p>
+    <pre  class="brush:javascript;">
+    const reverseString = str => [...str].reverse().join('');
+    // reverseString('foobar') -> 'raboof'
+    </pre>
+<hr />
+
+    <h5>RGB到十六进制</h5>
+    <p>使用按位左移运算符（<<）和toString（16），然后padStart（6，“0”）将给定的RGB参数转换为十六进制字符串以获得6位十六进制值。</p>
+    <pre  class="brush:javascript;">
+    const rgbToHex = (r, g, b) => ((r << 16) + (g << 8) + b).toString(16).padStart(6, '0');
+    // rgbToHex(255, 165, 1) -> 'ffa501'
+    </pre>
+<hr />
+
+    <h5>滚动到顶部</h5>
+    <p>使用document.documentElement.scrollTop或document.body.scrollTop获取到顶部的距离。从顶部滚动一小部分距离。使用window.requestAnimationFrame（）来滚动。</p>
+    <pre  class="brush:javascript;">
+    const scrollToTop = _ => {
+      const c = document.documentElement.scrollTop || document.body.scrollTop;
+      if (c > 0) {
+        window.requestAnimationFrame(scrollToTop);
+        window.scrollTo(0, c - c / 8);
+      }
+    };
+    // scrollToTop()
+    </pre>
+<hr />
+
+    <h5>随机数组值</h5>
+    <p>使用Array.map（）和Math.random（）创建一个随机值的数组。使用Array.sort（）根据随机值对原始数组的元素进行排序。</p>
+    <pre  class="brush:javascript;">
+    const shuffle = arr => {
+        let r = arr.map(Math.random);
+        return arr.sort((a,b) => r[a] - r[b]);
+    }
+    console.log(shuffle([1,2,3])); -> [2, 1, 3]     //这个不准确，3是不变的
+    </pre>
+<hr />
+
+    <h5>数组之间的相似性</h5>
+    <p>使用filter（）移除不是values的一部分值，使用includes（）确定。</p>
+    <pre  class="brush:javascript;">
+    const similarity = (arr, values) => arr.filter(v => values.includes(v));
+    // similarity([1,2,3], [1,2,4]) -> [1,2]
+    </pre>
+<hr />
+
+    <h5>按字符串排序（按字母顺序排列）</h5>
+    <p>使用split（''）分割字符串，sort（）使用localeCompare（），使用join（''）重新组合。</p>
+    <pre  class="brush:javascript;">
+    const sortCharactersInString = str =>
+      str.split('').sort((a, b) => a.localeCompare(b)).join('');
+    // sortCharactersInString('cabbage') -> 'aabbceg'
+    </pre>
+<hr />
+
+    <h5>数组总和</h5>
+    <p>使用reduce（）将每个值添加到累加器，初始化值为0。</p>
+    <pre  class="brush:javascript;">
+    const sum = arr => arr.reduce((acc, val) => acc + val, 0);
+    // sum([1,2,3,4]) -> 10
+    </pre>
+<hr />
+
+    <h5>交换两个变量的值</h5>
+    <p>使用数组解构来交换两个变量之间的值。</p>
+    <pre  class="brush:javascript;">
+    [varA, varB] = [varB, varA];
+    // [x, y] = [y, x]
+    </pre>
+<hr />
+
+    <h5>列表的tail</h5>
+    <p>返回arr.slice（1）</p>
+    <pre  class="brush:javascript;">
+    const tail = arr => arr.length > 1 ? arr.slice(1) : arr;
+    // tail([1,2,3]) -> [2,3]
+    // tail([1]) -> [1]
+    </pre>
+<hr />
+
+    <h5>数组唯一值</h5>
+    <p>使用ES6 Set和... rest操作符去掉所有重复值。</p>
+    <pre  class="brush:javascript;">
+    const unique = arr => [...new Set(arr)];
+    // unique([1,2,2,3,4,4,5]) -> [1,2,3,4,5]
+    </pre>
+<hr />
+
+    <h5>URL参数</h5>
+    <p>使用match() 与适当的正则表达式来获得所有键值对，适当的map() 。使用Object.assign（）和spread运算符（...）将所有键值对组合到一个对象中，将location.search作为参数传递给当前url。</p>
+    <pre  class="brush:javascript;">
+    const getUrlParameters = url =>
+      url.match(/([^?=&]+)(=([^&]*))/g).reduce(
+        (a, v) => (a[v.slice(0, v.indexOf('='))] = v.slice(v.indexOf('=') + 1), a), {}
+      );
+    // getUrlParameters('http://url.com/page?name=Adam&surname=Smith') -> {name: 'Adam', surname: 'Smith'}
+    </pre>
+<hr />
+
+    <h5>UUID生成器</h5>
+    <p>使用crypto API生成符合RFC4122版本4的UUID。</p>
+    <pre  class="brush:javascript;">
+    const uuid = _ =>
+      ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
+        (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+      );
+    // uuid() -> '7982fcfe-5721-4632-bede-6000885be57d'
+    </pre>
+<hr />
+
+    <h5>验证数字</h5>
+    <p>使用！isNaN和parseFloat（）来检查参数是否是一个数字，使用isFinite（）来检查数字是否是有限的。</p>
+    <pre  class="brush:javascript;">
+    const validateNumber = n => !isNaN(parseFloat(n)) && isFinite(n) && Number(n) == n;
+    // validateNumber('10') -> true
+    </pre>
+<hr />
+
+<!--colorBorder-->
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+
+<script>
+
+</script>
+</body>
+</html>

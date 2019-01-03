@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-18-easyaudioeffects-声音</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+<style>
+.list3.sound-trigger {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  position: relative;
+  margin: 10px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  -ms-border-radius: 100px;
+  -o-border-radius: 100px;
+  border-radius: 100px; }
+  .list3.sound-trigger:after {
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 48;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(100, 218, 194, 0.2);
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    -ms-border-radius: 100px;
+    -o-border-radius: 100px;
+    border-radius: 100px; }
+.list3.list3_hover:hover:after {
+  -webkit-transform: scale(1.25);
+  -moz-transform: scale(1.25);
+  -ms-transform: scale(1.25);
+  -o-transform: scale(1.25);
+  transform: scale(1.25); }
+.list3.list3_hover .list3_inner:hover {
+  -webkit-transform: scale(0.9);
+  -moz-transform: scale(0.9);
+  -ms-transform: scale(0.9);
+  -o-transform: scale(0.9);
+  transform: scale(0.9);
+  background-color: rgba(100, 218, 194, 0.5);
+  vertical-align: middle; }
+  .list3.list3_hover .list3_inner:hover i {
+    text-shadow: none; }
+  .list3.list3_hover .list3_inner:hover img {
+    vertical-align: middle; }
+.list3.list3_hover .sound-trigger__speach {
+  -webkit-animation: motion__hover 2s ease 0s infinite alternate;
+  -moz-animation: motion__hover 2s ease 0s infinite alternate;
+  -ms-animation: motion__hover 2s ease 0s infinite alternate;
+  -o-animation: motion__hover 2s ease 0s infinite alternate;
+  animation: motion__hover 2s ease 0s infinite alternate; }
+.list3.sound-trigger--type-click:active:after {
+  -webkit-transform: scale(1.25);
+  -moz-transform: scale(1.25);
+  -ms-transform: scale(1.25);
+  -o-transform: scale(1.25);
+  transform: scale(1.25); }
+.list3.sound-trigger--type-click .list3_inner:active {
+  -webkit-transform: scale(0.9);
+  -moz-transform: scale(0.9);
+  -ms-transform: scale(0.9);
+  -o-transform: scale(0.9);
+  transform: scale(0.9);
+  background-color: rgba(100, 218, 194, 0.5); }
+  .list3.sound-trigger--type-click .list3_inner:active i {
+    text-shadow: none; }
+.list3.sound-trigger--type-click .sound-trigger__speach {
+  -webkit-animation: motion__click 1s ease 0s infinite;
+  -moz-animation: motion__click 1s ease 0s infinite;
+  -ms-animation: motion__click 1s ease 0s infinite;
+  -o-animation: motion__click 1s ease 0s infinite;
+  animation: motion__click 1s ease 0s infinite; }
+.list3 .list3_inner {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  text-align: center;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  -ms-border-radius: 100px;
+  -o-border-radius: 100px;
+  border-radius: 100px;
+  -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
+  -ms-transition: all .3s ease;
+  -o-transition: all .3s ease;
+  transition: all .3s ease;
+  background-color: #64dac2;
+  color: #ececf5;
+  cursor: pointer;
+  position: relative;
+  z-index: 50; }
+  .list3 .list3_inner i {
+    font-size: 40px;
+    line-height: 100px;
+    -webkit-transition: all .1s ease;
+    -moz-transition: all .1s ease;
+    -ms-transition: all .1s ease;
+    -o-transition: all .1s ease;
+    transition: all .1s ease;
+    text-shadow: 0px 0px 0 #5cd8bf,1px 1px 0 #5cd8bf,2px 2px 0 #5cd8bf,3px 3px 0 #5cd8bf,4px 4px 0 #5cd8bf,5px 5px 0 #5cd8bf,6px 6px 0 #5cd8bf,7px 7px 0 #5cd8bf,8px 8px 0 #5cd8bf,9px 9px 0 #5cd8bf,10px 10px 0 #5cd8bf,11px 11px 0 #5cd8bf,12px 12px 0 #5cd8bf,13px 13px 0 #5cd8bf,14px 14px 0 #5cd8bf,15px 15px 0 #5cd8bf,16px 16px 0 #5cd8bf,17px 17px 0 #5cd8bf,18px 18px 0 #5cd8bf,19px 19px 0 #5cd8bf,20px 20px 0 #5cd8bf,21px 21px 0 #5cd8bf,22px 22px 0 #5cd8bf,23px 23px 0 #5cd8bf,24px 24px 0 #5cd8bf,25px 25px 0 #5cd8bf,26px 26px 0 #5cd8bf,27px 27px 0 #5cd8bf,28px 28px 0 #5cd8bf,29px 29px 0 #5cd8bf,30px 30px 0 #5cd8bf,31px 31px 0 #5cd8bf,32px 32px 0 #5cd8bf,33px 33px 0 #5cd8bf,34px 34px 0 #5cd8bf,35px 35px 0 #5cd8bf,36px 36px 0 #5cd8bf,37px 37px 0 #5cd8bf,38px 38px 0 #5cd8bf,39px 39px 0 #5cd8bf,40px 40px 0 #5cd8bf,41px 41px 0 #5cd8bf,42px 42px 0 #5cd8bf,43px 43px 0 #5cd8bf,45px 45px 0 transparent; }
+.list3 .sound-trigger__speach {
+  position: absolute;
+  z-index: 60;
+  width: 100%;
+  background-color: #5b5f7c;
+  color: #ececf5;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  font-size: 14rem;
+  top: -3em;
+  left: 0;
+  text-align: center; }
+  .list3 .sound-trigger__speach:after {
+    top: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-top-color: #5b5f7c;
+    border-width: 4px;
+    margin-left: -4px; }
+
+
+.sound-trigger--type-small-2.sound-trigger {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  position: relative;
+  margin: 5px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+  border-radius: 50px; }
+  .sound-trigger--type-small-2.sound-trigger:after {
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 48;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(100, 218, 194, 0.2);
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+    border-radius: 50px; }
+.sound-trigger--type-small-2.list3_hover:hover:after {
+  -webkit-transform: scale(1.25);
+  -moz-transform: scale(1.25);
+  -ms-transform: scale(1.25);
+  -o-transform: scale(1.25);
+  transform: scale(1.25); }
+.sound-trigger--type-small-2.list3_hover .list3_inner:hover {
+  -webkit-transform: scale(0.9);
+  -moz-transform: scale(0.9);
+  -ms-transform: scale(0.9);
+  -o-transform: scale(0.9);
+  transform: scale(0.9);
+  background-color: rgba(100, 218, 194, 0.5);
+  vertical-align: middle; }
+  .sound-trigger--type-small-2.list3_hover .list3_inner:hover i {
+    text-shadow: none; }
+  .sound-trigger--type-small-2.list3_hover .list3_inner:hover img {
+    vertical-align: middle; }
+.sound-trigger--type-small-2.list3_hover .sound-trigger__speach {
+  -webkit-animation: motion__hover 2s ease 0s infinite alternate;
+  -moz-animation: motion__hover 2s ease 0s infinite alternate;
+  -ms-animation: motion__hover 2s ease 0s infinite alternate;
+  -o-animation: motion__hover 2s ease 0s infinite alternate;
+  animation: motion__hover 2s ease 0s infinite alternate; }
+.sound-trigger--type-small-2.sound-trigger--type-click:active:after {
+  -webkit-transform: scale(1.25);
+  -moz-transform: scale(1.25);
+  -ms-transform: scale(1.25);
+  -o-transform: scale(1.25);
+  transform: scale(1.25); }
+.sound-trigger--type-small-2.sound-trigger--type-click .list3_inner:active {
+  -webkit-transform: scale(0.9);
+  -moz-transform: scale(0.9);
+  -ms-transform: scale(0.9);
+  -o-transform: scale(0.9);
+  transform: scale(0.9);
+  background-color: rgba(100, 218, 194, 0.5); }
+  .sound-trigger--type-small-2.sound-trigger--type-click .list3_inner:active i {
+    text-shadow: none; }
+.sound-trigger--type-small-2.sound-trigger--type-click .sound-trigger__speach {
+  -webkit-animation: motion__click 1s ease 0s infinite;
+  -moz-animation: motion__click 1s ease 0s infinite;
+  -ms-animation: motion__click 1s ease 0s infinite;
+  -o-animation: motion__click 1s ease 0s infinite;
+  animation: motion__click 1s ease 0s infinite; }
+.sound-trigger--type-small-2 .list3_inner {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  text-align: center;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+  border-radius: 50px;
+  -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
+  -ms-transition: all .3s ease;
+  -o-transition: all .3s ease;
+  transition: all .3s ease;
+  background-color: #64dac2;
+  color: #ececf5;
+  cursor: pointer;
+  position: relative;
+  z-index: 50; }
+  .sound-trigger--type-small-2 .list3_inner i {
+    font-size: 20px;
+    line-height: 50px;
+    -webkit-transition: all .1s ease;
+    -moz-transition: all .1s ease;
+    -ms-transition: all .1s ease;
+    -o-transition: all .1s ease;
+    transition: all .1s ease;
+    text-shadow: 0px 0px 0 #5cd8bf,1px 1px 0 #5cd8bf,2px 2px 0 #5cd8bf,3px 3px 0 #5cd8bf,4px 4px 0 #5cd8bf,5px 5px 0 #5cd8bf,6px 6px 0 #5cd8bf,7px 7px 0 #5cd8bf,8px 8px 0 #5cd8bf,9px 9px 0 #5cd8bf,10px 10px 0 #5cd8bf,11px 11px 0 #5cd8bf,12px 12px 0 #5cd8bf,13px 13px 0 #5cd8bf,14px 14px 0 #5cd8bf,15px 15px 0 #5cd8bf,16px 16px 0 #5cd8bf,17px 17px 0 #5cd8bf,18px 18px 0 #5cd8bf,19px 19px 0 #5cd8bf,20px 20px 0 #5cd8bf,21px 21px 0 #5cd8bf,22px 22px 0 #5cd8bf,23px 23px 0 #5cd8bf,24px 24px 0 #5cd8bf,25px 25px 0 #5cd8bf,26px 26px 0 #5cd8bf,27px 27px 0 #5cd8bf,28px 28px 0 #5cd8bf,29px 29px 0 #5cd8bf,30px 30px 0 #5cd8bf,31px 31px 0 #5cd8bf,32px 32px 0 #5cd8bf,33px 33px 0 #5cd8bf,34px 34px 0 #5cd8bf,35px 35px 0 #5cd8bf,36px 36px 0 #5cd8bf,37px 37px 0 #5cd8bf,38px 38px 0 #5cd8bf,39px 39px 0 #5cd8bf,40px 40px 0 #5cd8bf,41px 41px 0 #5cd8bf,42px 42px 0 #5cd8bf,43px 43px 0 #5cd8bf,45px 45px 0 transparent; }
+.sound-trigger--type-small-2 .sound-trigger__speach {
+  position: absolute;
+  z-index: 60;
+  width: 100%;
+  background-color: #5b5f7c;
+  color: #ececf5;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  font-size: 14rem;
+  top: -3em;
+  left: 0;
+  text-align: center; }
+  .sound-trigger--type-small-2 .sound-trigger__speach:after {
+    top: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-top-color: #5b5f7c;
+    border-width: 4px;
+    margin-left: -4px; }
+</style>
+</head>
+
+<body>
+<!--第一种-->
+<div id="trigger-2-hover" class="sound-trigger list3 list3_hover">
+  <p class="sound-trigger__speach">HOVER!</p>
+  <div class="list3_inner">
+     <i class="fa fa-volume-up fa-lg"></i>
+  </div>
+</div>
+<!--第二种-->
+<div class="center" style="margin-top: 60px;">
+  <div class="oneShotPolyphonic-hover sound-trigger sound-trigger--type-small-2 list3_hover">
+     <div class="list3_inner"><i class="fa fa-volume-up fa-lg"></i></div>
+  </div>
+  <div class="oneShotPolyphonic-hover sound-trigger sound-trigger--type-small-2 list3_hover">
+     <div class="list3_inner"><i class="fa fa-volume-up fa-lg"></i></div>
+  </div>
+  <div class="oneShotPolyphonic-hover sound-trigger sound-trigger--type-small-2 list3_hover">
+     <div class="list3_inner"><i class="fa fa-volume-up fa-lg"></i></div>
+  </div>
+  <div class="oneShotPolyphonic-hover sound-trigger sound-trigger--type-small-2 list3_hover">
+     <p class="sound-trigger__speach" style="width:100px; margin-left:-25px;">TRACE!</p>
+     <div class="list3_inner"><i class="fa fa-volume-up fa-lg"></i></div>
+  </div>
+  <div class="oneShotPolyphonic-hover sound-trigger sound-trigger--type-small-2 list3_hover">
+     <div class="list3_inner"><i class="fa fa-volume-up fa-lg"></i></div>
+  </div>
+  <div class="oneShotPolyphonic-hover sound-trigger sound-trigger--type-small-2 list3_hover">
+     <div class="list3_inner"><i class="fa fa-volume-up fa-lg"></i></div>
+  </div>
+  <div class="oneShotPolyphonic-hover sound-trigger sound-trigger--type-small-2 list3_hover">
+     <div class="list3_inner"><i class="fa fa-volume-up fa-lg"></i></div>
+  </div>
+</div>
+<a href="#">给所有的a标签</a>
+<a href="#">任意标签都可以</a>
+<a href="#">aaa</a>
+<script src="js/jquery-1.12.3.min.js"></script>
+<script src="js/plugins/jquery.easyaudioeffects.1.0.0.min.js"></script>
+<script type="text/javascript">
+   $(function(){
+   		  //第一种
+      $('#trigger-2-hover').easyAudioEffects({
+         mp3 : "js/plugins/audio/numbness.mp3",
+         //ogg : "js/plugins/audio/numbness.ogg",
+         eventType : 'hover',
+         //playType : "loop", //循环
+         //playType : "gate" //会中断
+      });
+
+        //第二种
+      $('.oneShotPolyphonic-hover').easyAudioEffects({
+        mp3 : "js/plugins/audio/chime.mp3",
+        //ogg : "js/plugins/audio/chime.ogg",
+        eventType : "hover",
+        playType : "oneShotPolyphonic"
+     });
+
+        //第三种
+      $('a').easyAudioEffects({
+        mp3 : "js/plugins/audio/pi.mp3",
+        ogg : "js/plugins/audio/pi.ogg",
+        eventType : "hover",
+        playType : "oneShotPolyphonic"
+     });
+
+   });
+</script>
+
+</body>
+</html>

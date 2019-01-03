@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+<title>test-111-css3-text-shadow-文字投影</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+<style>
+hr { margin: 30px 0; }
+.box {
+	width: 450px; height: 150px;
+	margin: 30px auto 0;
+	background-color: #05ccfa;
+	line-height: 150px;
+	text-align: center;
+	font-size: 50px;
+	color: #fff;
+}
+p {
+	margin: 20px 0;
+	text-align: center;
+}
+.shadow_0 {
+	text-shadow: 2px 2px 0px #f00;
+}
+.shadow_1 {
+	text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 40px #ff00de, 0 0 70px #ff00de;
+}
+.shadow_2 {
+	color: #999;
+	text-shadow: -1px -1px 0 #fff,1px 1px 0 #333,1px 1px 0 #444;
+}
+.shadow_3 {
+	color: transparent;
+	text-shadow: 0 0 6px #f96;
+}
+.shadow_4 {
+	text-shadow: 1px 1px 0 #f96;
+}
+.shadow_5 {
+	text-shadow: 1px 1px 0 #f96,-1px -1px 0 #f96;
+}
+.shadow_6 {
+	text-shadow: 1px 1px rgba(197, 223, 248,0.8),2px 2px rgba(197, 223, 248,0.8),3px 3px rgba(197, 223, 248,0.8),4px 4px rgba(197, 223, 248,0.8),5px 5px rgba(197, 223, 248,0.8),6px 6px rgba(197, 223, 248,0.8);
+}/*为负值就改变方向*/
+.shadow_7 {
+	text-shadow: 3px 3px 0 #666, 5px 5px 0 #eee;
+}
+</style>
+</head>
+
+<body>
+<p>text-shadow: x-offset y-offset blur color</p>
+<hr />
+
+<div class="box shadow_0">测试文字</div>
+<hr />
+
+<div class="box shadow_1">辉光效果</div>
+<hr />
+
+<div class="box shadow_2">浮雕效果</div>
+<hr />
+
+<div class="box shadow_3">模糊效果</div>
+<hr />
+
+<div class="box shadow_4">INSET效果</div>
+<hr />
+
+<div class="box shadow_5">描边效果</div>
+<hr />
+
+<div class="box shadow_6">3D效果</div>
+<hr />
+
+<div class="box shadow_7">叠影效果</div>
+<hr />
+<p>http://www.w3cplus.com/blog/52.html</p>
+
+<script src="js/plugins/prefixfree.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>随机抽奖案例</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<style>
+.zhiti {
+	width:900px;
+	height:1000px;
+	margin:auto;
+}
+.start {
+	width:100px;
+	height:30px;
+	border:2px solid blue;
+	text-align:center;
+	line-height:30px;
+	float:left;
+	margin-left:300px;
+	cursor: pointer;
+}
+.stop {
+	width:100px;
+	height:30px;
+	border:2px solid blue;
+	text-align:center;
+	line-height:30px;
+	float:right;
+	margin-right:300px;
+	background:red;
+	cursor: pointer;
+}
+ul li {
+	float: left;
+	list-style:none;
+	height:50px;
+	padding: 0 10px;
+	background:blue;
+	float:left;
+	text-align:center;
+	line-height:50px;
+	margin-top:40px;
+	margin-left:44px;
+	color:#fff;
+}
+.bot {
+	width:300px;
+	height:30px;
+	line-height: 30px;
+	padding: 5px;
+	margin: 50px auto;
+	border:3px solid silver;
+}
+</style>
+</head>
+
+<body>
+<div class="zhiti">
+    <div class="start" id="start">
+        <p>开始</p>
+    </div>
+    <div class="stop" id="stop">
+        <p>停止</p>
+    </div>
+    <div class="clear"></div>
+    <ul class="cf">
+        <li>李娜</li>
+        <li>景松浩</li>
+        <li>张森</li>
+        <li>李森</li>
+        <li>王雪</li>
+        <li>魏鹏</li>
+        <li>李少华</li>
+        <li>张慧杰</li>
+        <li>李天</li>
+        <li>刘天</li>
+        <li>李心</li>
+        <li>王悦</li>
+        <li>程佳硕</li>
+        <li>裴元庆</li>
+        <li>李元霸</li>
+        <li>李世民</li>
+        <li>李亚军</li>
+        <li>李元吉</li>
+        <li>李佳琪</li>
+        <li>李建成</li>
+        <li>兰陌陌</li>
+        <li>李世民1</li>
+        <li>李亚军1</li>
+        <li>李元吉1</li>
+        <li>李佳琪1</li>
+    </ul>
+
+    <div class="bot" id="bot">
+		抽奖结果...
+    </div>
+</div>
+
+
+
+<!--colorBorder-->
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+
+<script>
+var ostart = document.getElementById("start");
+var oStop = document.getElementById("stop");
+var aLis = document.getElementsByTagName("li");
+var oTxt = document.getElementById("bot")
+var timer = null;
+var index = 0;
+ostart.onclick = function() {
+    clearInterval(timer)
+    timer = setInterval(function() {
+        index = Math.floor(Math.random() * aLis.length);
+        for (var i = 0; i < aLis.length; i++) {
+            aLis[i].style.background = "blue";
+        }
+        aLis[index].style.background = "red"
+
+    }, 30)
+};
+oStop.onclick = function() {
+    clearInterval(timer);
+    oTxt.innerHTML = aLis[index].innerHTML + "中奖了";
+}
+
+</script>
+</body>
+</html>

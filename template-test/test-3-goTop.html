@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-3-goTop</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+<style>
+body {
+	height: 2000px;
+}
+
+/*左右侧固定定位*/
+.go {
+	display: none;
+	width: 36px;
+	height: 36px;
+	position: fixed;
+	right: 50%;
+	margin-right: -650px;
+	top: 50%;
+	margin-top: -18px;
+	z-index: 2000;
+
+	background-color: #8e8e8e;
+	transition: background-color 0.2s ease 0s;
+	border-radius: 4px;
+	cursor: pointer;
+
+	line-height: 36px;
+	text-align: center;
+	color: #fff;
+}
+.go:hover {
+	background-color: #26aef3;
+}
+</style>
+</head>
+
+<body>
+<!-- 右侧定位 -->
+<p class="go" id="goTop">↑</p>
+<!-- /右侧定位 -->
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+<script src="js/common-1.js"></script>
+<script>
+ski.cmn.goTop("#goTop");//返回顶部
+</script>
+</body>
+</html>

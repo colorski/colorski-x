@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-200-jquery-each</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+<style>
+div>pre {
+	background-color: #f0f0f0;
+	border-left: 3px solid #ccc;
+	padding-left: 5px;
+	color: #666;
+}
+div>p {
+	font-size: 14px;
+	color: #666;
+}
+</style>
+</head>
+
+<body>
+f12看console
+<div>
+<pre>
+var arr = [ "one", "two", "three", "four"];  
+$.each(arr, function(){  
+ 	console.log(this);  
+});	
+</pre>
+<p>//上面这个each输出的结果分别为：one,two,three,four </p>
+<pre>
+var arr1 = [[1, 4, 3], [4, 6, 6], [7, 20, 9]]
+$.each(arr1, function(i, item){
+    console.log(item[0]); 
+    /*$.each(item, function(n,v){
+    	console.log(item[n]);
+    })*/
+});	
+</pre>
+<p>//其实arr1为一个二维数组，item相当于取每一个一维数组<br />
+//item[0]相对于取每一个一维数组里的第一个值<br />
+//所以上面这个each输出分别为：1 4 7 </p>
+<pre>
+var obj = { one:{o:1}, two:{t:2}, three:{th:3}, four:{f:4}};  
+$.each(obj, function(key, val) {  
+    //console.log(obj[key]);
+    $.each(obj[key], function(i,v){
+    	console.log(obj[key][i]);
+    })
+});
+</pre>
+<p>//这个each就又更厉害了，能循环每一个属性<br />  
+//输出结果为：1 2 3 4 </p>
+</div>
+
+<script src="js/jquery-1.12.3.min.js"></script>
+<script src="js/common-1.js"></script>
+<script>
+var arr = [ "one", "two", "three", "four"];  
+$.each(arr, function(){  
+ 	console.log(this);  
+});
+//上面这个each输出的结果分别为：one,two,three,four  
+   
+var arr1 = [[1, 4, 3], [4, 6, 6], [7, 20, 9]]
+$.each(arr1, function(i, item){
+    console.log(item[0]); 
+    /*$.each(arr1[i], function(n,v){
+    	console.log(arr1[i][n]);
+    })*/
+});
+//其实arr1为一个二维数组，item相当于取每一个一维数组，  
+//item[0]相对于取每一个一维数组里的第一个值  
+//所以上面这个each输出分别为：1 4 7  
+  
+var obj = { one:{o:1}, two:{t:2}, three:{th:3}, four:{f:4}};
+$.each(obj, function(key, val) {  
+    //console.log(obj[key]);
+    $.each(obj[key], function(i,v){
+    	console.log(obj[key][i]);
+    })
+});
+//这个each就又更厉害了，能循环每一个属性  
+//输出结果为：1 2 3 4 
+</script>
+</body>
+</html>

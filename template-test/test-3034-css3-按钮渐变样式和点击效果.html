@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>test-3034-css3-按钮渐变样式和点击效果</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<link rel="stylesheet" href="css/reset.css" />
+<style>
+section {
+  margin: 30px 0;
+}
+.btn {
+  display:block;
+  color:#fff;
+  margin:0 auto;
+  border: none;
+  
+  background: -webkit-linear-gradient(left, #4fd4bc, #299edf);
+  background: -o-linear-gradient(right, #4fd4bc, #299edf);
+  background: -moz-linear-gradient(right, #4fd4bc, #299edf);
+  background: linear-gradient(to right, #4fd4bc, #299edf);
+  width:300px;
+  text-align: center;
+  cursor:pointer;
+  padding: 16px;
+  border-radius: 5px;
+  font-size: 19px;
+  font-weight: 700;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+.btn:hover {
+  box-shadow: 0 0 40px rgba(41, 205, 238, 0.5);
+}
+.btn:active {
+  box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+</style>
+</head>
+
+<body>
+<!--header-->
+<header>
+    <h1><a href="../x.html" class="fl spec-a" title="返回">《</a>按钮样式（背景渐变和hover和active）</h1>
+</header>
+
+<!--colorBorder-->
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+
+<section>
+    <button class="btn">Login</button>
+</section>
+
+<!--colorBorder-->
+<div class="topclor mar-top"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+
+<!--footer-->
+<footer>
+    <a href="www.colorski.com/" class="fr footer-a" title="www.colorski.com/">www.colorski.com/</a>
+</footer>
+
+</body>
+</html>

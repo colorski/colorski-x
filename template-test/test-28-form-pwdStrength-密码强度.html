@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-28-form-pwdStrength-密码强度</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<style>
+.form_box{width:620px;margin:40px auto 0px auto;}
+.form_left{float:left;width:100px;height:38px;line-height:38px;font-size:14px;text-align:right;}
+.pwd_box{float:left;width:226px;}
+.pwd_ipt_box{float:left;width:226px;height:38px;color:#171717;}
+.pwd_line_bg{float:left;background:#d6d3d3;width:62px;height:4px;margin-top:5px;_margin-top:0px;margin-left:5px;_height:2px;font-size:0px;}
+.pwd_line_txt{float:left;width:62px;margin-left:5px;text-align:center;color:#b0adad;font-size:12px;}
+.pwd_ipt{float:left;border:1px solid #ccc;color:#3e3e3e;width:198px;height:34px;line-height:34px;padding-left:12px;_padding-left:20px;}
+.pwd_line_red{float:left;background:#ff3300;width:62px;height:4px;margin-top:5px;margin-left:5px;_margin-top:0px;_height:2px;font-size:0px;}
+.pwd_line_red2{float:left;background: #099;width:62px;height:4px;margin-top:5px;margin-left:5px;_margin-top:0px;_height:2px;font-size:0px;}
+.pwd_line_red3{float:left;background: #060;width:62px;height:4px;margin-top:5px;margin-left:5px;_margin-top:0px;_height:2px;font-size:0px;}
+
+.pwd_tips_txt{float:left;color: #C00;font-size:12px;padding-left:10px;margin-top:10px;_padding-left:0px;}/*后面的文字*/
+.pwd_tips_txt a{ color:#C00;text-decoration:none;}
+.pwd_tips_txt a:hover{ color:#C00;}
+.pwd_tip {color: #898989;}
+.pwd_err {color: #f00;}
+</style>
+</head>
+
+<body>
+
+<form name="form1" method="post" action="" id="form1">
+	<div class="form_box cf">
+		<div class="form_left"> 设置密码：</div>
+		<div class="pwd_box">
+			<div class="pwd_ipt_box"><input name="tbPassword" type="password" id="tbPassword" class="pwd_ipt" /></div>
+			<div class="pwd_line_bg" id='pwdLevel_1'> </div>
+			<div class="pwd_line_bg" id='pwdLevel_2'> </div>
+			<div class="pwd_line_bg" id='pwdLevel_3'> </div>
+			<div class="pwd_line_txt"> 弱</div>
+			<div class="pwd_line_txt"> 中</div>
+			<div class="pwd_line_txt"> 强</div>
+		</div>
+		<div class="pwd_tips_txt">
+			<span class="pwd_tip">6-16位，由字母（区分大小写）、数字、符号组成</span>
+		</div>
+	</div>
+</form>
+
+<script src="js/jquery-1.12.3.min.js"></script>
+<script type="text/javascript">
+	$('#tbPassword').focus(function () {
+		$('#pwdLevel_1').attr('class', 'pwd_line_red');
+		$('#tbPassword').keyup();
+	});
+
+	$('#tbPassword').keyup(function () {
+		var __th = $(this);
+
+		if (!__th.val()) {
+			$('.pwd_tip').addClass('pwd_err');
+			Primary();
+			return;
+		}
+		if (__th.val().length < 6) {
+			$('.pwd_tip').addClass('pwd_err');
+			Weak();
+			return;
+		}
+		var _r = checkPassword(__th);
+		if (_r < 1) {
+			$('.pwd_tip').addClass('pwd_err');
+			Primary();
+			return;
+		}
+
+		if (_r > 0 && _r < 2) {
+			Weak();
+		} else if (_r >= 2 && _r < 4) {
+			Medium();
+		} else if (_r >= 4) {
+			Tough();
+		}
+
+		$('.pwd_tip').hide();
+	});
+
+ 
+
+	function Primary() {
+		$('#pwdLevel_1').attr('class', 'pwd_line_bg');
+		$('#pwdLevel_2').attr('class', 'pwd_line_bg');
+		$('#pwdLevel_3').attr('class', 'pwd_line_bg');
+	}
+
+	function Weak() {
+		$('#pwdLevel_1').attr('class', 'pwd_line_red');
+		$('#pwdLevel_2').attr('class', 'pwd_line_bg');
+		$('#pwdLevel_3').attr('class', 'pwd_line_bg');
+	}
+
+	function Medium() {
+		$('#pwdLevel_1').attr('class', 'pwd_line_red');
+		$('#pwdLevel_2').attr('class', 'pwd_line_red2');
+		$('#pwdLevel_3').attr('class', 'pwd_line_bg');
+	}
+
+	function Tough() {
+		$('#pwdLevel_1').attr('class', 'pwd_line_red');
+		$('#pwdLevel_2').attr('class', 'pwd_line_red2');
+		$('#pwdLevel_3').attr('class', 'pwd_line_red3');
+	}
+
+
+
+
+	function checkPassword(pwdinput) {
+		var maths, smalls, bigs, corps, cat, num;
+		var str = $(pwdinput).val()
+		var len = str.length;
+
+		var cat = /.{16}/g
+		if (len == 0) return 1;
+		if (len > 16) { $(pwdinput).val(str.match(cat)[0]); }
+		cat = /.*[\u4e00-\u9fa5]+.*$/
+		if (cat.test(str)) {
+			return -1;
+		}
+		cat = /\d/;
+		var maths = cat.test(str);
+		cat = /[a-z]/;
+		var smalls = cat.test(str);
+		cat = /[A-Z]/;
+		var bigs = cat.test(str);
+		var corps = corpses(pwdinput);
+		var num = maths + smalls + bigs + corps;
+
+		if (len < 6) { return 1; }
+
+		if (len >= 6 && len <= 8) {
+			if (num == 1) return 1;
+			if (num == 2 || num == 3) return 2;
+			if (num == 4) return 3;
+		}
+
+		if (len > 8 && len <= 11) {
+			if (num == 1) return 2;
+			if (num == 2) return 3;
+			if (num == 3) return 4;
+			if (num == 4) return 5;
+		}
+
+		if (len > 11) {
+			if (num == 1) return 3;
+			if (num == 2) return 4;
+			if (num > 2) return 5;
+		}
+	}
+
+	function corpses(pwdinput) {
+		var cat = /./g
+		var str = $(pwdinput).val();
+		var sz = str.match(cat)
+		for (var i = 0; i < sz.length; i++) {
+			cat = /\d/;
+			maths_01 = cat.test(sz[i]);
+			cat = /[a-z]/;
+			smalls_01 = cat.test(sz[i]);
+			cat = /[A-Z]/;
+			bigs_01 = cat.test(sz[i]);
+			if (!maths_01 && !smalls_01 && !bigs_01) { return true; }
+		}
+		return false;
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>圆形导航动画</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+<style>
+
+/*盒子样式*/
+.selector_box {
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:140px;
+    height:140px;
+    margin-top:-70px;
+    margin-left:-70px;
+}
+/*按钮*/
+    .selector_box,.selector_box p {
+    font-family:'Oswald',sans-serif;
+    font-weight:300;
+}
+.selector_box p {
+    position:relative;
+    width:140px;
+    height:140px;
+    line-height: 140px;
+    background:#428bca;
+    border-radius:50%;
+    border:0;
+    color:white;
+    font-size:20px;
+    text-align: center;
+    cursor:pointer;
+    box-shadow:0 3px 3px rgba(0,0,0,0.1);
+    transition:all .1s;
+}
+.selector_box p:hover {
+    background:#3071a9;
+}
+
+.selector_box ul {
+    position:absolute;
+    list-style:none;
+    padding:0;
+    margin:0;
+    top:-20px;
+    right:-20px;
+    bottom:-20px;
+    left:-20px;
+}
+.selector_box li {
+    position:absolute;
+    width:0;
+    height:100%;
+    margin:0 50%;
+    -webkit-transform:rotate(-360deg);
+    transition:all 0.8s ease-in-out;
+}
+.selector_box li input {
+    display:none;
+}
+.selector_box li input + label {
+    position:absolute;
+    left:50%;
+    bottom:100%;
+    width:0;
+    height:0;
+    line-height:1px;
+    margin-left:0;
+    background:#fff;
+    border-radius:50%;
+    text-align:center;
+    font-size:1px;
+    overflow:hidden;
+    cursor:pointer;
+    box-shadow:none;
+    transition:all 0.8s ease-in-out,color 0.1s,background 0.1s;
+}
+.selector_box li input + label:hover {
+    background:#f0f0f0;
+}
+.selector_box.open li input + label {
+    width:80px;
+    height:80px;
+    line-height:80px;
+    margin-left:-40px;
+    box-shadow:0 3px 3px rgba(0,0,0,0.1);
+    font-size:14px;
+}
+.selector_box.open li input + label a {
+    display: block;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    text-decoration:none;
+    color:#000;
+}
+/*菜单结束*/
+</style>
+</head>
+
+<body>
+<h1>xxx后台系统</h1>
+<div class="selector_box" id="selectorBox">
+    <ul>
+        <li>
+            <input id="c1" type="checkbox">
+            <label for="c1"><a href="###">菜单1</a></label>
+        </li>
+        <li>
+            <input id="c2" type="checkbox">
+            <label for="c2"><a href="###">菜单2</a></label>
+        </li>
+        <li>
+            <input id="c3" type="checkbox">
+            <label for="c3"><a href="###">菜单3</a></label>
+        </li>
+        <li>
+            <input id="c4" type="checkbox">
+            <label for="c4"><a href="###">菜单4</a></label>
+        </li>
+        <li>
+            <input id="c5" type="checkbox">
+            <label for="c5"><a href="###">菜单5</a></label>
+        </li>
+        <li>
+            <input id="c6" type="checkbox">
+            <label for="c6"><a href="###">菜单6</a></label>
+        </li>
+        <li>
+            <input id="c7" type="checkbox">
+            <label for="c7"><a href="###">菜单7</a></label>
+        </li>
+        <li>
+            <input id="c8" type="checkbox">
+            <label for="c8"><a href="###">菜单8</a></label>
+        </li>
+    </ul>
+    <p>请选择</p>
+</div>
+
+<script src="../js/jquery.min.js"></script>
+<script>
+var nbOptions = 8;
+var angleStart = -360;
+
+function rotate(li, d) {
+    $({
+        d: angleStart
+    }).animate({
+        d: d
+    }, {
+        step: function(now) {
+            $(li)
+                .css({
+                    transform: 'rotate(' + now + 'deg)'
+                })
+                .find('label')
+                .css({
+                    transform: 'rotate(' + (-now) + 'deg)'
+                });
+        },
+        duration: 0
+    });
+}
+
+function toggleOptions(s) {
+    $(s).toggleClass('open');
+    var li = $(s).find('li');
+    var deg = $(s).hasClass('half') ? 180 / (li.length - 1) : 360 / li.length;
+    for (var i = 0; i < li.length; i++) {
+        var d = $(s).hasClass('half') ? (i * deg) - 90 : i * deg;
+        $(s).hasClass('open') ? rotate(li[i], d) : rotate(li[i], angleStart);
+    }
+}
+
+$('#selectorBox p').click(function(e) {
+    toggleOptions($(this).parent());
+});
+
+//页面加载后延迟300ms执行此动画，默认可以是不显示列表的
+setTimeout(function() {
+    toggleOptions('#selectorBox');
+}, 300);
+
+</script>
+</body>
+</html>

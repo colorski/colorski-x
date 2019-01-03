@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>jquery-检测图片未加载成功用默认图片代替</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<link type="text/css" rel="stylesheet" href="http://www.colorski.com/plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushJScript.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushCss.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushXml.js"></script>
+
+<style>
+.tips { padding: 10px 20px; }
+.listbox {
+	padding: 20px;
+}
+.listbox li {
+	float: left;
+	margin-right:20px;
+}
+</style>
+</head>
+
+<body>
+<h1>检测图片未加载成功用默认图片代替</h1>
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p></div>
+
+<p class="tips">针对范围内的每一个图片，.load()是加载成功，.error()是加载失败。</p>
+<p class="tips">如下实例：后两个是找不到图片的，最终被替换成了默认头像；（注意f12还是会报错！）</p>
+
+<ul class="listbox cf" id="listbox">
+	<li><img src="images/img01.jpg" alt="" /></li>
+	<li><img src="images/img02.jpg" alt="" /></li>
+	<li><img src="images/img07.jpg" alt="" /></li>
+	<li><img src="images/img07.jpg" alt="" /></li>
+</ul>
+
+<pre  class="brush:javascript;">
+	$(function(){
+		$("#listbox img").each(function(){
+			var img = $(this);
+			img.load(function () {  
+	            img.attr("isLoad", "true");
+	        });
+		    img.error(function() {
+		        img.attr("src","../images/share_core_square.jpg");  
+		    });
+		});
+	});
+</pre>
+
+<div class="tips">javascript：</div>
+<pre  class="brush: html;">
+	<img src="images/showImg.jpg" onerror="this.onerror=null; this.src='images/default.jpg'" />
+	//onerror=null的作用是控制页面闪动
+</pre>
+
+<div class="tips">jQuery：</div>
+<pre  class="brush: javascript;">
+	$('img').error(function(){
+	    $(this).attr('src',"default.jpg");
+	})
+</pre>
+<p class="tips">扩展：<a href="https://segmentfault.com/q/1010000007489446?_ea=1391137" target="_blank">使用Img标签的时候，src图片地址不存在时，使用onerror替换为一张默认图片，但控制台会打印原来的图片地址找不到的错误。</a></p>
+<p class="tips">扩展：<a href="http://www.daqianduan.com/6419.html/comment-page-1#comment-93380" target="_blank">判断单、多张图片加载完成！！！！！</a></p>
+
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+<script>
+$(function(){
+	$("#listbox img").each(function(){
+		var img = $(this);
+		img.load(function () {
+            img.attr("isLoad", "true");
+        });
+	    img.error(function() {
+	        img.attr("src","../images/share_core_square.jpg");
+	    });
+	});
+});
+</script>
+</body>
+</html>

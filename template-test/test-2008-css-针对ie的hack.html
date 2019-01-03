@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-2008-css-针对ie的hack</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<link type="text/css" rel="stylesheet" href="http://www.colorski.com/plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushJScript.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushCss.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushXml.js"></script>
+
+<style>
+
+</style>
+</head>
+
+<body>
+<h1>针对ie的hack</h1>
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p></div>
+
+<section class="code">
+    <pre  class="brush:css;">
+    	.all IE{property:value\9;}
+        .gte IE 8{property:value\0;}
+        .lte IE 7{*property:value;}
+        .IE 8/9{property:value\0;}
+        .IE 9{property:value\9\0;}
+        .IE 7{+property:value;}
+        .IE 6{_property:value;}
+        .not IE{property//:value;}
+
+        //说明
+        
+        lte：就是Less than or equal to的简写，也就是小于或等于的意思。
+
+        lt ：就是Less than的简写，也就是小于的意思。
+
+        gte：就是Greater than or equal to的简写，也就是大于或等于的意思。
+
+        gt ：就是Greater than的简写，也就是大于的意思。
+
+        !  ：就是不等于的意思，跟javascript里的不等于判断符相同
+    </pre>
+
+<hr />
+
+</section>
+
+<!--colorBorder-->
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+</body>
+</html>

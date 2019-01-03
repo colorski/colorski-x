@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+<title>test-16-垂直居中</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+<style>
+.hd {
+	width: 100%;
+	height: 100px;
+	line-height: 100px;
+	background-color: #808099;
+	text-align: center;
+}
+.wrap {
+	max-width:1200px;
+	margin: 0 auto;
+}
+.leftBar {
+	float: left;
+	width: 120px;
+	background-color: #f00;
+	position: relative;
+	z-index: 2;
+}
+.main {
+	float: left;
+	width: 100%;
+	margin-left: -120px;
+	position: relative;
+	z-index: 1;
+}
+.mainWrap {
+	padding-left: 120px;
+}
+.mainCon {
+	width: 100%;
+	background-color: #f0f0f0;
+
+	height: 2000px;
+}
+
+/*重点在这里*/
+.alert_bg {
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.4);
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 5000;
+
+	display: flex;
+	min-height: 100vh;
+}
+.alert_box {
+	width: 20em;
+	height: 10em;
+	padding: 2em;
+	background-color: #fff;
+	
+	display: flex;
+	margin: auto;
+	align-items: center;
+	justify-content: center;
+}
+</style>
+</head>
+
+<body>
+<div class="hd">顶部内容。这是陪衬，重点在弹出框的居中啦。</div>
+<div class="wrap cf">
+	<div class="leftBar">
+		<a href="#">左导航。</a>
+	</div>
+	<div class="main">
+		<div class="mainWrap">
+			<div class="mainCon cf">
+				<div class="fl">里面再左浮动。这个结构还是很健壮的，右侧内容可以自适应。</div>
+				<div class="fr">里面再右浮动。</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--这是背景和要垂直居中的块-->
+<div class="alert_bg">
+	<div class="alert_box">
+		弹出框内容。<br />这是一块垂直居中的内容。
+	</div>
+</div>
+
+<script src="js/jquery-1.12.3.min.js"></script>
+<script src="js/common-1.js"></script>
+<script>
+	ski.cmn.testLeftBar(100);//检测竖导航高度，为了背景铺满屏幕
+</script>
+</body>
+</html>

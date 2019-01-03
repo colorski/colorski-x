@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-1000-js-reg-常用正则验证</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<link type="text/css" rel="stylesheet" href="http://www.colorski.com/plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushJScript.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushCss.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushXml.js"></script>
+</head>
+
+<body>
+<!--header-->
+<header>
+    <h1><a href="../index.html" class="fl spec-a" title="返回">《</a>js判断是否为移动设备访问并跳转到移动页面</h1>
+</header>
+
+<!--colorBorder-->
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+
+<section>
+    <p>可能会有这样一种需求，判断来访者是否为移动设备访问，包括手机、平板或其它移动设备。如果是移动设备访问，就跳转到专门做的移动页面。注意，项目中发现只适用手机，不适用pad。</p>
+    <h5>1.下面是百度site APP的判断方法：</h5>
+    <p>可以直接引用过来： <i class="colorred">http://siteapp.baidu.com/static/webappservice/uaredirect.js</i></p>
+    <p>调用方法：</p>
+    <pre  class="brush:javascript;">
+<script type="text/javascript">
+	uaredirect("http://mobile.colorski.com");
+</script>
+	</pre>
+    <p>引用别人的不放心？那就拿过来自己用。uaredirect.js的完整代码为：</p>
+    <pre  class="brush:javascript;">
+function uaredirect(f){try{if(document.getElementById("bdmark")!=null){return}var b=false;if(arguments[1]){var e=window.location.host;var a=window.location.href;if(isSubdomain(arguments[1],e)==1){f=f+"/#m/"+a;b=true}else{if(isSubdomain(arguments[1],e)==2){f=f+"/#m/"+a;b=true}else{f=a;b=false}}}else{b=true}if(b){var c=window.location.hash;if(!c.match("fromapp")){if((navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i))){location.replace(f)}}}}catch(d){}}function isSubdomain(c,d){this.getdomain=function(f){var e=f.indexOf("://");if(e>0){var h=f.substr(e+3)}else{var h=f}var g=/^www\./;if(g.test(h)){h=h.substr(4)}return h};if(c==d){return 1}else{var c=this.getdomain(c);var b=this.getdomain(d);if(c==b){return 1}else{c=c.replace(".","\\.");var a=new RegExp("\\."+c+"$");if(b.match(a)){return 2}else{return 0}}}};
+
+    </pre>
+    <p>更多方法来自百度：http://jingyan.baidu.com/article/cdddd41c61823e53cb00e198.html</p>
+    
+    <h5>2.判断是否移动设备转到移动页面：</h5>
+	<pre  class="brush:javascript;">
+    	<script type="text/javascript">
+			var mobileUrl = "/mobile/index";
+			if(/iphone|nokia|sony|ericsson|mot|samsung|sgh|lg|philips|panasonic|alcatel|lenovo|cldc|midp|wap|android|iPod|iPad|iPad mini/i.test(navigator.userAgent.toLowerCase())){ 
+			  if(mobileUrl){
+				document.location.href = mobileUrl;
+			  }
+			 }
+		</script>
+    </pre>
+    <h5>3.判断移动或PC使用不同的js：</h5>
+    <pre  class="brush:javascript;">
+    	<script>
+			var src,scriptElement,video,source;
+			var time = new Date().getTime();
+			function testIfMobile(){
+				var isMobile = {  
+					Android: function() {  
+						return navigator.userAgent.match(/Android/i) ? true : false;  
+					},  
+					BlackBerry: function() {  
+						return navigator.userAgent.match(/BlackBerry/i) ? true : false;  
+					},  
+					iOS: function() {  
+						return navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;  
+					},  
+					Windows: function() {  
+						return navigator.userAgent.match(/IEMobile/i) ? true : false;  
+					},  
+					any: function() {  
+						return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Windows());  
+					}
+				};
+				return isMobile.any();
+			}
+			if(testIfMobile()){
+				src = "mobile";
+			}else{
+				src = "pc";
+			}
+			scriptElement = document.createElement("script");
+			scriptElement.src = "script/new/" + src + ".js";
+			document.body.appendChild(scriptElement);
+		</script>
+    </pre>
+    <p>案例地址：http://we.tencent.com/index-eg.html</p>
+    <h5>4.手机平板等移动端适配跳转URL的javascript</h5>
+    <pre  class="brush:javascript;">
+<script type="text/javascript">
+	if(/AppleWebKit.*mobile/i.test(navigator.userAgent) || (/MIDP|SymbianOS|NOKIA|SAMSUNG|LG|NEC|TCL|Alcatel|BIRD|DBTEL|Dopod|PHILIPS|HAIER|LENOVO|MOT-|Nokia|SonyEricsson|SIE-|Amoi|ZTE/.test(navigator.userAgent))){
+		if(window.location.href.indexOf("?mobile")<0){
+			try{
+				if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)){
+					window.location.href="手机页面";
+				}else if(/iPad/i.test(navigator.userAgent)){
+					window.location.href="平板页面";
+				}else{
+					window.location.href="其他移动端页面"
+				}
+			}catch(e){}
+		}
+	}
+</script>
+    </pre>
+    <p>原文地址：http://www.css119.com/archives/1283</p>
+</section>
+
+<!--colorBorder-->
+<div class="topclor mar-top"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+
+<!--footer-->
+<footer>
+    <a href="../../index.html" class="fr footer-a" title="www.colorski.com/">www.colorski.com/</a>
+</footer>
+</body>
+</html>

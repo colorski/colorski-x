@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-47-jquery-批量删除和单个删除</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+<style>
+.user_con {
+	padding: 20px;
+}
+.user_con p.tips {
+	padding-left: 20px;
+	color: #999;
+}
+.user_con .tit {
+	height: 32px;
+	line-height: 32px;
+	padding-top: 10px;
+	padding-left: 20px;
+	border-bottom: 1px solid #d7d7d7;
+}
+.user_con .tit p {
+	float: left;
+	font-weight: bold;
+	text-align: center;
+}
+.user_con .tit p.p0 {
+	width: 430px;
+	text-align: left;
+}
+.user_con .tit p.p1 {
+	width: 100px;
+}
+.user_con .tit p.p2 {
+	width: 120px;
+	margin-right: 20px;
+}
+.user_con .tit p.p3 {
+	width: 90px;
+	margin-right: 32px;
+}
+.user_con .tit p.p4 {
+	width: 90px;
+}
+.user_con .tit p.p5 {
+	float: right;
+	width: 150px;
+}
+.user_con .tit p.p6 {
+	float: right;
+	width: 160px;
+}
+
+.watch_listem {
+	margin-top: 15px;
+	border: 1px solid #ebebeb;
+}
+.watch_listem li {
+	height: 50px;
+	line-height: 50px;
+	padding-left: 20px;
+	border-bottom: 1px solid #ebebeb;
+	vertical-align: bottom;
+}
+.watch_listem li:last-child {
+	border-bottom: none;
+}
+.watch_listem li:hover {
+	background-color: #e9e9e9;
+}
+.watch_listem li a.a_l {
+	float: left;
+	width: 390px;
+	margin-right: 46px;
+	color: #333;
+}
+.watch_listem li a.a_l:hover {
+	color: #188eee;
+}
+.watch_listem li span {
+	float: left;
+	width: 80px;
+	margin-right: 20px;
+	text-align: center;
+}
+.watch_listem li em {
+	float: left;
+	width: 120px;
+	margin-right: 20px;
+	text-align: center;
+	font-style: normal;
+}
+.watch_listem li i {
+	float: left;
+	width: 80px;
+	margin-right: 30px;
+	font-style: normal;
+	color: #999;
+}
+.watch_listem li a.a_r {
+	float: left;
+	width: 96px;
+	height: 34px;
+	line-height: 34px;
+	margin-top: 8px;
+	border-radius: 3px;
+	background-color: #ff9c28;
+	color: #fff;
+	text-align: center;
+}
+.watch_listem li a.a_r:hover {
+	background-color: #e98b1c;
+}
+.watch_listem li p.del {
+	float: left;
+	cursor: pointer;
+}
+
+.btn_collect {
+	border: none;
+	width: 100px;
+	height: 36px;
+	line-height: 36px;
+	border-radius: 3px;
+	background-color: #ff9d28;
+	color: #fff;
+	text-align: center;
+}
+.user_con .tit .ipt_all,
+.user_collection .watch_listem li input {
+	float: left;
+	width: 15px;
+	height: 15px;
+	margin: 9px 6px 0 0;
+}
+.user_collection .watch_listem li input {
+	margin-top: 18px;
+}
+.user_collection .watch_listem li a.a_l {
+	width: 360px;
+}
+.user_collection .tit p.p0 {
+	width: 400px;
+}
+
+/*弹出提示框s秒*/
+.alerts {
+    display: none;
+    max-width: 200px;
+    padding: 12px 40px;
+    line-height: 24px;
+    background-color: #058e05;
+    border-radius: 5px;
+    font-family: "SimSun";
+    font-size: 1.15rem;
+    color: #fff;
+
+    position: fixed;
+    top: 50%;
+    margin-top: -100px;
+    left: 50%;
+    margin-left: -100px;
+    z-index: 8000;
+}
+.warning {
+    background-color: #f7ba2a;
+}
+.danger {
+    background-color: #ff4949;
+}
+.info {
+    background-color: #50bfff;
+}
+
+/*确定提示框*/
+.alertTip_bg,
+.alertLoading_bg {
+    width: 100%;
+    height: 100%;
+    background: url(../images/bg_alpha.png) left center repeat;
+    background: rgba(0,0,0,.5);
+    position: fixed;
+    top: 0;
+    left:0;
+    z-index: 5100;
+}
+.alertLoading_bg {
+	text-align:center;
+}
+.alertLoading_bg img {
+	padding-top:20%;
+}
+.alertTip {
+    width: 300px;
+    background-color: #fff;
+    border: 1px solid #188eee;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-left: -150px;
+    margin-top: -150px;
+    z-index: 5101;
+}
+.alertTipBig {
+	width: 600px;
+	height: 400px;
+	margin-top: -200px;
+	margin-left: -300px;
+}
+.alertTip h6 {
+    height: 40px;
+    line-height: 40px;
+    padding-left: 10px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    background-color: #188eee;
+    color: #fff;
+}
+.alertTip h6:hover {
+    cursor: move;
+}
+.alertTip p {
+    padding: 0 10px;
+    line-height: 24px;
+    font-size: 14px;
+    text-indent: 2em;
+}
+.alertTip > button {
+    display: block;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    margin-top: 20px;
+    border: none;
+    background-color: #fff;
+    border-top: 1px solid #eee;
+    cursor: pointer;
+    transition: .3s background-color;
+}
+.alertTip > button:hover {
+    background-color: #f8f8f8;
+}
+
+.alertTip > .cancle {
+    float:left;
+    width: 150px;
+}
+.alertTip > .sure {
+    float: right;
+    width: 150px;
+    border-left: 1px solid #eee;
+}
+.alertTip i {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	z-index: 5102;
+	color: #fff;
+	cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+<h1>批量删除和单个删除</h1>
+<p style="padding-bottom: 10px;">把要删除的id拼成字符串，传给后台。类似：125,129</p>
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p></div>
+
+
+
+<div class="user_con user_collection">
+	<input type="button" class="btn_collect" id="btn_del_all" value="批量删除" />
+	<div class="tit">
+		<input type="checkbox" class="ipt_all" id="btn_ipt_all" />
+		<p class="p0">资源名称</p>
+		<p class="p1">上传人</p>
+		<p class="p2">学校</p>
+		<p class="p3">收藏时间</p>
+		<p class="p4">操作</p>
+	</div>
+	<ul class="watch_listem" id="user_collection_listem">
+		<li>
+			<input type="checkbox" value="123" />
+			<a class="a_l eps" href="#">2016-2017学年高一数学人教A版必修4预习导航：3.2简单简单简单简单简单</a>
+			<span class="eps">向日葵向日葵向日葵</span>
+			<em class="eps">南昌五中南昌五中南昌五中</em>
+			<i>2017-04-23</i>
+			<p class="del"></q>删除</p>
+		</li>
+		<li>
+			<input type="checkbox" value="124" />
+			<a class="a_l eps" href="#">2016-2017学年高一数学人教A版必修4预习导航：3.2简单简单简单简单简单</a>
+			<span class="eps">向日葵向日葵向日葵</span>
+			<em class="eps">南昌五中南昌五中南昌五中</em>
+			<i>2017-04-23</i>
+			<p class="del"></q>删除</p>
+		</li>
+		<li>
+			<input type="checkbox" value="125" />
+			<a class="a_l eps" href="#">2016-2017学年高一数学人教A版必修4预习导航：3.2简单简单简单简单简单</a>
+			<span class="eps">向日葵向日葵向日葵</span>
+			<em class="eps">南昌五中南昌五中南昌五中</em>
+			<i>2017-04-23</i>
+			<p class="del">删除</p>
+		</li>
+		<li>
+			<input type="checkbox" value="126" />
+			<a class="a_l eps" href="#">2016-2017学年高一数学人教A版必修4预习导航：3.2简单简单简单简单简单</a>
+			<span class="eps">向日葵向日葵向日葵</span>
+			<em class="eps">南昌五中南昌五中南昌五中</em>
+			<i>2017-04-23</i>
+			<p class="del"></q>删除</p>
+		</li>
+		<li>
+			<input type="checkbox" value="127" />
+			<a class="a_l eps" href="#">2016-2017学年高一数学人教A版必修4预习导航：3.2简单简单简单简单简单</a>
+			<span class="eps">向日葵向日葵向日葵</span>
+			<em class="eps">南昌五中南昌五中南昌五中</em>
+			<i>2017-04-23</i>
+			<p class="del">删除</p>
+		</li>
+		<li>
+			<input type="checkbox" value="128" />
+			<a class="a_l eps" href="#">2016-2017学年高一数学人教A版必修4预习导航：3.2简单简单简单简单简单</a>
+			<span class="eps">向日葵向日葵向日葵</span>
+			<em class="eps">南昌五中南昌五中南昌五中</em>
+			<i>2017-04-23</i>
+			<p class="del">删除</p>
+		</li>
+		<li>
+			<input type="checkbox" value="129" />
+			<a class="a_l eps" href="#">2016-2017学年高一数学人教A版必修4预习导航：3.2简单简单简单简单简单</a>
+			<span class="eps">向日葵向日葵向日葵</span>
+			<em class="eps">南昌五中南昌五中南昌五中</em>
+			<i>2017-04-23</i>
+			<p class="del">删除</p>
+		</li>
+		<li>
+			<input type="checkbox" value="130" />
+			<a class="a_l eps" href="#">2016-2017学年高一数学人教A版必修4预习导航：3.2简单简单简单简单简单</a>
+			<span class="eps">向日葵向日葵向日葵</span>
+			<em class="eps">南昌五中南昌五中南昌五中</em>
+			<i>2017-04-23</i>
+			<p class="del">删除</p>
+		</li>
+	</ul>
+</div>
+
+<script src="js/jquery-1.12.3.min.js"></script>
+<script src="js/common-1.js"></script>
+<script>
+$(function(){
+	var aimThis,ids;
+	var $body = $("body");
+	
+	var _iptAll = $('#btn_ipt_all');
+	var _iptCheck = $('#user_collection_listem').find("input");
+	//全选
+	_iptAll.change(function() {
+		ids="";
+	    if($(this).prop('checked') == true){
+	        _iptCheck.prop('checked',true);
+	    }else{
+	        _iptCheck.prop('checked',false);
+	    }
+	    $('#user_collection_listem').find("input:checked").each(function(){
+	    	ids = ids + $(this).val() + ',';
+	    });
+	    
+	    ids = ids.slice(0,ids.length-1);
+	});
+
+	_iptCheck.change(function(){
+	    var numAll = _iptCheck.size();
+	    var num = 0;
+	    ids="";
+	    
+	    _iptCheck.each(function(){
+	       if($(this).prop('checked') == true){
+	            num++;
+	            ids = ids + $(this).val() + ',';
+	        }
+	    });
+	    if(num == numAll){_iptAll.prop('checked',true);}else{_iptAll.prop('checked',false);}
+	    
+	    ids = ids.slice(0,ids.length-1);
+	});
+	
+	//单个删除
+	$("#user_collection_listem .del").on("click",function(){
+		var _this = $(this);
+
+	    var aimIpt = _this.siblings('input');
+	    
+	   	if(aimIpt.prop('checked') == true){
+	   		ids = aimIpt.val();
+	   		$.confirm("确定要删除当前收藏内容吗？");
+	   	}else{
+	   		$.alerts("未选择！","warning");
+	   		return false;
+	   	}
+	});
+	//批量删除
+	$("#btn_del_all").on("click",function(){
+		if(ids.length > 0){
+			$.confirm("确定要删除当前收藏内容吗？");
+		}else{
+			$.alerts("未选择！","warning");
+		}
+	});
+	
+	$body.delegate("#alertTip .sure","click",function(){
+		
+		$(this).parents("#alertTip_bg").remove();
+
+		deleteByCollectId(ids);
+	});
+});
+
+// 删除我的收藏函数 -- 注意传入里面的参数是拼接成的字符串形式。类似："256,257,258,289"
+function deleteByCollectId(collectIds){
+	$.alert("删除项的id为：" + collectIds);
+
+
+	//以下注释掉的为实际项目中的实例
+	/*var data = {
+        "collectIds":collectIds
+    };
+    $.ajax({
+        type : "post",
+        async : true,
+        data:data,
+        url : "/user/deleteByCollectIds",
+        dataType : "jsonp",
+        jsonp : "callback", 
+        success : function(json) {
+        	if(json > 0){
+            	$.alerts('删除成功！');
+            	setTimeout(function(){
+            		window.location.reload();
+            	},1000);
+        	}
+        },
+        error : function() {
+			$.alerts('删除失败！');
+        }
+    });*/
+}
+</script>
+</body>
+</html>

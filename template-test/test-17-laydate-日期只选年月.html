@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>laydate-日期只选年月</title>
+<meta name="keywords" content="" />
+<meta name="description" content="版本：1.1 官网：http://laydate.layui.com/" />
+
+<link rel="stylesheet" href="css/reset.css" />
+<style>
+.laydate-icon {
+	cursor: pointer;
+}
+
+#laydate_table,#laydate_today { display:none;}
+
+hr { margin: 30px 0; }
+p { margin: 15px 0; }
+pre { border-left: 3px solid #ccc; background-color: #f0f0f0; margin-left: 10px; padding: 10px; }
+
+</style>
+</head>
+
+<body>
+
+<input type="text" id="test1" class="laydate-icon" name="time1" readonly />
+<p>如下：如果只选择月份（format:'YYYY-MM'），在第二次选择的时候会报错：
+<pre>format:'YYYY-MM'</pre>
+<pre>Uncaught TypeError: Cannot read property 'length' of undefined</pre>
+</p>
+<p><pre>laydate.now();是显示今天</pre></p>
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+<script src="js/plugins/laydate/laydate.js"></script>
+<script>
+/**************************************第二种***************************************/
+laydate({
+	elem:'#test1',
+	format:'YYYY-MM-dd',
+	istoday:false,
+	isclear:false,
+	choose:function(dates){
+		dates = ''+dates;
+		var strM = dates.substring(0,7);
+		$("#test1").val(strM);
+	}
+});
+var tim=laydate.now().substring(0,7);
+$("#test1").val(tim);
+
+</script>
+</body>
+</html>

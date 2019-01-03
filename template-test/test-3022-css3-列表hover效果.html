@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-3022-css3-列表hover效果</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<link type="text/css" rel="stylesheet" href="http://www.colorski.com/plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushJScript.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushCss.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushXml.js"></script>
+
+<style>
+.live {
+  overflow: hidden;
+  padding:10px 0;
+}
+.live > li {
+  list-style: none;
+  position: relative;
+  padding: 0 0 0 1.2em;
+  margin: 0 0 .5em 10px;
+  -webkit-transition: .12s;
+          transition: .12s;
+}
+.live > li::before {
+  position: absolute;
+  content: '\2022';
+  font-family: Arial;
+  color: #333;
+  top: 0;
+  left: 0;
+  text-align: center;
+  font-size: 2em;
+  opacity: .5;
+  line-height: 1;
+  -webkit-transition: .5s;
+          transition: .5s;
+}
+.live > li:hover {
+  color: #f00;
+}
+.live > li:hover::before {
+  -webkit-transform: scale(2);
+      -ms-transform: scale(2);
+          transform: scale(2);
+  opacity: 1;
+  text-shadow: 0 0 4px;
+  -webkit-transition: .1s;
+          transition: .1s;
+}
+.live.type2 > li::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  background: #333;
+  border-radius: 3px;
+  line-height: 0;
+  top: .22em;
+  left: 5px;
+}
+.live.type2 > li:hover::before {
+  -webkit-transform: none;
+      -ms-transform: none;
+          transform: none;
+  border-radius: 5px;
+  width: 25px;
+  left: -10px;
+  background: #BA5353;
+}
+
+.live.numbers {
+  counter-reset: xxx 0;
+}
+.live.numbers > li::before {
+  content: counter(xxx,decimal) ".";
+  counter-increment: xxx 1;
+  font-family: 'Roboto Condensed';
+  font-size: 1em;
+  opacity: .5;
+  line-height: 1.8;
+  -webkit-transition: .5s;
+          transition: .5s;
+}
+.live.numbers > li:hover:before {
+  opacity: 1;
+  left: -10px;
+  -webkit-transform: none;
+      -ms-transform: none;
+          transform: none;
+  text-shadow: none;
+  -webkit-transition: .12s;
+          transition: .12s;
+}
+	
+</style>
+</head>
+
+<body>
+<h1>创意列表hover效果</h1>
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p></div>
+
+<h5>number</h5>
+<section>
+<ol class="live numbers">
+  <li>美金融大鳄索罗斯几乎抛光阿里股票 转投时代华纳和脸谱</li>
+  <li><a href="##">美欧调查电信贿赂案 乌兹别克斯坦总统大女儿涉案</a></li>
+  <li>三分之一美国人计划移民 寻求低税率与更好教育</li>
+  <li>苹果被曝研发无人驾驶汽车 或将进入测试阶段</li>
+  <li>莎拉波娃问鼎2015年全球收入最高女运动员排行榜</li>
+</ol>
+</section>
+<h5>disc</h5>
+<section>
+<ul class="live">
+  <li>美金融大鳄索罗斯几乎抛光阿里股票 转投时代华纳和脸谱</li>
+  <li>美欧调查电信贿赂案 乌兹别克斯坦总统大女儿涉案</li>
+  <li>三分之一美国人计划移民 寻求低税率与更好教育</li>
+  <li>苹果被曝研发无人驾驶汽车 或将进入测试阶段</li>
+  <li>莎拉波娃问鼎2015年全球收入最高女运动员排行榜</li>
+</ul>
+</section>
+
+<h5>square</h5>
+<section>
+<ul class="live type2">
+  <li>美金融大鳄索罗斯几乎抛光阿里股票 转投时代华纳和脸谱</li>
+  <li>美欧调查电信贿赂案 乌兹别克斯坦总统大女儿涉案</li>
+  <li>三分之一美国人计划移民 寻求低税率与更好教育</li>
+  <li>苹果被曝研发无人驾驶汽车 或将进入测试阶段</li>
+  <li>莎拉波娃问鼎2015年全球收入最高女运动员排行榜</li>
+</ul>
+</section>
+
+
+<!--colorBorder-->
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+
+<script>
+
+</script>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-3024-css3-自定义复选框单选框</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<link type="text/css" rel="stylesheet" href="http://www.colorski.com/plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushJScript.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushCss.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushXml.js"></script>
+
+<style>
+a { margin-right: 20px; }
+input[type="checkbox"] + label,
+input[type="radio"] +label {
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+/*复选框-用的字符形式的，也可用图片形式的，如单选框*/
+.test1 input[type="checkbox"] {
+    position: absolute;
+    clip:rect(0,0,0,0);
+}
+.test1 input[type="checkbox"] + label::before {
+    content: '\a0'; /*不换行空格*/
+    display: inline-block;
+    vertical-align:0;
+    width: 14px;
+    height: 14px;
+    margin-right: 6px;
+    border-radius: 2px;
+    background: silver;
+    text-align: center;
+    line-height: 14px;
+}
+.test1 input[type="checkbox"]:checked + label::before {
+    content: '\2714';
+    background: green;
+    color: #fff;
+}
+.test1 input[type="checkbox"]:focus + label::before {
+    box-shadow: 0 0 .1em .1em #58a;
+}
+.test1 input[type="checkbox"]:disabled + label::before {
+    background: #f2f2f2;
+    box-shadow: none;
+    color: #555;
+}
+
+
+/*单选框*/
+.test2 input[type="radio"] {
+    position: absolute;
+    clip:rect(0,0,0,0);
+}
+.test2 input[type="radio"] + label::before {
+    content: '\a0'; /*不换行空格*/
+    display: inline-block;
+    vertical-align:0;
+    width: 20px;
+    height: 20px;
+    margin-right: 6px;
+    background: url(css/plugins/iCheck/red.png) -88px 0px no-repeat;
+}
+.test2 input[type="radio"]:checked + label::before {
+    background-position:-110px 0px;
+}
+.test2 input[type="radio"]:disabled + label::before {
+    background-position:-132px 0px;
+}
+.test2 input[type="radio"]:checked:disabled + label::before {
+    background-position:-154px 0px;
+}
+
+</style>
+</head>
+
+<body>
+<h1>自定义复选框单选框</h1>
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p></div>
+
+<section class="code">
+
+    <h5>自定义的复选框-用的特殊字符形式的，也可用图片形式的，如单选框。</h5>
+    <p>扩展：
+        <a href="https://segmentfault.com/a/1190000002750033">CSS3的content属性详解</a>
+        <a href="http://www.w3cplus.com/solution/css3content/css3content.html">css3 content 生成内容</a>
+        <a href="http://www.w3cplus.com/solution/css3content/images/html.png">特殊字符</a>
+    </p>
+
+    <hr>
+
+    <div class="test1">
+        <input type="checkbox" id="apple" name="fruit" checked="true" /><label for="apple">苹果</label>
+        <input type="checkbox" id="tomato" name="fruit" /><label for="tomato">西红柿</label>
+        <input type="checkbox" id="peach" name="fruit" /><label for="peach">桃子</label>
+        <input type="checkbox" id="banana" name="fruit" disabled="true" /><label for="banana">被禁的香蕉</label>
+    </div>
+    
+    <hr>
+
+    <pre  class="brush:css;">
+    input[type="checkbox"] + label {
+        cursor: pointer;
+    }
+    .test1 input[type="checkbox"] {
+        position: absolute;
+        clip:rect(0,0,0,0);
+    }
+    .test1 input[type="checkbox"] + label::before {
+        content: '\a0'; /*不换行空格*/
+        display: inline-block;
+        vertical-align:0;
+        width: 14px;
+        height: 14px;
+        margin-right: 6px;
+        border-radius: 2px;
+        background: silver;
+        text-align: center;
+        line-height: 14px;
+    }
+    .test1 input[type="checkbox"]:checked + label::before {
+        content: '\2714';
+        background: green;
+        color: #fff;
+    }
+    .test1 input[type="checkbox"]:focus + label::before {
+        box-shadow: 0 0 .1em .1em #58a;
+    }
+    .test1 input[type="checkbox"]:disabled + label::before {
+        background: #f2f2f2;
+        box-shadow: none;
+        color: #555;
+    }
+    </pre>
+
+<hr />
+
+    <h5>自定义的单选框-用图片做背景的形式</h5>
+
+    <hr>
+
+    <div class="test2">
+        <input type="radio" id="apple2" name="fruit" checked="true" /><label for="apple2">苹果</label>
+        <input type="radio" id="tomato2" name="fruit" /><label for="tomato2">西红柿</label>
+        <input type="radio" id="peach2" name="fruit" /><label for="peach2">桃子</label>
+        <input type="radio" id="banana2" name="fruit" disabled="true" /><label for="banana2">被禁的香蕉</label>
+        <input type="radio" id="banana2" name="fruit" checked="true" disabled="true" /><label for="banana2">选中了被禁的香蕉-选择了其它的这个就不被选中并且不能选中了</label>
+    </div>
+    
+    <hr>
+
+    <pre  class="brush:css;">
+    /*单选框*/
+    .test2 input[type="radio"] {
+        position: absolute;
+        clip:rect(0,0,0,0);
+    }
+    .test2 input[type="radio"] + label::before {
+        content: '\a0'; /*不换行空格*/
+        display: inline-block;
+        vertical-align:0;
+        width: 20px;
+        height: 20px;
+        margin-right: 6px;
+        background: url(css/plugins/iCheck/red.png) -88px 0px no-repeat;
+    }
+    .test2 input[type="radio"]:checked + label::before {
+        background-position:-110px 0px;
+    }
+    .test2 input[type="radio"]:disabled + label::before {
+        background-position:-132px 0px;
+    }
+    .test2 input[type="radio"]:checked:disabled + label::before {
+        background-position:-154px 0px;
+    }
+    </pre>
+
+<hr>
+
+</section>
+
+<!--colorBorder-->
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+
+<script>
+
+</script>
+</body>
+</html>

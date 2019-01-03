@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-207-jq-jquery中需要注意的细节问题小结</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<link type="text/css" rel="stylesheet" href="http://www.colorski.com/plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushJScript.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushCss.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushXml.js"></script>
+
+<style></style>
+</head>
+
+<body>
+<h1>jquery中需要注意的细节问题小结</h1>
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p></div>
+
+<section class="code">
+    <h5>1. $.find()与$.children()的区别</h5>
+    <p>有如下HTML片段：</p>
+    <pre class="brush:xml;">
+        <div id="div_box">
+            <input id="one" />
+            <input id="two" />
+            <div><input id="three" /></div>
+        </div>
+    </pre>
+    <p>（1）$. find() 返回元素下所有指定元素，不限制子级的深度，如：</p>
+    <pre class="brush:javascript;">$("#div_box").find("input")//返回one、two、three三个input元素</pre>
+    <p>（2）children() 返回元素的一级子节点元素集合，如：</p>
+    <pre class="brush:javascript;">$("#div_box").children("input")//返回one、two两个input元素</pre>
+    
+    <h5>2. $.append()与$.appendTo()的区别</h5>
+    <p>（1）append()：返回父元素的引用</p>
+    <p>（2）appendTo()：返回新创建的元素的引用</p>
+    <p>代码如下:</p>
+    <pre class="brush:xml;">
+        <div id="div_1"></div>
+        
+        var e = $("<h1>动态创建并添加表标题元素</h1>").appendTo($("#div_1"));
+        var r = $("#div_1").append("<h1>动态创建并添加表标题元素</h1>");
+        //e 表示新创建的h1元素
+        //r 表示$("#div_1")元素
+    </pre>
+    
+    <h5>3. 动态绑定事件和静态添加事件的区别</h5>
+    <p>有了jQuery后，给元素动态绑定事件变得很简单，但传统方式直接给元素添加事件也不能忘了，但综合了jQuery和普通JavaScript的程序在使用时必须明确jQuery动态绑定事件和静态添加事件在获得事件源对象的不同之处。</p>
+    <pre class="brush:xml;">
+        <p id="p1">动态绑定事件和静态添加事件的区别</p>
+        <p id="p2" onclick="fun()">动态绑定事件和静态添加事件的区别</p>
+        <p id="p3" onclick="fun2(this)">动态绑定事件和静态添加事件的区别</p>
+    </pre>
+    <p>(1). 动态绑定事件，this即代表事件源。如：</p>
+    <pre class="brush:javascript;">
+        $("#p1").click(function(){
+            alert($(this).text()); //this代码事件源
+        });
+    </pre>
+    <p>(2). 静态绑定事件时，不能直接使用this。如：</p>
+    <pre class="brush:javascript;">
+        function fun(){
+            alert($(this).text); //不能获得&lt;p&gt;的内容
+        }
+    </pre>
+    <p>(3). 通过传递“this"后即可获得事件源</p>
+    <pre class="brush:javascript;">
+        function fun2(obj){
+            alert($(obj).text());//将obj包装为jQuery对象
+        }
+    </pre>
+    
+    <h5>4. 事件处理函数中this和$(this)的区别</h5>
+    <pre class="brush:javascript;">
+        $("#p1").click(function(){
+            alert(this.innerHTML); //直接使用this
+            alert($(this).text()); //将this包装为jQuery对象
+        });
+    </pre>
+    <p>如上代码中this代表事件源对象，但直使用this时它是HTML DOM对象；</p>
+    <p>$(this)可以将HTML DOM对象包装为jQuery对象，即拥有jQuery对象的属性和方法。</p>
+    
+    <h5>5. $.remove()和$.remove(selector)的区别</h5>
+    <p>两种调用形式都返回方法前选择器选中的元素</p>
+    <p>$.remove()将自身从父元素中删除【自杀】</p>
+    <p>$.remove(selector)从父元素中删除某元素【他杀】</p>
+    
+    <h5>6. $.eq()和$.get()的区别</h5>
+    <p>相同点：都可获得元素集合中指定第n个元素</p>
+    <p>不同点：</p>
+    <p>(1). eq(n) 返回的是jQuery对象，可以直接使用jQuery内置方法，如：</p>
+    <pre class="brush:javascript;">
+        $("#div_three a").eq(0).bind("click", function () {
+            alert($(this).text());
+        });
+    </pre>
+    <p>(2). get(n) 返回的DOM Element对象，可以直接使用HTML DOM属性和方法，如：</p>
+    <pre class="brush:javascript;">
+        $("#div_three a").get(1).onclick = function () {
+            alert($(this).text());
+        };
+    </pre>
+    <p>或将对象封装成jQuery对象达到一样的效果，如：</p>
+    <pre class="brush:javascript;">
+        $($("#div_three a").get(1)).bind("click",function () {
+            alert($(this).text());
+        });
+    </pre>
+    
+    <h5>7. $.css(properties)和$.css(name,value)的区别</h5> 
+   	<p>(1). 语法的区别</p>
+    <pre class="brush:javascript;">
+css(properties)  $("p").css({color:"red"}); 或 $("p").css({"color":"red"});
+css(name,value)  $("p").css("color":"red");
+    </pre>
+    <p>(2). 属性名的区别</p>
+    <p>css(properties)：
+如果样式属性名没有用引号，则必须用JavaScript语法的css样式名：如</p>
+	<pre class="brush:javascript;">
+$("p").css({color:"red",fontSize:"30px"});
+    </pre>
+    <p>如果改为“font-size”就没有效果</p>
+    <p>如果样式属性名有用引号 ，则两种样式都可以，如：</p>
+    <pre class="brush:javascript;">
+$("p").css({color:"red","font-size":"30px","fontWeight":"bold"});
+    </pre>
+    <p>css(name,value)：两种形式都可以，下面两种效果一样：</p>
+    <pre class="brush:javascript;">
+$("p").css("fontSize":"30px");
+$("p").css("font-size":"30px");
+    </pre>
+
+    <h5>8. children选取子元素时，在ie678下会把注释也作为子元素</h5>
+    <p>一般情况下，我们用.children来选取第一级子元素。但是如果有注释，在ie678中也会把一个注释计算为一个子元素。</p>
+    
+</section>
+
+<!-- 
+    <h5></h5>
+    <pre  class="brush:javascript;">
+    
+    </pre>
+    测试：<input type="text" value="" name="txt" id="iptTxt" /><input type="button" onclick="checkMobile();" value="提交" />
+
+<hr /> 
+-->
+
+<!--colorBorder-->
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+
+<script>
+
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>未整理完-test-13-svg-加号</title>
+	<style>
+		.toggle{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+		.toggle circle{-webkit-transition:all .3s;transition:all .3s;fill:transparent;stroke:#ddd;stroke-width:10px}
+		.toggle path{-webkit-transition:all .3s;transition:all .3s;stroke-width:8px}
+		.detectToggle{height:100%;width:40px;box-sizing:content-box;}
+		.detectToggle path{-webkit-transition:all .3s;transition:all .3s;stroke-dasharray:100;stroke:#ddd}
+		.detectToggle .h{-webkit-transform-origin:1%;transform-origin:1%}
+		.detectToggle .v{-webkit-transform-origin:1% 70%;transform-origin:1% 70%}
+		.option-checkbox:checked+label .detectToggle .v{-webkit-transform:rotate(50deg);transform:rotate(50deg)}
+		.option-checkbox:checked+label .detectToggle .h{-webkit-transform:rotate(55deg);transform:rotate(55deg);stroke-dashoffset:50}
+	</style>
+</head>
+<body>
+<svg width=0 height=0 viewBox="0 0 200 200" class="detectToggle toggle">
+	<circle cx=100 cy=100 r=80></circle>
+	<path class=h d="M50 100h100"></path>
+	<path class=v d="M100 50v100"></path>
+</svg>
+</body>
+</html>

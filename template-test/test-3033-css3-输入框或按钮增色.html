@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>test-3033-css3-输入框或按钮增色</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<link rel="stylesheet" href="css/reset.css" />
+<style>
+.ui-box {
+  background: #2c2e33;
+  border-radius: 5px;
+  text-align: left;
+}
+.form {
+  padding: 20px;
+}
+.form input {
+  background: #d8d8d8;
+  padding: 16px 22px;
+  border-radius: 5px;
+  border: 0;
+  box-shadow: none;
+  font-size: 19px;
+  font-weight: 300;
+  color: #232428;
+  outline: 0;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+.form input:focus {
+  background: white;
+  box-shadow: 0 0 40px rgba(41, 205, 238, 0.5);
+}
+</style>
+</head>
+
+<body>
+
+<section>
+    <div class="ui-box form search">
+        <form>
+          <input name="search" id="search" type="text" placeholder="Search">
+        </form>
+    </div>
+</section>
+
+</body>
+</html>

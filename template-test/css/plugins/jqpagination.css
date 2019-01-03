@@ -1,0 +1,59 @@
+
+.jqpager ul.pages { 
+    text-align: center;
+    display:block;
+    border:none;
+    text-transform:uppercase;
+    margin:2px 0 15px 2px;
+    padding:0;
+}  
+  
+.jqpager ul.pages li {  
+    list-style:none;  
+    /*float:left;*/
+    display: inline-block;
+    border:1px solid #ccc;
+    text-decoration:none;
+    margin:0 5px 0 0;
+    padding:5px 3px;
+    border-radius:4px;
+}
+.jqpager ul.pages li:hover {  
+    border:1px solid #284569;
+}  
+.jqpager ul.pages li.pgNext {
+	font-size:14px;
+}
+.jqpager ul.pages li.pgEmpty {  
+    border:1px solid #aaa;  
+    color:#aaa;  
+    cursor:default;  
+}
+.jqpager ul.pages li.pgText {  
+    border:none;  
+    cursor:default;  
+}
+.jqpager ul.pages li.page-number  {  
+    min-width:40px;  
+    border-radius:4px;
+    text-align:center;  
+}  
+.jqpager ul.pages li.pgCurrent {  
+    border:1px solid #003f7e;  
+    color:#fff;  
+    font-weight:700;  
+    background-color:#003f7e;  
+    border-color: #003f7e;  
+}   
+.jqpager input.iptGo {  
+    width:50px;  
+    border:1px solid #ccc;  
+    margin:-2px 0px 0px 0px;  
+    height:28px;  
+    vertical-align:middle;  
+    text-align:center;
+}  
+.jqpager span.spGo {  
+    cursor:pointer;  
+    margin-left:2px;  
+}

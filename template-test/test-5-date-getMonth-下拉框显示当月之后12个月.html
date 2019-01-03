@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-5-date-getMonth-下拉选择当月后12个月</title>
+<meta name="keywords" content="" />
+<meta name="description" content="在下拉框中显示当前月份之前的12个月" />
+
+<link rel="stylesheet" href="css/reset.css" />
+<style>
+
+</style>
+</head>
+
+<body>
+<select name="getMonth" id="dateMonth"></select>
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+<script>
+//加零函数
+function toDbl(n){
+	return n<10?'0'+n:''+n;
+};
+
+var nowDate = new Date();  
+var timestamp = nowDate.getFullYear()+'-'+toDbl((nowDate.getMonth()+1)); 
+var valMonth = toDbl((nowDate.getMonth()+1));
+		  
+for(var i = 0; i<12; i++){
+	$('#dateMonth').append('<option value='+valMonth+'>'+ timestamp +'</option>');  
+	          
+	var month = toDbl(nowDate.getMonth());  
+	var year = nowDate.getFullYear();  
+	if( month -1   < 0){  
+		month = 12 ;   
+		year = year - 1;  
+		valMonth = 12;
+	}else{  
+		month = month; 
+		valMonth = month;
+	}  
+	nowDate.setFullYear(year,month,null);  
+	          
+	timestamp = nowDate.getFullYear()+'-'+toDbl((nowDate.getMonth()+1));
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-1000-js-reg-常用正则验证</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<link type="text/css" rel="stylesheet" href="http://www.colorski.com/plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushJScript.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushCss.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushXml.js"></script>
+
+<style>
+	.code {
+		border-radius: 3px;
+	}
+</style>
+</head>
+
+<body>
+<h1>常用表单验证 正则验证</h1>
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p></div>
+
+<section class="code">
+
+    <h5>1.手机验证<i>【验证13系列和150-159(154除外)、180、185、186、187、188、189几种号码，长度11位】，后来添加了170段</i></h5>
+    <pre  class="brush:javascript;">
+    function checkMobile() {
+        var regMobile = /^((13[0-9]{1}|15[0-35-9]{1}|170|18[0|5-9]{1})+\d{8})$/;
+        
+        if($("#iptTxt").val() == ""){
+            alert("输入不能为空！");
+            $("#iptTxt").focus(); 
+            return false;
+        }
+        if($("#iptTxt").val().match(regMobile)){
+            alert("正确");
+        }else{
+            alert("手机号格式不正确"); 
+            $("#iptTxt").focus(); 
+            return false; 
+        }
+    };
+    </pre>
+    测试：<input type="text" value="" name="txt" id="iptTxt" /><input type="button" onclick="checkMobile();" value="提交" />
+
+<hr />
+
+    <h5>2.email验证</h5>
+    <pre  class="brush:javascript;">
+    function checkEmail() {
+        //var regEmail = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+        var regEmail = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+        
+        if($("#iptTxt1").val() == ""){
+            alert("输入不能为空！");
+            $("#iptTxt1").focus(); 
+            return false;
+        }
+        if($("#iptTxt1").val().match(regEmail)){
+            alert("正确");
+        }else{
+            alert("邮箱号格式不正确"); 
+            $("#iptTxt1").focus(); 
+            return false; 
+        }
+    };
+    </pre>
+    测试：<input type="text" value="" name="txt" id="iptTxt1" /><input type="button" onclick="checkEmail();" value="提交" />
+
+<hr />
+
+    
+    <h5>3.同时验证手机和邮箱</h5>
+    <pre  class="brush:javascript;">
+    function checkIptVal() { 
+        if ($("#iptTxt2").val() == "") {
+            alert("输入不能为空!") 
+            $("#iptTxt2").focus(); 
+            return false; 
+        } 
+        //简化：$("#iptTxt2").val().match(/^(\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+)|(((13[0-9]{1})|15[0-35-9]{1}|170|180|18[5-9]{1})+\d{8})$/)
+        if ($("#iptTxt2").val().match(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/) || $("#iptTxt").val().match(/^(((13[0-9]{1})|15[0-35-9]{1}|170|180|18[5-9]{1})+\d{8})$/)) {
+            alert("正确");
+        }else{
+            alert("邮箱或手机号格式不正确"); 
+            $("#iptTxt2").focus(); 
+            return false; 
+        }
+        return true; 
+    }; 
+    </pre>
+    测试：<input type="text" value="" name="txt" id="iptTxt2" /><input type="button" onclick="checkIptVal();" value="提交" />
+
+<hr />
+
+    
+    <h5>4.IP验证</h5>
+    <pre  class="brush:javascript;">
+    function checkIP() {
+        if ($("#iptTxt3").val() == ""){
+            alert("没有值");
+             return false;
+        }
+        var re=/^((?:(?:25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?\d)))\.){3}(?:25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?\d))))$/;  //匹配IP地址的正则表达式
+        if(re.test($("#iptTxt3").val()))
+        {
+            alert("right");
+            return true;
+        }else{
+            alert("wrong");
+            return false;
+        }
+    };
+    </pre>
+    测试：<input type="text" value="" name="txt" id="iptTxt3" /><input type="button" onclick="checkIP();" value="提交" /><br />
+    <p>其实对ip概念不是很了解，ip验证原文地址：<a href="http://www.cnblogs.com/txw1958/archive/2011/10/13/2210114.html" target="_blank">这里</a></p>
+
+<hr />
+
+	<h5>5.只能输入数字字母下划线</h5>
+
+	<pre class="brush:html;">
+		<input type="text" name="password" placeholder="输入密码" />
+	</pre>
+	<pre class="brush:javascript;">
+		$('input[name="password"]').on('keyup', function(){
+			this.value = this.value.replace(/[^\w]/g,"");
+		});
+		// [] 的意思是 非
+		// \w 的意思是 数字字母下划线
+		// 所以上边的意思是 不是数字字母下划线的替换为""
+
+		//简单的邮箱验证
+		$('input[name="password"]').on('keyup', function(){
+			this.value = this.value.replace(/[^\w.\@]/g,"");
+		});
+	</pre>
+    测试：<input type="text" name="password" placeholder="输入密码" /> <i>只能输入数字字母下划线</i>
+
+<hr />
+
+    <h5>6.只能输入数字和小数点的文本框</h5>
+    <pre class="brush:javascript;">
+        function clearNoNum(event,obj){ 
+            //响应鼠标事件，允许左右方向键移动 
+            event = window.event||event; 
+            if(event.keyCode == 37 | event.keyCode == 39){ 
+                return; 
+            } 
+            //先把非数字的都替换掉，除了数字和. 
+            obj.value = obj.value.replace(/[^\d.]/g,""); 
+            //必须保证第一个为数字而不是. 
+            obj.value = obj.value.replace(/^\./g,""); 
+            //保证只有出现一个.而没有多个. 
+            obj.value = obj.value.replace(/\.{2,}/g,"."); 
+            //保证.只出现一次，而不能出现两次以上 
+            obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$","."); 
+        } 
+        function checkNum(obj){ 
+            //为了去除最后一个. 
+            obj.value = obj.value.replace(/\.$/g,""); 
+        } 
+
+        文本：
+        <input id="input1" onKeyUp="clearNoNum(event,this)" onBlur="checkNum(this)" /> 
+    </pre>
+    测试：<input type="text" id="input1" placeholder="simple money" onKeyUp="clearNoNum(event,this)" onBlur="checkNum(this)" /> <i>只能输入数字和小数点的文本框</i>
+
+<hr />
+	
+	<h5>7.验证QQ</h5>
+	<pre class="brush:javascript;">
+		//验证QQ
+		function isQQ(str){
+			var regQQ = /^[1-9]\d{4,10}$/;
+			var flag = regQQ.test(str);
+			if(!flag){
+				return false;
+			}else{
+				return true;
+			}
+		}
+
+		$("#iptQQ").blur(function(){
+			var qq = $(this).val();
+			var _tip = $("#tipQQ");
+
+			if(qq != ""){
+				if(isQQ(qq)){
+					_tip.empty().text("qq格式正确！");
+					return true;
+				}else{
+					_tip.empty().text("qq格式有误，请重新输入！");
+					return false;
+				}
+			}else{
+				_tip.empty().text("qq不能为空！");
+				return false;
+			}
+		})
+	</pre>
+	测试：<input type="text" id="iptQQ" placeholder="请输入QQ" /><span id="tipQQ"></span>
+
+<hr />
+	
+	<h5>8.只能输入数字</h5>
+	<pre class="brush:javascript;">
+		原生：
+		<input type="text" onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="只能输入数字" value="" />
+
+		jQuery:  
+		<input type="text" id="ipt" placeholder="只能输入数字" value="" />
+		$("#ipt").keyup(function() {
+			var _val = $(this).val();
+			$(this).val(_val.replace(/[^\d]/g,''));
+		});
+	</pre>
+	测试：<input type="text" onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="只能输入数字" value="" />
+
+<hr />
+	
+	<h5>8.必须为字母和数字的组合，6-16位</h5>
+	<pre class="brush:javascript;">
+		var wdReg = /^(?![^a-zA-Z]+$)(?!\D+$).{6,16}/;
+		function checkWd(){
+			if(!wdReg.test($('#iptWd').val())){
+				alert('输入有误！必须为6-16位的字母和数字组合！');
+				return false;
+			}else{
+				alert('输入正确！');
+			}
+		};
+	</pre>
+	测试：<input type="text" placeholder="请输入" value="" id="iptWd" /><input type="button" onclick="checkWd();" value="提交">
+
+</section>
+
+<!--colorBorder-->
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+
+<script>
+//Mobile
+function checkMobile() {
+	var regMobile = /^((13[0-9]{1}|15[0-35-9]{1}|170|18[0|5-9]{1})+\d{8})$/;
+	
+	if($("#iptTxt").val() == ""){
+		alert("输入不能为空！");
+		$("#iptTxt").focus(); 
+		return false;
+	}
+	if($("#iptTxt").val().match(regMobile)){
+		alert("正确");
+	}else{
+		alert("手机号格式不正确"); 
+		$("#iptTxt").focus(); 
+		return false; 
+	}
+};
+//Email
+function checkEmail() {
+	//var regEmail = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+	var regEmail = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+	
+	if($("#iptTxt1").val() == ""){
+		alert("输入不能为空！");
+		$("#iptTxt1").focus(); 
+		return false;
+	}
+	if($("#iptTxt1").val().match(regEmail)){
+		alert("正确");
+	}else{
+		alert("邮箱号格式不正确"); 
+		$("#iptTxt1").focus(); 
+		return false; 
+	}
+};
+//Mobile and Email
+function checkIptVal() { 
+	if ($("#iptTxt2").val() == "") {
+		alert("输入不能为空!") 
+		$("#iptTxt2").focus(); 
+		return false; 
+	} 
+	if ($("#iptTxt2").val().match(/^(\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+)|(((13[0-9]{1})|15[0-35-9]{1}|170|180|18[5-9]{1})+\d{8})$/)) {
+		alert("正确");
+	}else{
+		alert("邮箱或手机号格式不正确"); 
+		$("#iptTxt2").focus(); 
+		return false; 
+	}
+	return true; 
+}; 
+//IP
+function checkIP() {
+	if ($("#iptTxt3").val() == ""){
+		alert("没有值");
+		 return false;
+	}
+	var re=/^((?:(?:25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?\d)))\.){3}(?:25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?\d))))$/;  //匹配IP地址的正则表达式
+	if(re.test($("#iptTxt3").val()))
+	{
+		alert("right");
+		return true;
+	}else{
+		alert("wrong");
+		return false;
+	}
+};
+
+//只能输入字母数字下划线
+$('input[name="password"]').on('keyup', function(){
+	this.value = this.value.replace(/[^\w]/g,"");
+});
+
+//只能输入数字和小数点的文本框
+function clearNoNum(event,obj){ 
+    event = window.event||event; 
+    if(event.keyCode == 37 | event.keyCode == 39){ 
+        return; 
+    }  
+    obj.value = obj.value.replace(/[^\d.]/g,""); 
+    obj.value = obj.value.replace(/^\./g,"");
+    obj.value = obj.value.replace(/\.{2,}/g,"."); 
+    obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$","."); 
+} 
+function checkNum(obj){ 
+    obj.value = obj.value.replace(/\.$/g,""); 
+}
+
+//验证QQ
+function isQQ(str){
+	var regQQ = /^[1-9]\d{4,10}$/;
+	var flag = regQQ.test(str);
+	if(!flag){
+		return false;
+	}else{
+		return true;
+	}
+}
+$("#iptQQ").blur(function(){
+	var qq = $(this).val();
+	var _tip = $("#tipQQ");
+
+	if(qq != ""){
+		if(isQQ(qq)){
+			_tip.empty().text("qq格式正确！");
+			return true;
+		}else{
+			_tip.empty().text("qq格式有误，请重新输入！");
+			return false;
+		}
+	}else{
+		_tip.empty().text("qq不能为空！");
+		return false;
+	}
+})
+
+//只能输入字母和数字组合，6-16位
+var wdReg = /^(?![^a-zA-Z]+$)(?!\D+$).{6,16}/;
+function checkWd(){
+	if(!wdReg.test($('#iptWd').val())){
+		alert('输入有误！必须为6-16位的字母和数字组合！');
+		return false;
+	}else{
+		alert('输入正确！');
+	}
+};
+
+</script>
+</body>
+</html>

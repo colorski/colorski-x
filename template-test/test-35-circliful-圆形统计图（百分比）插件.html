@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-35-circliful-圆形统计图（百分比）插件</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+<style>
+.circliful {
+    position: relative; 
+}
+.circle-text, .circle-info, .circle-text-half, .circle-info-half {
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    display: inline-block;
+}
+.circle-info, .circle-info-half {
+	color: #999;
+}
+.circliful .fa {
+	margin: -10px 3px 0 3px;
+	position: relative;
+	bottom: 4px;
+}
+</style>
+</head>
+
+<body>
+<div id="myStathalf" data-dimension="250" data-text="35%" data-info="New Clients" data-width="30" data-fontsize="38" data-percent="35" data-fgcolor="#7ea568" data-bgcolor="#eee" data-type="half" data-fill="#ddd"></div>
+
+<div id="myStat" data-dimension="250" data-text="65%" data-info="New Clients" data-width="30" data-fontsize="38" data-percent="65" data-fgcolor="#61a9dc" data-bgcolor="#eee" data-fill="#ddd"></div>
+
+<div id="myStathalf2" data-dimension="250" data-text="35" data-info="New Clients" data-width="30" data-fontsize="38" data-percent="35" data-fgcolor="#7ea568" data-bgcolor="#eee" data-type="half" data-icon="fa-task"></div>
+
+<div id="myStat2" data-dimension="250" data-text="35%" data-info="New Clients" data-width="30" data-fontsize="38" data-percent="35" data-fgcolor="#61a9dc" data-bgcolor="#eee"></div>
+
+<div id="myStat3" data-startdegree="90" data-dimension="250" data-text="35%" data-info="New Clients" data-width="30" data-fontsize="38" data-percent="35" data-fgcolor="#61a9dc" data-bgcolor="#eee"></div>
+
+<div id="myStat4" data-startdegree="180" data-dimension="250" data-text="35%" data-info="New Clients" data-width="30" data-fontsize="38" data-percent="35" data-fgcolor="#61a9dc" data-bgcolor="#eee"></div>
+
+<div id="myStathalf3" data-startdegree="45" data-dimension="250" data-text="50%" data-info="New Clients" data-width="30" data-fontsize="38" data-percent="50" data-fgcolor="#7ea568" data-bgcolor="#eee" data-type="half" data-fill="#ddd"></div>
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+<script type="text/javascript"  src="js/plugins/jquery.circliful.min.js"></script>
+<script>
+$( document ).ready(function() {
+    $('#myStathalf').circliful();
+	$('#myStat').circliful();
+	$('#myStathalf2').circliful();
+	$('#myStat2').circliful();
+    $('#myStat3').circliful();
+    $('#myStat4').circliful();
+    $('#myStathalf3').circliful();
+});
+</script>
+</body>
+</html>

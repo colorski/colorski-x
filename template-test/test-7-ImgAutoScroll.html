@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-7-ImgAutoScroll</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+<style>
+.coop_slide {
+	float: left;
+	width: 914px;
+	height: 140px;
+	overflow: hidden;
+	position: relative;
+}
+.coop_slide ul {
+	width: 10000px;
+	height: 140px;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.coop_slide ul li {
+	float: left;
+	margin-right: 11px;
+}
+.coop_slide .sec_slide_btn {
+	display: inline-block;
+	width: 40px;
+	height: 54px;
+	line-height: 54px;
+	text-align: center;
+	color: #fff;
+	border-radius: 5px;
+	background: rgba(0,0,0,.3);
+	position: absolute;
+	top: 44px;
+	z-index: 20;
+}
+.coop_slide .slide_l,
+.coop_slide .slide_l_act {
+	left: 10px;
+}
+.coop_slide .slide_r,
+.coop_slide .slide_r_act {
+	right: 10px;
+}
+</style>
+</head>
+
+<body>
+<div class="coop_slide">
+	<ul id="skiImgScroll">
+		<li><a href="#"><img src="images/pic_test_2.png" alt="" /></a></li>
+		<li><a href="#"><img src="images/pic_test_2.png" alt="" /></a></li>
+		<li><a href="#"><img src="images/pic_test_2.png" alt="" /></a></li>
+		<li><a href="#"><img src="images/pic_test_2.png" alt="" /></a></li>
+		<li><a href="#"><img src="images/pic_test_2.png" alt="" /></a></li>
+		<li><a href="#"><img src="images/pic_test_2.png" alt="" /></a></li>
+		<li><a href="#"><img src="images/pic_test_2.png" alt="" /></a></li>
+		<li><a href="#"><img src="images/pic_test_2.png" alt="" /></a></li>
+		<li><a href="#"><img src="images/pic_test_2.png" alt="" /></a></li>
+		<li><a href="#"><img src="images/pic_test_2.png" alt="" /></a></li>
+	</ul>
+	<a class="sec_slide_btn slide_l" id="leftBtn" href="javascript:void(0);">←</a>
+	<a class="sec_slide_btn slide_r" id="rightBtn" href="javascript:void(0);">→</a>
+</div>
+
+<script src="js/jquery-1.12.3.min.js"></script>
+<script src="js/common-1.js"></script>
+<script>
+$(document).ready(function($) {
+	//注意加载完成后执行此函数，不然第一次加载时滚动异常
+	ski.cmn.skiImgAutoScroll({
+		scrollTime:2500,
+		moveSpeed:400,
+		skiImgBox:".coop_slide",
+		ulId:"ul#skiImgScroll",
+		rightBtnId:"#rightBtn",
+		leftBtnId:"#leftBtn", 
+		marginRight:11
+	});//图片自动滚动
+});
+</script>
+</body>
+</html>

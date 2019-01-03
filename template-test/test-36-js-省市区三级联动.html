@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-36-js-省市区三级联动</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+</head>
+
+<body>
+<div>
+省：<select id="cmbProvince" class="scroller"></select>
+市：<select id="cmbCity"></select>
+区：<select id="cmbArea"></select>
+
+<br /><br />
+
+省：<select id="Select1"></select>
+市：<select id="Select2"></select>
+区：<select id="Select3"></select>
+</div>
+
+
+<script src="js/plugins/jsAddress.js"></script>
+<script type="text/javascript">
+	addressInit('cmbProvince', 'cmbCity', 'cmbArea', '陕西', '宝鸡市', '金台区');
+	addressInit('Select1', 'Select2', 'Select3');
+</script>
+
+</body>
+</html>

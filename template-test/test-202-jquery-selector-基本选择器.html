@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-202-jquery-selector-基本选择器</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+<style type="text/css">
+.col-md-2 {
+	float: left;
+	width: 20%;
+}
+.col-md-7 {
+	float: left;
+	width: 70%;
+}
+
+
+.highlight {
+	  background-color: #FFFF88;
+	}
+
+	.tag {
+	  color: blue;
+	}
+
+	.attribute-value {
+	  color: maroon;
+	}
+
+	.btn {
+	  margin-bottom: 5px;
+	  font-family:consolas;
+	  cursor: pointer;
+	}
+
+	#html-content, .html-content {
+	  font-family: consolas;
+	  font-size: 1.2em;
+	}
+</style>
+</head>
+
+<body>
+<div class="htmleaf-container">
+		<div class="row mt50">
+		  <div class="col-md-2 col-md-offset-2">
+		    <p><strong>元素选择器</strong></p>
+		    <div class="btn btn-success" id="nav-button">nav</div>
+		    <div class="btn btn-success" id="section-button">section</div>
+
+		    <p><strong>类选择器</strong></p>
+		    <div class="btn btn-success" id="first-button">.first</div>
+		    <div class="btn btn-success" id="second-button">.second</div>
+		    <div class="btn btn-success" id="div-second-button">div.second</div>
+		    <div class="btn btn-success" id="span-second-button">span.second</div>
+
+		    <p><strong>ID选择器</strong></p>
+		    <div class="btn btn-success" id="id-button">#myId</div>
+
+		    <p><strong>群组选择器</strong></p>
+		    <div class="btn btn-success" id="group-button">span,div#myId</div>
+
+		    <p><strong>子元素选择器</strong></p>
+		    <div class="btn btn-success" id="navdivdescendent-button">nav div</div>
+		    <div class="btn btn-success" id="navdivdirect-button">nav > div</div>
+
+		    <p><strong>兄弟元素选择器</strong></p>
+		    <div class="btn btn-success" id="siblings-button">div.three ~ div</div>
+		    <div class="btn btn-success" id="sibling-button">div.three + div</div>
+
+		    <p><strong>属性选择器</strong></p>
+		    <div class="btn btn-success" id="attribute-equality-button">[data-bind='demo']</div>
+		    <div class="btn btn-success" id="attribute-starts-button">[data-bind^='another']</div>
+		    <div class="btn btn-success" id="attribute-ends-button">[data-bind$='demo']</div>
+		    <div class="btn btn-success" id="attribute-contains-button">[data-bind*='demo']</div>
+		  </div>
+		  <div class="col-md-7">
+		    <p><strong>HTML</strong></p>
+		    <div id="html-content">
+		      <div class="first"></div>
+		      <nav>
+		        <div id="myId"></div>
+		        <section>
+		          <div class="second"></div>
+		          <div class="three" data-bind='demo'></div>
+		          <div class="four" data-bind='another demo'></div>
+		          <div class="five"></div>
+		        </section>
+		      </nav>
+		      <span class="second"></span>
+		    </div>
+		  </div>
+		</div>
+	</div>
+
+<script src="js/jquery-1.12.3.min.js"></script>
+<script type="text/javascript">
+	var $startingHtml = null;
+	$(function() {
+	  $startingHtml = $('#html-content').clone();
+	  displayHtml();
+	});
+
+	function resetHtml() {
+	  $('#html-content').replaceWith($startingHtml.clone());
+	}
+
+	function displayHtml(data) {
+	  if(data === undefined) data = '#html-content';
+	 
+	  $.each($(data).children(), function() {
+	    createHtml(this);
+	  });
+	}
+
+	function createHtml(element) {
+	  element = $(element);
+	  
+	  if (element.children().length > 0) {
+	    displayHtml(element);
+	  }
+
+	  var startingTag = element.prop('outerHTML').substring(0, element.prop('outerHTML').indexOf('>') + 1);
+	  var tagName = '';
+	  if(startingTag.indexOf(' ') > -1)
+	    tagName = startingTag.substring(1, startingTag.indexOf(' '));
+	  else
+	    tagName = startingTag.substring(1, startingTag.indexOf('>'));
+	  var formattedTag = '&lt;<span class="tag">' + tagName + '</span>attributes&gt;';
+	  
+	  attributesString = '';
+	  $.each(element.prop('attributes'), function() {
+	    attributesString += ' ' + this.nodeName + '=';
+	    attributesString += '<span class="attribute-value">"' + this.nodeValue + '"</span>';
+	  });
+	  
+	  startingTag = formattedTag.replace('attributes', attributesString);
+	  element.prepend(startingTag);
+	  element.append(formattedTag.replace('attributes', '').replace('&lt;', '&lt;/'));
+	    
+	  element.css('padding-left', '20px');
+	}</script>
+	<script>
+	$(function () {
+	    $('#section-button').click(function () {
+	        resetHtml();
+	        $('section').addClass('highlight');
+	        displayHtml();
+	    });
+	    $('#nav-button').click(function () {
+	        resetHtml();
+	        $('nav').addClass('highlight');
+	        displayHtml();
+	    });
+	    $('#first-button').click(function () {
+	        resetHtml();
+	        $('.first').addClass('highlight');
+	        displayHtml();
+	    });
+	    $('#second-button').click(function () {
+	        resetHtml();
+	        $('.second').addClass('highlight');
+	        displayHtml();
+	    });
+	    $('#div-second-button').click(function () {
+	        resetHtml();
+	        $('div.second').addClass('highlight');
+	        displayHtml();
+	    });
+	    $('#id-button').click(function () {
+	        resetHtml();
+	        $('div#myId').addClass('highlight');
+	        displayHtml();
+	    });
+	    $('#span-second-button').click(function () {
+	        resetHtml();
+	        $('span.second').addClass('highlight');
+	        displayHtml();
+	    });
+	    $('#navdivdescendent-button').click(function () {
+	        resetHtml();
+	        $('nav div').addClass('highlight');
+	        displayHtml();
+	    });
+	    $('#navdivdirect-button').click(function () {
+	        resetHtml();
+	        $('nav > div').addClass('highlight');
+	        displayHtml();
+	    });
+
+	    $('#siblings-button').click(function () {
+	        resetHtml();
+	        $('div.three ~ div').addClass('highlight');
+	        displayHtml();
+	    });
+
+	    $('#sibling-button').click(function () {
+	        resetHtml();
+	        $('div.three + div').addClass('highlight');
+	        displayHtml();
+	    });
+
+	    $('#attribute-equality-button').click(function () {
+	        resetHtml();
+	        $('[data-bind="demo"]').addClass('highlight');
+	        displayHtml();
+	    });
+	    $('#attribute-starts-button').click(function () {
+	        resetHtml();
+	        $('[data-bind^="another"]').addClass('highlight');
+	        displayHtml();
+	    });
+	    $('#attribute-contains-button').click(function () {
+	        resetHtml();
+	        $('[data-bind*="demo"]').addClass('highlight');
+	        displayHtml();
+	    });
+
+	    $('#attribute-ends-button').click(function () {
+	        resetHtml();
+	        $('[data-bind$="demo"]').addClass('highlight');
+	        displayHtml();
+	    });
+
+	    $('#group-button').click(function () {
+	        resetHtml();
+	        $('span.second,div#myId').addClass('highlight');
+	        displayHtml();
+	    });
+
+
+	    $('.col-md-2 .btn').click(function(){
+	    	$('.col-md-2 .btn').css('color','black');
+	    	$(this).css('color','red');
+	    });
+	});
+</script>
+</body>
+</html>

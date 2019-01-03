@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test-3026-css3-伪类content</title>
+    <link rel="stylesheet" href="css/reset.css">
+
+	<style>
+/****2.attr：插入标签属性值***/
+.attr-title:after{
+    content:attr(title);
+    color:#f00;
+}
+/**图片滑过动画效果**/
+#imghover li{
+    display: inline-block;
+    position:relative;
+    margin-right:20px;
+}
+#imghover a:after{
+    content:attr(title);
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    background-color:rgba(0,0,0,0.5);
+    line-height:30px;
+    color:#fff;
+    text-align:center;
+    font-size:14px;
+    text-shadow:-1px -1px 0 rgba(0,0,0,0.8);
+    opacity: 0;
+    -webkit-transition:all 0.3s ease;
+    -moz-transition:all 0.3s ease;
+    -ms-transition:all 0.3s ease;
+    -o-transition:all 0.3s ease;
+    transition:all 0.3s ease;
+}
+#imghover a:hover:after{
+    top:50%;
+    margin-top:-15px;
+    opacity: 1;
+}
+
+/*******3.******/
+#icon_list a{
+    font-size:16px;
+}
+#icon_list a[href]:before{
+    content:'';
+    margin-right:5px;
+}
+#icon_list a[href$='.txt']:before{
+    content:url(http://www.w3cplus.com/solution/css3content/images/icon_txt.gif);
+}
+#icon_list a[href$='.pdf']:before{
+    content:url(http://www.w3cplus.com/solution/css3content/images/icon_pdf.gif);
+}
+#icon_list a[href$='.doc']:before{
+    content:url(http://www.w3cplus.com/solution/css3content/images/icon_doc.gif);
+}
+#icon_list a[href$='.jpg']:before{
+    content:url(http://www.w3cplus.com/solution/css3content/images/icon_pic.gif);
+}
+#icon_list a[href^="mailto:"]:before{
+    content:url(http://www.w3cplus.com/solution/css3content/images/icon_mailto.gif);
+}
+
+
+/*******4.******/
+#counter li{
+    margin-left:0;
+    list-style:none outside none;
+    counter-increment: title1;
+}
+#counter li:before{
+    content:"第"counter(title1)"章：";
+    font-size:14px;
+    color:#f00;
+}
+#counter li li{
+    margin-left:25px;
+    counter-increment: title2;
+}
+#counter li li:before{
+    content:counter(title1)"."counter(title2);
+}
+
+/*****5.*****/
+#special li:before,
+#special li:after{
+    color:#f00;
+}
+#special li:nth-child(2n+1):before{
+    color:#ccc;
+}
+#special li:first-child:before{
+    content:"\25c4";
+}
+#special li:first-child:after{
+    content:"\25ba";
+}
+#special li:nth-of-type(2):before{
+    content:"\2714";
+}
+#special li:nth-child(3):after{
+    content:"\00bb";
+}
+#special li:last-of-type:before{
+    content:"\00a9";
+    margin-right:5px;
+}
+
+/*******常用*****/
+.test5-1 {
+    quotes:"(" ")";  /*利用元素的quotes属性指定文字符号*/
+}
+.test5-1::before{
+    content:open-quote;
+}
+.test5-1::after{
+    content:close-quote;
+}
+
+.test5-2 {
+    quotes:"\"" "\"";  /*添加双引号要转义*/
+}
+.test5-2::before{
+    content:open-quote;
+}
+.test5-2::after{
+    content:close-quote;
+}
+
+.test1 .up{
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-width: 4px;
+    border-style: dashed;
+    border-color: transparent;
+    border-top-width: 0;
+    border-bottom-color: #808080;
+    border-left-style: solid;
+    position: relative;
+    top: 5px;
+    left: 20px;
+}
+.test1 .up:after {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-width: 6px;
+    border-style: dashed;
+    border-color: transparent;
+    border-top-width: 0;
+    border-bottom-color: #fff;
+    content: '';
+    position: absolute;
+    top: 1px;
+    left: -6px;
+}
+
+.test1 .down{
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-width: 4px;
+    border-style: dashed;
+    border-color: transparent;
+    border-bottom-width: 0;
+    border-top-color: #808080;
+    border-left-style: solid;
+    position: relative;
+    top: 5px;
+    left: 10px;
+}
+.test1 .down:after {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-width: 6px;
+    border-style: dashed;
+    border-color: transparent;
+    border-bottom-width: 0;
+    border-top-color: #fff;
+    content: '';
+    position: absolute;
+    top: -7px;
+    left: -6px;
+}
+
+.test1 .new {
+    position: relative;
+    color: #333;
+}
+.test1 .new:after {
+    vertical-align: top;
+    display: inline-block;
+    content: "";
+    width: 20px;
+    height: 9px;
+    background-image: url('images/icon_new.png');
+    background-repeat: no-repeat;
+    position: absolute;
+    right: -25px;
+    top: 0px;
+}
+
+</style>
+
+<link type="text/css" rel="stylesheet" href="../plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="../plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="../plugins/codeView/shBrushJScript.js"></script>
+<script type="text/javascript" src="../plugins/codeView/shBrushCss.js"></script>
+<script type="text/javascript" src="../plugins/codeView/shBrushXml.js"></script>
+
+</head>
+
+<body>
+<h1>伪类content</h1>
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p></div>
+
+<section class="code">
+<p>兼容ie9+ ； 以下内容来自：<a href="http://www.w3cplus.com/solution/css3content/css3content.html">css3 content 生成内容-w3cplus</a></p>
+<p>content一般和:before,:after一起使用，用来生成内容(img和input没有该属性)，content的内容一般可以为以下四种：<br />
+<br />
+none： 不生成任何值。<br />
+attr： 插入标签属性值<br />
+url： 使用指定的绝对或相对地址插入一个外部资源（图像，声频，视频或浏览器支持的其他任何资源）<br />
+string： 插入字符串<br />
+</p>
+<hr />
+
+<h5>1. none</h5>
+<p>其实我们常用的clearfix就是应用了这个none了.</p>
+<pre  class="brush:css;">
+    .clearfix:after {
+        content: "";
+        visibility: hidden;
+        display: block;
+        font-size: 0;
+        clear: both;
+        height: 0;
+    }
+    * html .clearfix             { zoom: 1; } /* IE6 */
+    *:first-child+html .clearfix { zoom: 1; } /* IE7 */
+</pre>
+<hr />
+
+<h5>2. attr： 插入标签属性值</h5>
+<p>可以是普通文字</p>
+<p class="attr-title" title="我是插入的普通文字">青，取之于蓝，而青于蓝；冰，水为之，而寒于水。</p>
+<pre  class="brush:css;">
+    .attr-title:after{
+        content:attr(title);
+        color:#f00;
+    }
+</pre>
+<p>图片划过动画效果</p>
+<ul id="imghover" class="cf">
+    <li><a href="#" title="青，取之于蓝"><img src="images/img01.jpg" title="青，取之于蓝" alt="而青于蓝"></a></li>
+    <li><a href="#" title="冰，水为之"><img src="images/img02.jpg" title="冰，水为之" alt="而寒于水"></a></li>
+</ul>
+<pre  class="brush:css;">
+    /**图片滑过动画效果**/
+    #imghover li{
+        display: inline-block;
+        position:relative;
+        margin-right:20px;
+    }
+    #imghover a:after{
+        content:attr(title);
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+        background-color:rgba(0,0,0,0.5);
+        line-height:30px;
+        color:#fff;
+        text-align:center;
+        font-size:14px;
+        text-shadow:-1px -1px 0 rgba(0,0,0,0.8);
+        opacity: 0;
+        -webkit-transition:all 0.3s ease;
+        -moz-transition:all 0.3s ease;
+        -ms-transition:all 0.3s ease;
+        -o-transition:all 0.3s ease;
+        transition:all 0.3s ease;
+    }
+    #imghover a:hover:after{
+        top:50%;
+        margin-top:-15px;
+        opacity: 1;
+    }
+</pre>
+<hr />
+
+<h5>3. url：使用指定的绝对或相对地址插入一个外部资源</h5>
+<ul id="icon_list" class="nostyle demo">
+   <li><a href="#noname.txt">source.txt</a></li>
+   <li><a href="#noname.doc">source.doc</a></li>
+   <li><a href="#noname.pdf">source.pdf</a></li>
+   <li><a href="#noname.jpg">source.jpg</a></li>
+   <li><a href="mailto:xuyc_brother@foxmail.com">mailto:marvin</a></li>
+</ul>
+<pre  class="brush:css;">
+    #icon_list a{
+        font-size:16px;
+    }
+    #icon_list a[href]:before{
+        content:'';
+        margin-right:5px;
+    }
+    #icon_list a[href$='.txt']:before{
+        content:url(http://www.w3cplus.com/solution/css3content/images/icon_txt.gif);
+    }
+    #icon_list a[href$='.pdf']:before{
+        content:url(http://www.w3cplus.com/solution/css3content/images/icon_pdf.gif);
+    }
+    #icon_list a[href$='.doc']:before{
+        content:url(http://www.w3cplus.com/solution/css3content/images/icon_doc.gif);
+    }
+    #icon_list a[href$='.jpg']:before{
+        content:url(http://www.w3cplus.com/solution/css3content/images/icon_pic.gif);
+    }
+    #icon_list a[href^="mailto:"]:before{
+        content:url(http://www.w3cplus.com/solution/css3content/images/icon_mailto.gif);
+    }
+</pre>
+<hr />
+
+<h5>4. string：插入字符串</h5>
+<p>用content做计算器</p>
+<ol id="counter" class="demo">
+    <li>css3新增的选择器
+        <ol>
+            <li>属性选择器</li>
+            <li>结构伪类选择器</li>
+        </ol>
+    </li>
+    <li>增强的文本和颜色功能
+        <ol>
+            <li>文本阴影，文本换行，溢出文本</li>
+            <li>rgba色彩模式</li>
+        </ol>
+    </li>
+    <li>新增的弹性盒模型
+        <ol>
+            <li>box布局</li>
+            <li>弹性布局实战</li>
+        </ol>
+    </li>
+</ol>
+<pre  class="brush:css;">
+    #counter li{
+        margin-left:0;
+        list-style:none outside none;
+        counter-increment: title1;
+    }
+    #counter li:before{
+        content:"第"counter(title1)"章：";
+        font-size:14px;
+        color:#f00;
+    }
+    #counter li li{
+        margin-left:25px;
+        counter-increment: title2;
+    }
+    #counter li li:before{
+        content:counter(title1)"."counter(title2);
+    }
+</pre>
+<hr />
+
+<h5>5. 插入特殊字符</h5>
+<p>特殊字符的使用及查询在这里：<a href="test-2000-html-特殊字符编码查询.html">特殊字符编码查询</a></p>
+实例：<br />
+<p>这里顺便多应用了下css3的子元素选择器，对于第一个的after箭头，通过transform的scale为-1来左右调转</p>
+<ul id="special" class="nostyle demo">
+    <li>css3新增的选择器</li>
+    <li>增强的文本和颜色功能</li>
+    <li>新增的弹性盒模型</li>
+    <li>copyright</li>
+</ul>
+<pre  class="brush:css;">
+    #special li:before,
+    #special li:after{
+        color:#f00;
+    }
+    #special li:nth-child(2n+1):before{
+        color:#ccc;
+    }
+    #special li:first-child:before,
+    #special li:first-child:after{
+        content:"\25ba";
+    }
+    #special li:first-child:after{
+        -webkit-transform:scale(-1);
+        -moz-transform:scale(-1);
+        -ms-transform:scale(-1);
+        -o-transform:scale(-1);
+        transform:scale(-1);
+    }
+    #special li:nth-of-type(2):before{
+        content:"\2714";
+    }
+    #special li:nth-child(3):after{
+        content:"\00bb";
+    }
+    #special li:last-of-type:before{
+        content:"\00a9";
+        margin-right:5px;
+    }
+</pre>
+<hr />
+
+<h5>比较常用的</h5>
+<p class="test5-1">我两边有括号</p>
+<pre class="brush:css;">
+    .test5-1 {
+        quotes:"(" ")";  /*利用元素的quotes属性指定文字符号*/
+    }
+    .test5-1::before{
+        content:open-quote;
+    }
+    .test5-1::after{
+        content:close-quote;
+    }
+</pre>
+<p class="test5-2">我两边是双引号</p>
+<pre class="brush:css;">
+    .test5-2 {
+        quotes:"\"" "\"";  /*添加双引号要转义*/
+    }
+    .test5-2::before{
+        content:open-quote;
+    }
+    .test5-2::after{
+        content:close-quote;
+    }
+</pre>
+
+<hr />
+<h5>配合伪类生成的三角</h5>
+<div class="test1">
+    <p class="cf">
+    	<i class="up"></i>
+    </p>
+    <pre  class="brush:css;">
+    .test1 .up{
+        display: inline-block;
+        width: 0;
+        height: 0;
+        border-width: 4px;
+        border-style: dashed;
+        border-color: transparent;
+        border-top-width: 0;
+        border-bottom-color: #808080;
+        border-left-style: solid;
+        position: relative;
+        top: 5px;
+        left: 20px;
+    }
+    .test1 .up:after {
+        display: inline-block;
+        width: 0;
+        height: 0;
+        border-width: 6px;
+        border-style: dashed;
+        border-color: transparent;
+        border-top-width: 0;
+        border-bottom-color: #fff;
+        content: '';
+        position: absolute;
+        top: 1px;
+        left: -6px;
+    }
+    </pre>
+
+    <p class="cf">
+        <i class="down"></i>
+    </p>
+    <pre  class="brush:css;">
+    .test1 .down{
+        display: inline-block;
+        width: 0;
+        height: 0;
+        border-width: 4px;
+        border-style: dashed;
+        border-color: transparent;
+        border-bottom-width: 0;
+        border-top-color: #808080;
+        border-left-style: solid;
+        position: relative;
+        top: 5px;
+        left: 10px;
+    }
+    .test1 .down:after {
+        display: inline-block;
+        width: 0;
+        height: 0;
+        border-width: 6px;
+        border-style: dashed;
+        border-color: transparent;
+        border-bottom-width: 0;
+        border-top-color: #fff;
+        content: '';
+        position: absolute;
+        top: -7px;
+        left: -6px;
+    }
+    </pre>
+</div>
+<div class="test1">
+    <p><a href="#" class="new">内容后跟一个图片</a></p>
+    <pre  class="brush:css;">
+        .test1 .new {
+            position: relative;
+            color: #333;
+        }
+        .test1 .new:after {
+            vertical-align: top;
+            display: inline-block;
+            content: "";
+            width: 20px;
+            height: 9px;
+            background-image: url('images/icon_new.png');
+            background-repeat: no-repeat;
+            position: absolute;
+            right: -25px;
+            top: 0px;
+        }
+    </pre>
+</div>
+
+</section>
+
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+</body>
+</html>

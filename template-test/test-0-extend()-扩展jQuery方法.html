@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-0-$.extend()-扩展jQuery方法</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+<style></style>
+</head>
+
+<body>
+<p>f12看看</p>
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+<script>
+//扩展jQuery类对 数值 | 数组 | 字符串 等的常用方法
+(function($){
+	$.extend({
+
+//以下是对数值的操作方法
+
+		//n-m之间的随机数（默认0-10，包括n和m）
+		rdm:function(n,m){
+			n = n || 0;
+			m = m || 10;
+			return parseInt(Math.random()*((m-n)+1))+n;
+		},
+		//补零函数--返回的是String
+		toDbl:function(n){
+			return n<10?'0'+n:''+n;
+		},
+		//获取len长度的随机数字 --注意会出现1.0的情况
+        getRnd: function (len) {
+            if ($.isNullOrEmpty(len)) { len = 5; }
+            return parseFloat(Math.random()).toFixed(len).toString().replace("0.", "");
+        },
+
+        //是否整数：0,正整数，负整数
+        isInt: function (str) {
+            return (str % 1 == 0 ? true : false); //return /^\-?\d+$/.test(num);
+        },
+        //是否是正整数
+        //symbol不指定时表示不按正号前导符匹配，?表示模糊正号前导符匹配，+表示一定要有正号前导符
+        isPositiveInt: function (str, symbol) {
+            if ($.isNullOrEmpty(str)) { return false; }
+            switch (symbol) {
+                case "+": return /^\+[1-9][0-9]*$/.test(str); break;
+                case "?": return /^\+?[1-9][0-9]*$/.test(str); break;
+                default: return /^[1-9][0-9]*$/.test(str); break;
+            }
+        },
+        //非负整数(正整数和零)
+        isPositiveIntOrZero: function (str, symbol) {
+            switch (symbol) {
+                case "+": return (/^\+[1-9][0-9]*$/.test(str) || str == 0); break;
+                case "?": return (/^\+?[1-9][0-9]*$/.test(str) || str == 0); break;
+                default: return (/^[1-9][0-9]*$/.test(str) || str == "0"); break;
+            }
+        },
+        //是否是金额
+        isMoney: function (str) {
+            return /^(0|[1-9][0-9]*){1}(\.\d{1,2})?$/.test(str);
+        },
+        //小数四舍五入
+        decRound: function (Decimal, i) {
+            return Math.round(Decimal * Math.pow(10, i)) / Math.pow(10, i);
+        },
+
+//以下是对数组的操作方法
+
+        //过滤数组中重复的项
+        arrFilter: function (arr) {
+            if (arr.length < 2) { return [arr[0]] || []; }
+            var array = [];
+            for (var i = 0; i < arr.length; i++) {
+                array.push(arr.splice(i--, 1));
+                for (var j = 0; j < arr.length; j++) {
+                    if (arr[j] == array[array.length - 1]) {
+                        arr.splice(j--, 1);
+                    }
+                }
+            }
+            return array;
+        },
+        //返回下标从l到h的项组成的数组
+        arrRange: function (arr, l, h) {
+            var _a = arr; var ret = [];
+            l = l < 0 ? 0 : l;
+            h = h > _a.length ? _a.length : h;
+            for (var i = 0; i < _a.length; i++) {
+                if (i >= l && i <= h) { ret[ret.length] = _a[i]; }
+                if (i > h) { break; }
+            };
+            return ret;
+        },
+        //获取项在数组中第一次出现的下标
+        arrIndexOf: function (arr, item) {
+            var len = arr.length;
+            for (var i = 0; i < len; i++) {
+                if (item == arr[i]) { return i; }
+            }
+            return -1;
+        },
+        //根据项的下标从数组中删除
+        arrDelete: function (arr, removeItemIndex) {
+            if (isNaN(removeItemIndex) || removeItemIndex > arr.length) { return arr; }
+            arr.splice(removeItemIndex, 1);
+            return arr;
+        },
+        //根据项的值从数组中删除（如果有重复项也一起删除）
+        arryRemove: function (arr, removeItemValue) {
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i] == removeItemValue) {
+                    arr.splice(i, 1);
+                }
+            }
+            return arr;
+        },
+        // 元素是否在数组中存在
+        arrIsExit: function (arr, ele) {
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i] === ele) {
+                    return true;
+                }
+            }
+            return false;
+        },
+
+
+
+
+
+        //获取url中的参数值
+        getUrlParam: function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        },
+
+        //读写小数据量缓存
+        setcache: function (cachename, data) {
+            if ($("#" + cachename).length > 0) {
+                $("#" + cachename).attr("value", data);
+            }
+            else {
+                //$("body").append("<input id='" + cachename + "' style='display:none;' value='" + data + "' />");
+                $("body").append("<textarea id='" + cachename + "' style='display:none;'>" + data + "</textarea>");
+            }
+
+        },
+        getcache: function (cachename) {
+            return $("#" + cachename).attr("value");
+        },
+        delcache: function (cachename) {
+            if ($("#" + cachename).length > 0) { $("#" + cachename).remove(); }
+        },
+        // '1' 转换为 '一' ...
+        numToChar: function (number) {
+            var numCn = "";
+            var array = "一,二,三,四,五,六,七,八,九,十,十一,十二,十三,十四,十五,十六,十七,十八,十九,二十,廿一,廿二,廿三,廿四,廿五,廿六,廿七,廿八,廿九,三十,卅一,卅二,卅三,卅四,卅五,卅六,卅七,卅八,卅九,X".split(",");
+            if (number < 1) { number = 1; }
+            if (number > 40) { number = 40; }
+            return array[number - 1];
+        },
+        //获取当前时间
+        getDateTime: function () {
+            var d = new Date();
+            return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+        },
+
+        //获取某日期星期几
+        getDateWeek: function (date, defaultStr) {
+            var d = new Date(date.replace(/-/ig, "/"));
+            var weekStr = "日,一,二,三,四,五,六".split(",");
+            if ($.isNullOrEmpty(defaultStr)) { defaultStr = "星期"; }
+            return defaultStr + weekStr[new Date().getDay()];
+        },
+
+        getDateDiff: function (strInterval, date1, date2) {
+            date1 = date1.replace(/-/ig, "/");
+            date2 = date2.replace(/-/ig, "/");
+            var dtStart = new Date(date1);
+            var dtEnd = new Date(date2);
+            if (dtEnd < dtStart) {
+                var dtTmp = dtStart;
+                dtStart = dtEnd;
+                dtEnd = dtTmp;
+            }
+            switch (strInterval) {
+                case "s": return parseInt((dtEnd - dtStart) / 1000);
+                case "n": return parseInt((dtEnd - dtStart) / 60000);
+                case "h": return parseInt((dtEnd - dtStart) / 3600000);
+                case "d": return parseInt((dtEnd - dtStart) / 86400000);
+                case "w": return parseInt((dtEnd - dtStart) / (86400000 * 7));
+                case "m": return dtEnd.getMonth() - dtStart.getMonth();
+                case "y": return dtEnd.getFullYear() - dtStart.getFullYear();
+            }
+        },
+
+        //计算时间间隔，有正负之分
+        getDateDiff2: function (strInterval, date1, date2) {
+            date1 = date1.replace(/-/ig, "/");
+            date2 = date2.replace(/-/ig, "/");
+            var dtStart = new Date(date1);
+            var dtEnd = new Date(date2);
+            switch (strInterval) {
+                case "s": return parseInt((dtEnd - dtStart) / 1000);
+                case "n": return parseInt((dtEnd - dtStart) / 60000);
+                case "h": return parseInt((dtEnd - dtStart) / 3600000);
+                case "d": return parseInt((dtEnd - dtStart) / 86400000);
+                case "w": return parseInt((dtEnd - dtStart) / (86400000 * 7));
+                case "m": return dtEnd.getMonth() - dtStart.getMonth();
+                case "y": return dtEnd.getFullYear() - dtStart.getFullYear();
+            }
+        },
+
+        timeDiff: function (date1, date2) {
+
+            var daydiff = $.dateDiff(date1, date2);
+            if (daydiff == "今天") {
+                var hourDiff = $.getDateDiff("h", date1, date2);
+                var minuteDiff = $.getDateDiff("n", date1, date2);
+                var secondDiff = $.getDateDiff("s", date1, date2);
+
+                if (hourDiff > 0) { return hourDiff + "小时前"; }
+                if (minuteDiff > 0) { return minuteDiff + "分钟前"; }
+                else { return secondDiff + "秒钟前"; }
+            } else {
+                return daydiff;
+            }
+        },
+
+        dateDiff: function (date1, date2) {
+            //2010-9-4 18:00:80 初,末时间
+            var array1 = date1.split(" ")[0].split("-");
+            var array2 = date2.split(" ")[0].split("-");
+
+            var date1year = array1[0];
+            var date1month = array1[1];
+            var date1date = array1[2];
+
+            var date2year = array2[0];
+            var date2month = array2[1];
+            var date2date = array2[2];
+
+            if (date2year > date1year) { return (date2year - date1year) + "年前"; }
+            if (date2month > date1month) { return (date2month - date1month) + "个月前"; }
+
+            var datediff = (date2date - date1date);
+            switch (datediff) {
+                case 0: return "今天"; break;
+                case 1: return "昨天"; break;
+                case 2: return "前天"; break;
+                case 3: return "大前天"; break;
+                default: return datediff + "天前"; break;
+            }
+        },
+
+        formatUTC: function (utcDate, format) {
+            if (!utcDate) {
+                return '';
+            }
+            var date = new Date(parseInt(utcDate.replace("/Date(", "").replace(")/", ""), 10));
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+            var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var datastr = year + "-" + month + "-" + currentDate + " " + hour + ":" + minute + ":" + second;
+            return this.formatDateTime(datastr, format);
+        },
+
+        //日期形式格式化实现C#中yyyy-MM-dd hh:mm:ss自定义
+        formatDateTime: function (str, format) {
+            var date = new Date(str.split("-").join("/"));
+            if (date.toString() == "NaN" || date.toString() == "Invalid Date") { return ""; }
+            var o = {
+                "M+": date.getMonth() + 1,
+                "d+": date.getDate(),
+                "h+": date.getHours(),
+                "m+": date.getMinutes(),
+                "s+": date.getSeconds()
+            };
+            if (/(y+)/.test(format)) {
+                format = format.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
+            }
+            for (var k in o) {
+                if (new RegExp("(" + k + ")").test(format)) {
+                    format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length));
+                }
+            }
+            return format;
+        },
+
+        //将json格式的字符串转为json对象{}
+        json: function (jsonStr) {
+            return eval("(" + jsonStr + ")");
+        },
+
+        //字符串替换，正则匹配替换
+        replace: function (text, oldStr, newStr) {
+            var reg = new RegExp(oldStr, "g");
+            return text.replace(reg, newStr);
+        },
+
+        //字符串字节长度，1个中文或全角字符是2字节
+        bLength: function (str) {
+            var len = 0;
+            if (!str) { return 0; }
+            var str = str.replace(/(^\s*)|(\s*$)/g, "");
+            for (var i = 0; i < str.length; i++) {
+                if (str.charCodeAt(i) > 0 && str.charCodeAt(i) < 128) { len++; } else { len += 2; }
+            }
+            return len;
+        },
+        // 截取字符串
+        stringCut: function (value, maxLength, suffix) {
+            if (value.length <= maxLength)
+                return value;
+            else
+                return value.substr(0, maxLength) + suffix;
+        },
+        //清除字符串中的html标签
+        htmlClear: function (str) {
+            return str.replace(/<[^>]+>/g, "");
+        },
+        //html编码
+        htmlEncode: function (str) {
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\"/g, "&#34;").replace(/\'/g, "&#39;");
+        },
+        //html解码
+        htmlDecode: function (str) {
+            return str.replace(/\&amp\;/g, '\&').replace(/\&gt\;/g, '\>').replace(/\&lt\;/g, '\<').replace(/\&quot\;/g, '\'').replace(/\&\#39\;/g, '\'');
+        },
+        //是否字符串或数组是否为空
+        isNullOrEmpty: function (str) {
+            return (str == null
+                    || typeof str == "NaN"
+                    || typeof str == "undefined"
+                    || str.length == 0) ? true : false;
+        },
+
+        isStrInLength: function (str, minLen, maxLen) {
+            if (parseInt(maxLen) != maxLen || parseInt(minLen) != minLen) { return null; }
+            if (maxLen < minLen) {
+                var tmp = maxLen;
+                maxLen = minLen;
+                minLen = tmp;
+            }
+            if (str == null || str == undefined) { return false; };
+            if (str.length > maxLen) { return false; };
+            if (str.length < minLen) { return false; };
+            return true;
+        },
+
+
+        //精确的四则运算
+        //精确加法，可类字符串数值/纯数字值
+        //javascript的加法结果会有误差，在两个大浮点数相加的时候会比较明显。这个函数返回较为精确的加法结果。
+        accAdd: function (arg1, arg2) {
+            var r1, r2, m;
+            try { r1 = arg1.toString().split(".")[1].length; } catch (e) { r1 = 0; }
+            try { r2 = arg2.toString().split(".")[1].length; } catch (e) { r2 = 0; }
+            m = Math.pow(10, Math.max(r1, r2));
+            return (arg1 * m + arg2 * m) / m;
+        },
+        //精确减法
+        accSub: function (arg1, arg2) {
+            var r1, r2, m, n;
+            try { r1 = arg1.toString().split(".")[1].length; } catch (e) { r1 = 0; }
+            try { r2 = arg2.toString().split(".")[1].length; } catch (e) { r2 = 0; }
+            m = Math.pow(10, Math.max(r1, r2));
+            //last modify by deeka
+            //动态控制精度长度
+            n = (r1 >= r2) ? r1 : r2;
+            return ((arg1 * m - arg2 * m) / m).toFixed(n);
+        },
+        //精确乘法
+        accMul: function (arg1, arg2) {
+            var m = 0, s1 = arg1.toString(), s2 = arg2.toString();
+            try { m += s1.split(".")[1].length; } catch (e) { };
+            try { m += s2.split(".")[1].length; } catch (e) { };
+            return Number(s1.replace(".", "")) * Number(s2.replace(".", "")) / Math.pow(10, m);
+        },
+
+        //精确除法
+        //javascript的除法结果会有误差，在两个浮点数相除的时候会比较明显。这个函数返回较为精确的除法结果。
+        accDiv: function (arg1, arg2) {
+            var t1 = 0, t2 = 0, r1, r2;
+            try { t1 = arg1.toString().split(".")[1].length; } catch (e) { };
+            try { t2 = arg2.toString().split(".")[1].length; } catch (e) { };
+            with (Math) {
+                r1 = Number(arg1.toString().replace(".", ""));
+                r2 = Number(arg2.toString().replace(".", ""));
+                return (r1 / r2) * pow(10, t2 - t1);
+            }
+        }
+	});
+})(jQuery);
+
+//使用方法
+  //$.rdm(10,20);
+  //$.toDbl(7)
+
+
+console.log($.rdm(20,23));
+console.log($.toDbl(4));
+console.log($.isMoney(3,400,06));
+console.log($.decRound(1.34567, 3));
+
+var arrL = [1,3,3,4,4,4];
+arrL = $.arrFilter(arrL);
+console.log(arrL);
+
+//直接如下方式也可以
+/*
+
+$.extend({
+	//...
+});
+
+*/
+
+</script>
+</body>
+</html>

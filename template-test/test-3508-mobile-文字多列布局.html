@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+<title>test-3508-mobile-文字多列布局</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<style>
+.box {
+	-webkit-column-count:3;
+	-moz-column-count:3;
+	column-count:3;/*列数*/
+	
+	-webkit-column-gap:30px;
+	-moz-column-gap:30px;
+	column-gap:30px;/*列间距*/
+	
+	-webkit-column-rule:2px dashed #f00;
+	-moz-column-rule:2px dashed #f00;
+	column-rule:2px dashed #f00;/*列间规则*/}
+.box p.column-span {
+	-webkit-column-span:all;
+	column-span:all; /*合并列*/
+	padding:10px 0;}
+</style>
+</head>
+
+<body>
+<div class="box">
+	<p>测试多列布局的内容，看多列布局是怎么排列的，主要是针对文本，一定要写针对不同内核浏览器的方法，最后写统一的方法。我们看看是怎么的的。测试多列布局的内容，看多列布局是怎么排列的，主要是针对文本，多列布局可以分好多列哎。我们看看是怎么的的。测试多列布局的内容，看多列布局是怎么排列的，主要是针对文本，多列布局可以分好多列哎。我们看看是怎么的的。测试多列布局的内ss局可以分好多列哎。我们看看是怎么的的。测试多列布局的内容，看多列布局是怎么排列的，主要是针对文本，多列布局可以分好多列哎。我们看看是怎么的的。列布局的内ss局可以分好多列哎。我们看看是怎么的的。测试多列布局的内容，看多列布局是怎么排列的，主要是针对文本，多列布局可以分好多列哎。我们看看是怎么的的。列布局的内ss局可以分好多列哎。我们看看是怎么的的。测试多列布局的内容，看多列布局是怎么排列的，主要是针对文本，多列布局可以分好多列哎。我们看看是怎么的的。</p>
+    <p class="column-span">如果我想合并为一列怎么办呢，应该用column-span是吧如果我想合并为一列怎么办呢，应该用column-span是吧如果我想合并为一列怎么办呢，应该用column-span是吧</p>
+</div>
+</body>
+</html>

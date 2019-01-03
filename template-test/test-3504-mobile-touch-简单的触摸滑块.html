@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+<title>test-3504-mobile-touch-简单的触摸滑块</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<link type="text/css" rel="stylesheet" href="http://www.colorski.com/plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushJScript.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushCss.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushXml.js"></script>
+<style>
+* { margin: 0; padding: 0; }
+#box{width:200px; height:200px; background:#000; margin:0 auto; position:absolute;}
+</style>
+</head>
+
+<body>
+<h1>刮一刮</h1>
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p></div>
+
+<p class="x">使用触摸屏测试</p>
+<div id="box"></div>
+
+<section class="code" style="margin-top: 250px;">
+	<pre class="brush:javascript;">
+		function getOffset(e)
+		{
+		    var x = e.offsetLeft;
+		    var y = e.offsetTop;
+		    while(e = e.offsetParent)
+		    {
+		        x += e.offsetLeft;
+		        y += e.offsetTop;
+		    }
+		    return {'x': x, 'y': y};
+		};
+		var oBox=document.getElementById('box');
+		//开始位置
+		var StartX=null,StartY=null;
+		//滑动中的位置
+		var MoveX=null,MoveY=null;
+		//定义滑动初始时的坐标
+		oBox.addEventListener("touchstart",function(event) {
+		    StartX = event.targetTouches[0].pageX-getOffset(oBox).x;   
+			StartY = event.targetTouches[0].pageY-getOffset(oBox).y;  
+		}, false);
+
+		oBox.addEventListener("touchmove",function(event) {
+			MoveX = event.targetTouches[0].pageX;   
+			MoveY = event.targetTouches[0].pageY;
+			
+			if(MoveX-StartX<=0)
+			{
+				oBox.style.left ='0px';
+			}
+			else if(MoveX-StartX>=document.body.clientWidth-oBox.offsetWidth)
+			{
+				oBox.style.left =document.body.clientWidth-oBox.offsetWidth+'px';
+			}
+			else
+			{
+				oBox.style.left = MoveX-StartX+'px';	
+			}
+			event.preventDefault();
+		},false);
+		//定义滑动结束时的坐标
+		oBox.addEventListener("touchend",function(event) {
+			console.log(oBox.style.left);
+		}, false);
+	</pre>
+
+</section>
+
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+
+<script>
+function getOffset(e)
+{
+    var x = e.offsetLeft;
+    var y = e.offsetTop;
+    while(e = e.offsetParent)
+    {
+        x += e.offsetLeft;
+        y += e.offsetTop;
+    }
+    return {'x': x, 'y': y};
+};
+var oBox=document.getElementById('box');
+//开始位置
+var StartX=null,StartY=null;
+//滑动中的位置
+var MoveX=null,MoveY=null;
+//定义滑动初始时的坐标
+oBox.addEventListener("touchstart",function(event) {
+    StartX = event.targetTouches[0].pageX-getOffset(oBox).x;   
+	StartY = event.targetTouches[0].pageY-getOffset(oBox).y;  
+}, false);
+
+oBox.addEventListener("touchmove",function(event) {
+	MoveX = event.targetTouches[0].pageX;   
+	MoveY = event.targetTouches[0].pageY;
+	
+	if(MoveX-StartX<=0)
+	{
+		oBox.style.left ='0px';
+	}
+	else if(MoveX-StartX>=document.body.clientWidth-oBox.offsetWidth)
+	{
+		oBox.style.left =document.body.clientWidth-oBox.offsetWidth+'px';
+	}
+	else
+	{
+		oBox.style.left = MoveX-StartX+'px';	
+	}
+	event.preventDefault();
+},false);
+//定义滑动结束时的坐标
+oBox.addEventListener("touchend",function(event) {
+	console.log(oBox.style.left);
+}, false);
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>格式化大数字</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+</head>
+
+<body>
+请输入数字 <input id="input" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+<br>
+输出结果 <input id="output" style="margin-left:16px" disabled="disabled">
+
+<script src="../js/jquery.min.js"></script>
+<script>
+var pageVar = {
+    addUnit(str, n, unit) {
+        n = !isNaN(n * 1) ? n * 1 : 1;
+        try {
+            str = str * 1 || 0,
+                _ext = str >= 0 ? '' : '-';
+            str = Math.abs(str);
+            if (str >= 100000000) {
+                str = Math.round(str / 100000000 * Math.pow(10, n)) / Math.pow(10, n) + (typeof unit != 'undefined' ? unit : '亿');
+            } else if (str >= 10000) {
+                str = Math.round(str / 10000 * Math.pow(10, n)) / Math.pow(10, n) + (typeof unit != 'undefined' ? unit : '万');
+            } else if (str >= 1000) {
+                str = Math.round(str);
+            } else {
+                str = this.parseNumber(str, n);
+            }
+        } catch (e) {}
+        return _ext + str;
+    }
+};
+
+$(document).ready(function() {
+    $('#input').change(function() {
+        var val = $(this).val();
+        $('#output').val(pageVar.addUnit(val));
+    });
+})
+</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+<title>test-116-css3-左侧竖条的多种实现方法</title>
+<link href="css/reset.css" rel="stylesheet" />
+<style>
+blockquote { float: left; width: 200px; height: 50px; line-height: 50px; padding-left: 10px; background-color: #f0f0f0; margin:20px 20px 20px 50px;
+    position: relative; /*focus*/
+}
+pre { float:left; width: 400px; height: 50px; line-height: 20px; font-size: 12px; background-color: #f0f0f0; border-left: 3px solid pink; padding-left: 10px; margin: 20px; 
+
+    display: flex; align-items: center;  /*focus*/
+}
+
+p { float: left; width: 600px; height: 50px; margin: 20px 0; display: flex; align-items: center;}
+
+.test1 { 
+    border-left: 5px solid deeppink; 
+}
+
+.test2:before {
+    content: "";
+    width: 5px;
+    height: 50px;
+    background-color: deeppink;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.test3 {
+    box-shadow: -5px 0px 0 0 deeppink;
+}
+
+.test4 {
+    box-shadow:inset 5px 0px 0 0 deeppink;
+}
+
+.test5 {
+    background-image: linear-gradient(90deg, deeppink 0px, deeppink 5px, transparent 5px);
+}
+
+</style>
+</head>
+
+<body>
+<blockquote class="test1">左侧竖条实现方法</blockquote> 
+<pre>border-left: 5px solid deeppink; </pre> 
+<p>border方法会增加盒子宽度；兼容最好</p>
+
+<hr class="clear" />
+
+<blockquote class="test2">左侧竖条实现方法</blockquote>
+<pre>.test2:before {
+content: "";width: 5px;height: 50px;background-color: deeppink;position: absolute;top: 0;left: 0;}</pre> 
+<p>伪类方法；兼容较好</p>
+
+<hr class="clear" />
+
+<blockquote class="test3">左侧竖条实现方法</blockquote>
+<pre>box-shadow: -5px 0px 0 0 deeppink;</pre>
+<p>外box-shadow；不会增加盒子宽度，但会占用左侧位置</p>
+
+<hr class="clear" />
+
+<blockquote class="test4">左侧竖条实现方法</blockquote>
+<pre>box-shadow:inset 5px 0px 0 0 deeppink;</pre>
+<p>内box-shadow；不会增加盒子宽度，也不会占用左侧位置</p>
+
+<hr class="clear" />
+
+<blockquote class="test5">左侧竖条实现方法</blockquote>
+<pre>background-image: linear-gradient(90deg, deeppink 0px, deeppink 5px, transparent 5px);</pre>
+<p>灵活使用 CSS3 的渐变可以完成大量想不到的图形，CSS3 的渐变分为线性渐变和径向渐变，本例使用线性渐变，可以轻易解题；</p>
+
+<hr class="clear" />
+<div style="padding: 20px 20px 0 50px">原示例有8种方法，其它三种太奇葩，不适用；<a target="_blank" href="http://mp.weixin.qq.com/s?__biz=MzAxODE2MjM1MA==&mid=2651551358&idx=1&sn=a92c4b9591bc7fe321b5f4e809ef82d7&chksm=8025a1bfb75228a9d4ed9f8a9bf530f45f18a0a7a512711f223986289aa332a4d3822b4f45db&scene=21#wechat_redirect">在这里</a>；掌握上边5种就够了。</div>
+
+
+
+
+</body>
+</html>

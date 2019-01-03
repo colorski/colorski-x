@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-1003-js-文字闪烁</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<link type="text/css" rel="stylesheet" href="http://www.colorski.com/plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushJScript.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushCss.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushXml.js"></script>
+
+<style></style>
+</head>
+
+<body>
+<h1>文字闪烁</h1>
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p></div>
+
+<section class="code">
+
+    <h5>原生js写的文字闪烁</h5>
+    <p>测试：<input type="button" id="btn1" value="点我" /><span id="shine_text">你看我是在闪吗^_^？</span></p>
+    <pre  class="brush:javascript;">
+    	//闪烁定义
+    	function shine(obj){
+    		var i=0;
+    		var timer=null;
+    		clearInterval(timer);
+    		timer=setInterval(function(){
+    			i++;
+    			if(i%2){
+    				obj.style='color:#C6F;';
+    			}else{
+    				obj.style='color:#F00;';
+    			}
+    			if(i==6){
+    				clearInterval(timer);
+    				i=0;
+    			}
+    		},60);
+    	};
+    	var oTxt=document.getElementById("shine_text");
+    	var oBtn=document.getElementById("btn1");
+
+    	//闪烁执行
+    	oBtn.onclick=function(){
+    		shine(oTxt);
+    	};
+    </pre>
+
+<hr />
+
+
+</section>
+
+<!--colorBorder-->
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+
+<script>
+//闪烁定义
+function shine(obj){
+	var i=0;
+	var timer=null;
+	clearInterval(timer);
+	timer=setInterval(function(){
+		i++;
+		if(i%2){
+			obj.style='color:#C6F;';
+		}else{
+			obj.style='color:#F00;';
+		}
+		if(i==6){
+			clearInterval(timer);
+			i=0;
+		}
+	},60);
+};
+var oTxt=document.getElementById("shine_text");
+var oBtn=document.getElementById("btn1");
+
+//闪烁执行
+oBtn.onclick=function(){
+	shine(oTxt);
+};
+</script>
+</body>
+</html>

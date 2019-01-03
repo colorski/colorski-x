@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>formatTime-根据时间戳返回特定格式时间</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<link type="text/css" rel="stylesheet" href="http://www.colorski.com/plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushJScript.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushCss.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushXml.js"></script>
+</head>
+
+<body>
+<p id="timeStemp"></p>
+<p id="formatedTime"></p>
+<p id="onlyDate"></p>
+
+<pre class="brush:css;">
+	var timeStemp = new Date().getTime();  //获取当前时间戳
+	var formatedTime = ski.cmn.formatTime(timeStemp);
+
+	$("#timeStemp").text('时间戳：'+timeStemp);
+	$("#formatedTime").text('当前时间戳转成的日期：'+formatedTime);
+	$("#onlyDate").text('只要日期：'+formatedTime.substring(0,10)); 
+	//0-开始，10-长度  注意用substring()不用substr，substr不符合ECMA规范；
+
+	//扩展：
+	var timeStemp = new Date().getTime();  //获取当前时间戳
+	var timeStemp000 = Date.parse(new Date());  //获取的时间戳是把毫秒改成000显示
+	console.log(timeStemp000);  //结果类似：1496990292000
+</pre>
+
+<script src="js/jquery-1.12.3.min.js"></script>
+<script src="js/common-1.js"></script>
+<script>
+$(function(){
+	var timeStemp = new Date().getTime();  //获取当前时间戳
+	var formatedTime = ski.cmn.formatTime(timeStemp);
+
+	$("#timeStemp").text('时间戳：'+timeStemp);
+	$("#formatedTime").text('当前时间戳转成的日期：'+formatedTime);
+	$("#onlyDate").text('只要日期：'+formatedTime.substring(0,10)); 
+	//0-开始，10-长度  注意用substring()不用substr，substr不符合ECMA规范；
+
+	//扩展：
+	var timeStemp = new Date().getTime();  //获取当前时间戳
+	var timeStemp000 = Date.parse(new Date());  //获取的时间戳是把毫秒改成000显示
+	console.log(timeStemp000);  //结果类似：1496990292000
+
+});
+</script>
+</body>
+</html>

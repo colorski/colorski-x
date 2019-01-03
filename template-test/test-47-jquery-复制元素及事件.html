@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-47-复制元素及事件</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<link type="text/css" rel="stylesheet" href="http://www.colorski.com/plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushJScript.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushCss.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushXml.js"></script>
+
+<style>
+#paramBox {
+	position: relative;
+}
+#paramBox dl dt {
+	float: left;
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	margin:10px 20px 0 0;
+	text-align: right;
+	font-weight: bold;
+}
+#paramBox dl dd {
+	float: left;
+	height: 30px;
+	line-height: 30px;
+	margin: 10px 0;
+}
+#paramBox dl dd select {
+	height: 38px;
+	line-height: 38px;
+	border-color: #ddd;
+}
+#btnPlus {
+	position: absolute;
+	top: 16px;
+	left: 450px;
+	font-size: 20px;
+	font-style: normal;
+	cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+<h1>复制元素及事件-clone(true)</h1>
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p></div>
+
+
+<div id="paramBox">
+	<i id="btnPlus">＋</i>
+	<dl class="cf">
+		<dt>业务参数：</dt>
+		<dd>
+			<select class="stage">
+				<option value="3" selected="selected">高中</option>
+				<option value="2">初中</option>
+				<option value="1">小学</option>
+			</select>
+			<select class="subject">
+				<option value="03" selected="selected">人教版</option>
+				<option value="02">鲁教版</option>
+				<option value="01">沪教版</option>
+			</select>
+			<input class="question_ids" type="text" value="" placeholder="试题id，多个id用逗号隔开" />
+		</dd>
+	</dl>
+</div>
+
+
+<pre  class="brush:javascript;">
+//点加号复制
+$('#btnPlus').click(function(){
+	$(this).next('dl.cf').clone(true).appendTo('#paramBox');//这时如果被复制项填了值，也会复制这个值，可以这样：
+	//$(this).next('dl.cf').clone(true).appendTo('#paramBox').find('input').val('');
+});
+
+$(selector).clone(true|false);
+false - 默认。不复制事件处理程序；
+true - 复制元素的同时复制事件处理程序；
+</pre>
+
+<hr />
+如果选择学段后要获取相应的科目列表，即高中、初中、小学对应的科目是不一样的；
+这时候要从学段下手，然后$(this).next('.subject')去获取当前学段下的科目；<br />
+参考：22-工作备份\API接口可视化工具\z-v-3.3\productionEnvironment\6.html
+
+<!--colorBorder-->
+<div class="topclor"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"><p class="tc_1"></p><p class="tc_4"></p><p class="tc_3"></p><p class="tc_2"></p><p class="tc_5"></p>
+</div>
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+
+<script>
+//点加号复制
+$('#btnPlus').click(function(){
+	$(this).next('dl.cf').clone(true).appendTo('#paramBox').find('input').val('');
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<studentslist>
+	<student email="01@qq.com">
+		<name>wangwei</name>
+		<id>1</id>
+	</student>
+	<student email="02@qq.com">
+		<name>colorski</name>
+		<id>2</id>
+	</student>
+</studentslist>

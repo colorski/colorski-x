@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-204-jquery-json-排序</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+<style>
+</style>
+</head>
+
+<body>
+按大写字母序：
+<p class="listofstud"></p>
+
+<script src="js/jquery-1.12.3.min.js"></script>
+<script>
+$(document).ready(function(){
+    //对象数组
+    var students = [
+        {
+            "id": 102,
+            "name": "John",
+            "email": "john@sina.cn"
+        },
+        {
+            "id": 101,
+            "name": "Zord",
+            "email": "zord@sina.cn"
+        },
+        {
+            "id": 104,
+            "name": "BinWang",
+            "email": "BinWang@sina.cn"
+        },
+        {
+            "id": 103,
+            "name": "Karry",
+            "email": "karry@sina.cn"
+        }
+    ];
+    
+    //为对象数组排序
+    students = students.sort(function(a, b){
+        //return b.id-a.id; //倒序
+        //如果是比较数值则可以直接利用 return a-b，而如果是字符串则不行
+        
+        //按字母序//注意也区分大小写
+        if(a.name<b.name) {
+            return -1;
+        }
+        else if(a.name>b.name) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    });
+    
+    $.each(students, function(i, v){
+        $('.listofstud').append(v.id + " " + v.name + " " + v.email + "<br />");
+    });
+});
+</script>
+</body>
+</html>

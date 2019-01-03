@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-12-hover-direction</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<style>
+body { background-color: #000; }
+.box .list{
+	float: left;
+	width:174px;
+	height:140px;
+	line-height:140px;
+	margin-right: 10px;
+	text-align: center;
+	border:1px solid #ccc;
+	position:relative;
+	overflow:hidden;
+}
+.box .list .mask{
+	display: block;
+	position:absolute;
+	left:-174px;
+	top:0;
+	width:100%;
+	height:100%;
+	background:rgba(255,255,255,0.6);/*若兼容ie7需要做半透明图*/
+	color: #000;
+}
+</style>
+</head>
+
+<body>
+<div class="box cf">
+	<div class="list">
+		<img src="images/pic_test_2.png" width="100%" alt="" />
+		<a class="mask" href="#">描述内容0</a> 
+	</div>
+	<div class="list">
+		<img src="images/pic_test_2.png" width="100%" alt="" />
+		<a class="mask" href="#">描述内容1</a> 
+	</div>
+	<div class="list">
+		<img src="images/pic_test_2.png" width="100%" alt="" />
+		<a class="mask" href="#">描述内容2</a> 
+	</div>
+	<div class="list">
+		<img src="images/pic_test_2.png" width="100%" alt="" />
+		<a class="mask" href="#">描述内容3</a> 
+	</div>
+</div>
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+<script src="js/common-1.js"></script>
+<script>
+ski.cmn.hoverDirection();
+</script>
+</body>
+</html>

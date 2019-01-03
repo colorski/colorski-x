@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-14-alerts-弹出提示框x秒</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+<style>
+
+.alerts {
+	display: none;
+	max-width: 200px;
+	padding: 12px 40px;
+	line-height: 24px;
+	background-color: green;
+	border-radius: 5px;
+	font-family: "SimSun";
+	font-size: 16px;
+	color: #fff;
+
+	position: fixed;
+	top: 50%;
+	margin-top: -100px;
+	left: 50%;
+	margin-left: -100px;
+	z-index: 8000;
+}
+
+</style>
+</head>
+
+<body>
+<a class="btn" href="javascript:void(0);">点我</a>
+
+
+<script src="js/jquery-1.12.3.min.js"></script>
+<script src="js/common-1.js"></script>
+<script>
+$("a.btn").click(function(){
+	$.alerts("恭喜！<br />提交成功！",3);//弹出提示框
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>带按钮的焦点图</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+<style>
+.banner{
+    width: 100%;
+    height: 300px;
+    margin:0 auto;
+    position: relative;
+    overflow: hidden;
+}
+.banner .box{
+    width: 100%;
+    height:100%;
+}
+.banner .box li{
+    position: absolute;
+    left:0;
+    top:0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: none;
+}
+.banner .box li.active{
+    display: block;
+}
+.banner .ban-nav{
+    position: absolute;
+    bottom: 30px;
+    left:50%;
+    margin-left:-50px;
+    display: none;
+}
+.banner .ban-nav li{
+    float: left;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #5e5e5e;
+    margin-left: 8px;
+    cursor:pointer;
+}
+.banner .ban-nav li:first-child{
+    margin-left:0;
+}
+.banner .ban-nav li.on{
+    background: #8a6d3b;
+}
+.banner .ban-btn{
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background: #515151;
+    color: #ffffff;
+    position: absolute;
+    top:50%;
+    margin-top: -25px;
+    z-index: 1991612;
+    opacity: .7;
+    display: none;
+}
+.banner .prev{
+    left: 15px;
+}
+.banner .next{
+    right: 15px;
+}
+/*-----*/
+#obj{
+    width: 300px;
+    height: 100px;
+    margin:0 auto;
+    margin-top:-100px;
+    text-align: center;
+    line-height: 100px;
+    font-size: 36px;
+    color: red;
+}
+</style>
+</head>
+
+<body>
+<div class="banner" id="banner">
+    <ul class="box">
+        <li class="active">1</li>
+        <li>
+            <div id="obj">我是回调函数....</div>
+        </li>
+        <li>3</li>
+    </ul>
+    <ol class="ban-nav">
+        <li class="on"></li>
+        <li></li>
+        <li></li>
+    </ol>
+    <a href="javascript:void(0)" class="ban-btn prev">&lt;</a>
+    <a href="javascript:void(0)" class="ban-btn next">&gt;</a>
+</div>
+<p>
+* 功能：回调函数、轮播宽高、轮播方式切换、轮播时间、自动轮播<br />
+* ----------------------------------------------<br />
+* 可配置项：<br />
+* type: string 轮播方式，slide：左右切换，fade：淡入淡出<br />
+* area: array 轮播宽高<br />
+* aBgImg: array 背景图片地址 ---------必须传值<br />
+* animateTime: number 动画时间<br />
+* nCallback: function 进入下一个动画完成 回调函数<br />
+* pCallback: function 离开当前动画完成 回调函数<br />
+* auto: boolean 是否自动轮播<br />
+* autoTime: number 自动轮播相隔时间<br />
+* pageBtn: boolean 是否显示左右按钮<br />
+</p>
+
+
+
+<script src="../js/jquery.min.js"></script>
+<script>
+/*
+* author:wangzhihong
+* email:guailaoma@qq.com
+* time:2017.12.25
+* 功能：回调函数、轮播宽高、轮播方式切换、轮播时间、自动轮播
+* ----------------------------------------------
+* 可配置项：
+* type: string 轮播方式，slide：左右切换，fade：淡入淡出
+* area: array 轮播宽高
+* aBgImg: array 背景图片地址 ---------必须传值
+* animateTime: number 动画时间
+* nCallback: function 进入下一个动画完成 回调函数
+* pCallback: function 离开当前动画完成 回调函数
+* auto: boolean 是否自动轮播
+* autoTime: number 自动轮播相隔时间
+* pageBtn: boolean 是否显示左右按钮
+*
+* */
+(function($){
+    $.fn.Carousel = function(obj){
+        var setting = {
+            type:'slide',
+            area:['100%','400px'],
+            aBgImg:[],
+            animateTime:500,
+            auto:true,
+            autoTime:5000,
+            pageBtn:true,
+            navBtn:true,
+            nCallback:false,
+            pCallback:false
+        };
+        if(obj){
+            $.extend(setting,obj);
+        }
+        var this_obj = $(this);
+        var nav_width = parseFloat(this_obj.find(".ban-nav").width())/2;
+        this_obj.css({
+            width:setting.area[0],
+            height:setting.area[1]
+        });
+        this_obj.find(".ban-nav").css({marginLeft:-nav_width+'px'});
+        for(var j = 0 ; j < setting.aBgImg.length ; j++){
+            this_obj.find(".box>li").eq(j).css({
+                background:'url('+setting.aBgImg[j]+') no-repeat',
+                backgroundSize:'100% 100%'
+            })
+        }
+        if(setting.pageBtn){
+            this_obj.find(".ban-btn").show();
+        }
+        if(setting.navBtn){
+            this_obj.find(".ban-nav").show();
+        }
+        function nowActive(){
+            var number = 0;
+            for(var i = 0 ; i < this_obj.find(".ban-nav>li").length ; i++ ){
+                if(this_obj.find(".ban-nav>li")[i].getAttribute("class") == 'on'){
+                    number = i;
+                }
+            }
+            return number;
+        }
+        var now = 0;
+        var setTime = null;
+        switch (setting.type){
+            case 'slide':
+                this_obj.find(".next").click(function(){
+                    if( this_obj.find(".box>li").eq(now).is(":animated") ){
+                        return false;
+                    }
+                    now = nowActive();
+                    now++;
+                    if( now >= this_obj.find(".box>li").length ){
+                        now = 0;
+                    }
+                    if(this_obj.find(".box>li").eq(now).prev("li").length > 0){ // 如果 有上一个兄弟元素
+                        this_obj.find(".box>li").eq(now).prev("li").animate({left:"-100%"},setting.animateTime,function(){
+                            $(this).removeClass("active").css({left:0});
+                            if(setting.pCallback){
+                                setting.pCallback(now);
+                            }
+                        });
+                    }else{  // 如果 没有上一个兄弟元素，则执行最后一张
+                        this_obj.find(".box>li:last-child").animate({left:"-100%"},setting.animateTime,function(){
+                            $(this).removeClass("active").css({left:0});
+                            if(setting.pCallback){
+                                setting.pCallback(this_obj.find(".box>li").length);//最后一张的下标
+                            }
+                        });
+                    }
+                    this_obj.find(".box>li").eq(now).addClass("active").css({
+                        left:'100%'
+                    }).animate({
+                        left:'0'
+                    },setting.animateTime,function(){
+                        if(setting.nCallback){
+                            setting.nCallback(now+1);
+                        }
+                    });
+                    this_obj.find(".ban-nav li").eq(now).addClass("on").siblings().removeClass("on");
+
+                });
+                this_obj.find(".prev").click(function(){
+                    if( this_obj.find(".box>li").eq(now).is(":animated") ){
+                        return false;
+                    }
+                    now = nowActive();
+                    now--;
+                    if( now < 0 ){
+                        now = this_obj.find(".box>li").length-1;
+                    }
+                    if(this_obj.find(".box>li").eq(now).next("li").length > 0){
+                        this_obj.find(".box>li").eq(now).next("li").animate({left:"100%"},setting.animateTime,function(){
+                            $(this).removeClass("active").css({left:0});
+                            if(setting.pCallback){
+                                setting.pCallback(now+2);
+                            }
+                        });
+                    }else{
+                        this_obj.find(".box>li:first-child").animate({left:"100%"},setting.animateTime,function(){
+                            $(this).removeClass("active").css({left:0});
+                            if(setting.pCallback){
+                                setting.pCallback(1);
+                            }
+                        });
+                    }
+                    this_obj.find(".box>li").eq(now).addClass("active").css({
+                        left:'-100%'
+                    }).animate({
+                        left:'0'
+                    },setting.animateTime,function(){
+                        if(setting.nCallback){
+                            setting.nCallback(now+1);
+                        }
+                    });
+                    this_obj.find(".ban-nav>li").eq(now).addClass("on").siblings().removeClass("on");
+
+                });
+                this_obj.find(".ban-nav>li").click(function(){
+                    if( this_obj.find(".box>li").eq(now).is(":animated") ){
+                        return false;
+                    }
+                    var index = this_obj.find(".ban-nav>li").index(this);
+                    now = nowActive();
+                    if(index < now ){ // prev
+                        this_obj.find(".box>li").eq(now).animate({left:"100%"},setting.animateTime,function(){
+                            $(this).removeClass("active").css({left:0});
+                            if(setting.pCallback){
+                                setting.pCallback(now+1);
+                            }
+                        });
+                        this_obj.find(".box>li").eq(index).addClass("active").css({
+                            left:'-100%'
+                        }).animate({
+                            left:'0'
+                        },setting.animateTime,function(){
+                            if(setting.nCallback){
+                                setting.nCallback(index+1);
+                            }
+                        });
+                    }
+                    if(index > now ){ // next
+                        this_obj.find(".box>li").eq(now).animate({left:"-100%"},setting.animateTime,function(){
+                            $(this).removeClass("active").css({left:0});
+                            if(setting.pCallback){
+                                setting.pCallback(now+1);
+                            }
+                        });
+                        this_obj.find(".box>li").eq(index).addClass("active").css({
+                            left:'100%'
+                        }).animate({
+                            left:'0'
+                        },setting.animateTime,function(){
+                            if(setting.nCallback){
+                                setting.nCallback(index+1);
+                            }
+                        });
+                    }
+                    $(this).addClass("on").siblings().removeClass("on");
+                });
+                break;
+            case 'fade':
+                this_obj.find(".next").click(function(){
+                    if( this_obj.find(".box>li").eq(now).is(":animated") ){
+                        return false;
+                    }
+                    now = nowActive();
+                    now++;
+                    if( now >= this_obj.find(".box>li").length ){
+                        now = 0;
+                    }
+                    this_obj.find(".box>li").eq(now).fadeIn(setting.animateTime,function(){
+                        if(setting.nCallback){
+                            setting.nCallback(now+1);
+                        }
+                        if(setting.pCallback){
+                            if(now == 0){
+                                setting.pCallback(this_obj.find(".box>li").length);
+                            }else{
+                                setting.pCallback(now);
+                            }
+
+                        }
+                    }).siblings().fadeOut(setting.animateTime);
+                    this_obj.find(".ban-nav li").eq(now).addClass("on").siblings().removeClass("on");
+                });
+                this_obj.find(".prev").click(function() {
+                    if(this_obj.find(".box>li").eq(now).is(":animated")) {
+                        return false;
+                    }
+                    now = nowActive();
+                    now--;
+                    if (now < 0) {
+                        now = this_obj.find(".box>li").length - 1;
+                    }
+                    this_obj.find(".box>li").eq(now).fadeIn(setting.animateTime,function(){
+                        if(setting.nCallback){
+                            setting.nCallback(now+1);
+                        }
+                        if(setting.pCallback){
+                            if(now == this_obj.find(".box>li").length- 1){
+                                setting.pCallback(1);
+                            }else{
+                                setting.pCallback(now+2);
+                            }
+
+                        }
+                    }).siblings().fadeOut(setting.animateTime);
+                    this_obj.find(".ban-nav li").eq(now).addClass("on").siblings().removeClass("on");
+
+                });
+                this_obj.find(".ban-nav>li").click(function(){
+                    if( this_obj.find(".box>li").eq(now).is(":animated") ){
+                        return false;
+                    }
+                    var index = this_obj.find(".ban-nav>li").index(this);
+                    now = nowActive();
+                    this_obj.find(".box>li").eq(index).fadeIn(setting.animateTime,function(){
+                        if(setting.nCallback){
+                            setting.nCallback(index+1);
+                        }
+                        if(setting.pCallback){
+                            setting.pCallback(now+1);
+                        }
+                    }).siblings().fadeOut(setting.animateTime);
+                    $(this).addClass("on").siblings().removeClass("on");
+                });
+                break;
+            default:
+                throw "type:'"+setting.type+"',This type does not defined";
+                break;
+        }
+        // 自动轮播
+        if(setting.auto){
+            setTime = setInterval(function(){this_obj.find(".next").click();},setting.autoTime);
+            // 每次手动切换banner时，都会重新计时轮播。
+            this_obj.find(".next,.prev,.ban-nav>li").click(function(){
+                clearInterval(setTime);
+                setTime = setInterval(function(){this_obj.find(".next").click();},setting.autoTime);
+            });
+        }
+
+
+    }
+})(jQuery);
+
+// 调用方法:
+$(function(){
+    $("#banner").Carousel({
+        type:'fade',
+        area:['100%','300px'],
+        aBgImg:['http://www.jq22.com/img/cs/500x300-1.png','http://www.jq22.com/img/cs/500x300-2.png','http://www.jq22.com/img/cs/500x300-3.png'],
+        auto:false,
+        nCallback:function(now){
+            // console.log("进入==="+now);   now就是第几张图片
+            if(now == 2){
+                $("#obj").animate({marginTop:'100px'});
+            }
+        },
+        pCallback:function(now){
+            // console.log("离开==="+now);
+            if(now == 2){
+                $("#obj").animate({marginTop:'-100px'});
+            }
+        }
+    });
+})
+</script>
+</body>
+</html>
