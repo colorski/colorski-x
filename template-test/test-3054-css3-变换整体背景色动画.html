@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<link rel="shortcut icon" href="images/favicon.ico"/>
+<link rel="bookmark" href="images/favicon.ico"/>
+
+<title>test-3054-css3-变换整体背景色动画</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="css/reset.css" />
+
+<link type="text/css" rel="stylesheet" href="http://www.colorski.com/plugins/codeView/shCore.css"/>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shCore.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushJScript.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushCss.js"></script>
+<script type="text/javascript" src="http://www.colorski.com/plugins/codeView/shBrushXml.js"></script>
+
+<style>
+:root {
+  --main-background-color:#f00;
+  --test-width: 200px;
+  --test-bg-color: green;
+}
+body {
+  background-color: var(--main-background-color);
+  transition: background 2s;
+}
+.box {
+  height: 200px;
+  width: var(--test-width);
+  background: var(--test-bg-color);
+}
+</style>
+</head>
+
+<body>
+<h1>变换整体背景色动画</h1>
+<div class="box">测试css变量var</div>
+
+<script>
+setTimeout(()=>{
+  document.documentElement.style.setProperty("--main-background-color", "#a10dde")
+},1000)
+</script>
+</body>
+</html>
